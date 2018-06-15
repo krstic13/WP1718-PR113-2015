@@ -1,0 +1,32 @@
+﻿.Baner {
+    font-size: xx-large;
+    text-align: center;
+    background-color: springgreen;
+    font-weight: normal;
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%
+}
+
+.Meni {
+    background-color: springgreen;
+    color: white;
+    font-weight: bold;
+    position: fixed;
+    top: 30px;
+    width: 100%
+}
+
+.Bad {
+    color: red
+}
+
+.Good {
+    color: lightseagreen
+}
+
+.Centar {
+    text-align: center;
+    font-size: large
+}

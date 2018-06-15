@@ -7,30 +7,19 @@ namespace TaksiSluzba.Models
 {
     public class Address
     {
-        public string Ulica { get; set; }
-        public string NaseljenoMesto { get; set; }
-        public int PozivniBroj { get; set; }
-        public int Broj { get; set; }
+        public string UlicaBroj { get; set; }
+        public string MestoPostanski { get; set; }
 
 
         public Address()
         {
                 
         }
-        public Address(string ulica, string naseljenomesto, int pozivnibroj, int broj)
+        public Address(string ulicaIbroj, string mestoIpostanski)
         {
-            Ulica = ulica;
-            NaseljenoMesto = naseljenomesto;
-            PozivniBroj = pozivnibroj;
-            Broj = broj;
+            UlicaBroj = ulicaIbroj;
+            MestoPostanski = mestoIpostanski;
         }
 
-        public Address(Address a)
-        {
-            this.Ulica = a.Ulica;
-            this.NaseljenoMesto = a.NaseljenoMesto;
-            this.PozivniBroj = a.PozivniBroj;
-            this.Broj = a.Broj;
-        }
     }
 }

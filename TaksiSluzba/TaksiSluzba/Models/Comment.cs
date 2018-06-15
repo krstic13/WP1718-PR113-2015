@@ -11,14 +11,14 @@ namespace TaksiSluzba.Models
         public DateTime DatumObjave { get; set; }
         public User KorisnikKojiJeOstavioKomentar { get; set; }
         public Ride VoznjaNaKojuSeOdnosiKomentar { get; set; }
-        public int Ocena { get; set; }
+        public string Ocena { get; set; }
 
         public Comment()
         {
 
         }
 
-        public Comment(string opis, DateTime datumobjave, User korisnikkojijeostaviokomentar, Ride voznjanakojuseodnosikomentar, int ocena)
+        public Comment(string opis, DateTime datumobjave, User korisnikkojijeostaviokomentar, Ride voznjanakojuseodnosikomentar, string ocena)
         {
             Opis = opis;
             DatumObjave = datumobjave;

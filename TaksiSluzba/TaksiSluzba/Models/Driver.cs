@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TaksiSluzba.Models
 {
-    public class Driver
+    public class Driver:User
     {
         public Location Lokacija { get; set; }
         public Car Automobil { get; set; }

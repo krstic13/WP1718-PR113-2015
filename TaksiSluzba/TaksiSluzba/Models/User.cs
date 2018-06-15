@@ -6,6 +6,7 @@ using System.Web;
 namespace TaksiSluzba.Models
 {
     public enum ROLE { USER, DRIVER, ADMIN}
+    public enum POL { Muško, Žensko }
 
     public class User
     {
@@ -13,14 +14,15 @@ namespace TaksiSluzba.Models
         public string Password { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
-        public string Gender { get; set; }
+        public POL Gender { get; set; }
         public string JMBG { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public ROLE Uloga { get; set; }
-        public Ride Voznja { get; set; }
+        public List<Ride> Voznje { get; set; }
+        public string Id { get; set; }
 
-        public User(string username, string password, string name, string lastname, string gender, string jmbg, string phonenumber,string email, ROLE uloga, Ride voznja)
+        public User(string username, string password, string name, string lastname, POL gender, string jmbg, string phonenumber,string email, ROLE uloga)
         {
             UserName = username;
             Password = password;
@@ -31,8 +33,7 @@ namespace TaksiSluzba.Models
             PhoneNumber = phonenumber;
             Email = email;
             Uloga = uloga;
-            Voznja = new Ride(voznja);
-
+            Voznje = new List<Ride>();
         }
 
         public User(User korisnik)
@@ -46,21 +47,11 @@ namespace TaksiSluzba.Models
             this.PhoneNumber = korisnik.PhoneNumber;
             this.Uloga = korisnik.Uloga;
             this.UserName = korisnik.UserName;
-            this.Voznja = korisnik.Voznja;
         }
 
         public User()
         {
-            UserName = "";
-            Password = "";
-            Name = "";
-            LastName = "";
-            Gender = "Z";
-            JMBG = "";
-            PhoneNumber = "";
-            Email = "";
-            Uloga = ROLE.USER;
-            Voznja = new Ride();
+            Voznje = new List<Ride>();
         }
 
     }

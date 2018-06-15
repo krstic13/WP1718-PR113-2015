@@ -7,8 +7,8 @@ namespace TaksiSluzba.Models
 {
     public class Location
     {
-        public double Xcoordinate { get; set; }
-        public double Ycoordinate { get; set; }
+        public string Xcoordinate { get; set; }
+        public string Ycoordinate { get; set; }
         public Address Adresa { get; set; }
 
         public Location()
@@ -16,7 +16,7 @@ namespace TaksiSluzba.Models
 
         }
 
-        public Location(double xcoordinate, double ycoordinare, Address adresa)
+        public Location(string xcoordinate, string ycoordinare, Address adresa)
         {
             Xcoordinate = xcoordinate;
             Ycoordinate = ycoordinare;

@@ -9,8 +9,8 @@ namespace TaksiSluzba.Models
 
     public class Car
     {
-        public Driver Vozac { get; set; }
-        public int GodisteAutomobila { get; set; }
+      //  public Driver Vozac { get; set; }  string username? 
+        public string GodisteAutomobila { get; set; }
         public string Registracija { get; set; }
         public string TaxiId { get; set; }
         public CARTYPE TipAutomobila { get; set; }
@@ -20,9 +20,8 @@ namespace TaksiSluzba.Models
 
         }
 
-        public Car(Driver vozac, int godisteautomobila, string registracija, string taxiid, CARTYPE tipautomobila)
+        public Car(string godisteautomobila, string registracija, string taxiid, CARTYPE tipautomobila)
         {
-            Vozac = vozac;
             GodisteAutomobila = godisteautomobila;
             Registracija = registracija;
             TaxiId = taxiid;
@@ -32,7 +31,6 @@ namespace TaksiSluzba.Models
 
         public Car(Car c)
         {
-            this.Vozac = c.Vozac;
             this.GodisteAutomobila = c.GodisteAutomobila;
             this.Registracija = c.Registracija;
             this.TaxiId = c.TaxiId;

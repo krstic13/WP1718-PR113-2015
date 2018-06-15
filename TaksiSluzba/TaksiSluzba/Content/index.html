@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="Stilovi.css" />
+    <meta charset="utf-8" />
+    <title></title>
+
+
+    <script src="/Scripts/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+            var trenutnoUlogovan;
+
+            $(document).on("click", "#logovanjeButton", function () {
+                if ($("#Username").val() != "" && $("#Password").val() != "")
+                {
+                    var objekat = { Username: $("#Username").val(), Password: $("#Password").val() };
+                    $.post("/api/ahome/login", objekat, function (data, status) {
+                        if (data.UserName == null) {
+                            $("#Greske").html(data);
+                        } else {
+                            trenutnoUlogovan = data;
+                            //fali prikaz svega za korisnika koji se ulogavao
+                            //mora da se proveri u ifovima da li je korisnik admin/vozac ili dispecer
+                            //data tacka ne nudi sam po sebi mogucnosti 
+                            $("#Greske").html("korisnik se ulogovao " + data.UserName);
+                        }
+                    });
+
+                } else {
+                    $("#Greske").html("Pogrešan unos lozinke ili korisničkog imena");
+                }
+
+            });
+
+            $(document).on("click", "#registracija", function () {
+                
+               var regHelper = "    <table>";
+                regHelper += "    <tr> <td> Korisničko ime: </td> <td> <input type=\"text\" id=\"korisnickoIme\" /></td> </tr > ";
+                regHelper += "        <tr> <td> Lozinka: </td> <td> <input type=\"password\" id=\"korisnickaLozinka\" /> </td> </tr>";
+                regHelper += "        <tr> <td> Ime: </td> <td> <input type=\"text\" id=\"Ime\" /></td> </tr>";
+                regHelper += "        <tr> <td> Prezime: </td> <td> <input type=\"text\" id=\"Prezime\" /> </td> </tr>";
+                regHelper += "        <tr> <td> Pol: </td> <td>";
+                regHelper += "            <select name=\"Pol\" id=\"pol\" size=\"1\">";
+                regHelper += "               <option value=\"1\">Žensko</option>";
+                regHelper += "               <option value=\"2\" selected>Muško</option>";
+                regHelper += "            </select>";
+                regHelper += "       </td> </tr>";
+                regHelper += "        <tr> <td> JMBG: </td> <td> <input type=\"text\" id=\"korisnickiJMBG\" /> </td> </tr>";
+                regHelper += "        <tr> <td> Kontakt telefon: </td> <td> <input type=\"text\" id=\"korisnickiTelefon\" /> </td> </tr>";
+                regHelper += "        <tr> <td> Email: </td> <td> <input type=\"text\" id=\"korisnickiEmail\" /> </td> </tr>";
+                regHelper += "<tr><td colspan='2' align='center'> <input type=\"submit\" value='Potvrda Registracije' id=\"potvrdaRegistracije\"/></td></tr>";
+                regHelper += " </table >";
+                $("#PageContent").html(regHelper);
+            });
+
+            $(document).on("click", "#potvrdaRegistracije", function () {
+                // postaje musterija
+                if ($("#korisnickoIme").val() != "" && $("#korisnickaLozinka").val() != ""
+                    && $("#Ime").val() != "" && $("#Prezime").val() != "" && $("#korisnickiJMBG").val() != "" && $("#korisnickiTelefon").val() != "" && $("#korisnickiEmail").val() != "")
+                {
+                    var objekat = {
+                        UserName: $("#korisnickoIme").val(), Password: $("#korisnickaLozinka").val(), Name: $("#Ime").val(), LastName: $("#Prezime").val(),
+                        Gender: $("#pol").val(), JMBG: $("#korisnickiJMBG").val(), PhoneNumber: $("#korisnickiTelefon").val(), Email: $("#korisnickiEmail").val() };
+
+                    $.post("/api/ahome/registration", objekat, function (data, status) {
+                        if (data.UserName == null) {
+                            $("#Greske").html(data);
+                        }
+                        else {
+                            var LoginView = " <table> ";
+                            LoginView += "   <tr>";
+                            LoginView += "       <td> Korisničko ime </td>";
+                            LoginView += "       <td> <input type=\"text\" id=\"Username\" /> </td>";
+                            LoginView += "    </tr>";
+                            LoginView += "    <tr>";
+                            LoginView += "        <td> Lozinka </td>";
+                            LoginView += "        <td> <input type=\"password\" id=\"Password\" /> </td>";
+                            LoginView += "    </tr>";
+                            LoginView += "    <tr>";
+                            LoginView += "        <td> <input type=\"button\" value=\"Uloguj se\" id=\"logovanjeButton\" /></td>";
+                            LoginView += "    </tr>";
+
+                            LoginView += "</table>";
+
+                            $("#PageContent").html(LoginView);
+                        }
+                        
+                    });
+
+                } else
+                {
+                    $("#Greske").html("Sva polja moraju biti popunjena!");
+                }
+
+
+            });
+
+
+        });
+    </script>
+</head>
+
+
+<body>
+    <div class="Baner" id="PageBanner">
+        Taksi služba
+    </div>
+
+    <div class="Meni">
+        <table align="center">
+            <tr>
+                <td id="logovanje"> Uloguj se </td>
+                <td>&nbsp; &nbsp; &nbsp;</td>
+                <td id="registracija"> Registruj se </td>
+            </tr>
+
+        </table>
+    </div>
+
+<br /><br /><br />
+
+
+    <div id="PageContent">
+        <table>
+            <tr>
+                <td> Korisničko ime </td>
+                <td> <input type="text" id="Username" /> </td>
+            </tr>
+            <tr>
+                <td> Lozinka </td>
+                <td> <input type="password" id="Password" /> </td>
+            </tr>
+            <tr>
+                <td> <input type="button" value="Uloguj se" id="logovanjeButton" /></td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div id="Greske" class="Bad">
+
+    </div>
+
+    <div id="AllGood" class="Good">
+
+    </div>
+
+
+</body>
+</html>

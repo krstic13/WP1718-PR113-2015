@@ -5,43 +5,44 @@ using System.Web;
 
 namespace TaksiSluzba.Models
 {
-    public enum RideStatus {KREIRANA,FORMIRANA,OBRADJENA,PRIHVACENA,OTKAZANA,NEUSPESNA,USPESNA}
+    public enum RideStatus {KREIRANA,FORMIRANA,OBRADJENA,PRIHVACENA,OTKAZANA,NEUSPESNA,USPESNA,U_TOKU}
     public class Ride
     {
-        public DateTime DatumPorudzbine { get; set; }
-        public DateTime VremePorudzbine { get; set; }
-        public Location Lokacija { get; set; }
+        public DateTime DatumIVremePorudzbine { get; set; }
+        public Location LokacijaPolazna { get; set; }
         public User Musterija { get; set; }
         public Location Odrediste { get; set; }
-        //Dispecer
+        public User Dispatcher { get; set; }
         public Driver Vozac { get; set; }
-        public Double Iznos { get; set; }
+        public string Iznos { get; set; }
         public Comment Komentar { get; set; }
         public RideStatus StatusVoznje { get; set; }
+        public CARTYPE TipVozila { get; set; }
+        public string Id { get; set; }
 
         public Ride()
         {
 
         }
 
-        public Ride(DateTime datumporudzbine, DateTime vremeporudzbine, Location lokacija, User musterija, Location odrediste, Driver vozac, double iznos, Comment komentar, RideStatus statusVoznje)
+        public Ride(DateTime datumporudzbine, Location lokacija, User musterija, Location odrediste, Driver vozac, string iznos, Comment komentar, RideStatus statusVoznje, User dispatcher, CARTYPE tipvozila)
         {
-            DatumPorudzbine = datumporudzbine;
-            VremePorudzbine = vremeporudzbine;
-            Lokacija = lokacija;
+            DatumIVremePorudzbine = datumporudzbine;
+            LokacijaPolazna = lokacija;
             Musterija = musterija;
             Odrediste = odrediste;
             Vozac = vozac;
             Iznos = iznos;
             Komentar = komentar;
             StatusVoznje = statusVoznje;
+            Dispatcher = dispatcher;
+            TipVozila = tipvozila;
         }
 
         public Ride(Ride r)
         {
-            this.DatumPorudzbine = r.DatumPorudzbine;
-            this.VremePorudzbine = r.VremePorudzbine;
-            this.Lokacija = r.Lokacija;
+            this.DatumIVremePorudzbine = r.DatumIVremePorudzbine;
+            this.LokacijaPolazna = r.LokacijaPolazna;
             this.Musterija = r.Musterija;
             this.Odrediste = r.Odrediste;
             this.Vozac = r.Vozac;
