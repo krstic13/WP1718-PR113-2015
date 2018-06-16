@@ -16,7 +16,7 @@ namespace TaksiSluzba.Controllers
         public static List<User> korisnici = new List<User>(); // musterije
         public static List<Driver> vozaci = new List<Driver>();
         public static List<User> admin = new List<User>();
-        public static Dictionary<string, User> ulogovani = new Dictionary<string, User>();
+        public static Dictionary<string, string> ulogovani = new Dictionary<string, string>();
 
         [HttpGet,Route("")]
         public RedirectResult Index()
@@ -43,7 +43,7 @@ namespace TaksiSluzba.Controllers
                         return Ok("Korisnik je već ulogovan, nemoguće duplo logovanje");
                     }
                     else {
-                        ulogovani.Add(u.Id, u);
+                        ulogovani.Add(u.Id,u.UserName);
                     }
                     
                     return Ok(u);
@@ -61,7 +61,7 @@ namespace TaksiSluzba.Controllers
                     }
                     else
                     {
-                        ulogovani.Add(u.Id, u);
+                        ulogovani.Add(u.Id, u.UserName);
                     }
                     return Ok(u);
                 }
@@ -78,7 +78,7 @@ namespace TaksiSluzba.Controllers
                     }
                     else
                     {
-                        ulogovani.Add(u.Id, u);
+                        ulogovani.Add(u.Id, u.UserName);
                     }
                     return Ok(u);
                 }
@@ -94,14 +94,15 @@ namespace TaksiSluzba.Controllers
             //Implement changes here
             if (u.Email == "" || u.JMBG == "" || u.LastName == "" || u.Name == "" || u.Password == "" || u.PhoneNumber == "" || u.UserName == "")
             {
-                return Ok("Jendno od polja je ostalo prazno, izmene nedozvoljene.");
+                return Ok("Jedno od polja je ostalo prazno, izmene nedozvoljene.");
             }
 
             User pomocni = new User();
 
             if (ulogovani.Keys.Contains(u.Id))
             {
-                pomocni = ulogovani[u.Id];
+                //pomocni = ulogovani[u.Id];
+                pomocni = korisnici.Find(uu => uu.Id == u.Id);
                 ulogovani.Remove(u.Id);         // obrisali ga iz trenutno ulogovanih
                 korisnici.Remove(pomocni);      // obrisali ga iz liste korisnika
             }else
@@ -112,7 +113,7 @@ namespace TaksiSluzba.Controllers
             if (korisnici.Exists(k => k.UserName == u.UserName) || admin.Exists(a => a.UserName == u.UserName) || vozaci.Exists(v => v.UserName == u.UserName))
             {
                 korisnici.Add(pomocni);
-                ulogovani.Add(pomocni.Id,pomocni);
+                ulogovani.Add(pomocni.Id,pomocni.UserName);
                 return Ok("Ovo korisnicko ime vec postoji izmene nisu moguce");
             }
             pomocni.UserName = u.UserName;
@@ -125,8 +126,64 @@ namespace TaksiSluzba.Controllers
             pomocni.PhoneNumber = u.PhoneNumber;
 
             korisnici.Add(pomocni);
-            ulogovani.Add(pomocni.Id,pomocni);
+            ulogovani.Add(pomocni.Id,pomocni.UserName);
             WriteToXMl(ROLE.USER);
+
+            return Ok(pomocni);
+        }
+
+        [HttpGet]
+        [Route("api/ahome/changedriver")]
+        public IHttpActionResult ChangeDriver([FromUri]Driver u)
+        {
+            if (u.Email == "" || u.JMBG == "" || u.LastName == "" || u.Name == "" || u.Password == "" || u.PhoneNumber == "" || u.UserName == ""
+                || u.Automobil.GodisteAutomobila == "" || u.Automobil.Registracija=="")
+            {
+                return Ok("Jedno od polja je ostalo prazno, izmene nedozvoljene.");
+            }
+
+            Driver pomocni = new Driver();
+
+            if (ulogovani.Keys.Contains(u.Id))
+            {
+                // pomocni = ulogovani[u.Id];
+                pomocni = vozaci.Find(uu => uu.Id == u.Id);
+                ulogovani.Remove(u.Id);         // obrisali ga iz trenutno ulogovanih
+                vozaci.Remove(pomocni);      // obrisali ga iz liste korisnika
+            }
+            else
+            {
+                return Ok("Error occured");
+            }
+
+            if (korisnici.Exists(k => k.UserName == u.UserName) || admin.Exists(a => a.UserName == u.UserName) || vozaci.Exists(v => v.UserName == u.UserName))
+            {
+                vozaci.Add(pomocni);
+                ulogovani.Add(pomocni.Id,pomocni.UserName);
+                return Ok("Ovo korisnicko ime vec postoji izmene nisu moguce");
+            }
+            pomocni.UserName = u.UserName;
+            pomocni.Email = u.Email;
+            pomocni.Gender = u.Gender;
+            pomocni.JMBG = u.JMBG;
+            pomocni.LastName = u.LastName;
+            pomocni.Name = u.Name;
+            pomocni.Password = u.Password;
+            pomocni.PhoneNumber = u.PhoneNumber;
+
+            pomocni.Automobil.GodisteAutomobila = u.Automobil.GodisteAutomobila;
+            pomocni.Automobil.Registracija = u.Automobil.Registracija;
+            pomocni.Automobil.TaxiId = u.Automobil.TaxiId;
+            pomocni.Automobil.TipAutomobila = u.Automobil.TipAutomobila;
+
+            pomocni.Lokacija.Adresa.MestoPostanski = u.Lokacija.Adresa.MestoPostanski;
+            pomocni.Lokacija.Adresa.UlicaBroj = u.Lokacija.Adresa.UlicaBroj;
+            pomocni.Lokacija.Xcoordinate = u.Lokacija.Xcoordinate;
+            pomocni.Lokacija.Ycoordinate = u.Lokacija.Ycoordinate;
+
+            vozaci.Add(pomocni);
+            ulogovani.Add(pomocni.Id,pomocni.UserName);
+            WriteToXMl(ROLE.DRIVER);
 
             return Ok(pomocni);
         }
@@ -167,13 +224,11 @@ namespace TaksiSluzba.Controllers
         [Route("api/ahome/logoutuser")]
         public IHttpActionResult LogOut(User u)
         {
-            User help = new User();
+
             if (ulogovani.Keys.Contains(u.Id))
             {
-                help = ulogovani[u.Id];
+                ulogovani.Remove(u.Id);
             }
-
-            ulogovani.Remove(u.Id);
 
             return Ok("Loged Out");
         }

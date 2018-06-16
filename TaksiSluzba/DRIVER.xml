@@ -10,21 +10,19 @@
     <PhoneNumber>064/2547543</PhoneNumber>
     <Email>sale@gmail.com</Email>
     <Uloga>DRIVER</Uloga>
+    <Id> 1 </Id>
     <Voznje />
-	<Id> 1 </Id>
     <Lokacija>
       <Xcoordinate>19.850214217442478</Xcoordinate>
       <Ycoordinate>45.24585404603471</Ycoordinate>
       <Adresa>
         <UlicaBroj>Despota Stefana 10</UlicaBroj>
-        <MestoPostanski>Novi Sad 21000</MestoPostanski>
       </Adresa>
     </Lokacija>
     <Automobil>
       <GodisteAutomobila>2011</GodisteAutomobila>
-      <Registracija>NS434-WL</Registracija>
-	  <TaxiId> 1 </TaxiId>
-      <TipVozila>putnicki</TipVozila>
+      <Registracija>NS404-WL</Registracija>
+      <TipAutomobila>putnicki</TipAutomobila>
     </Automobil>
   </Driver>
 </ArrayOfDriver>
