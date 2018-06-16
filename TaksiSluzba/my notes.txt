@@ -1,0 +1,2 @@
+Nemam nigde session storage
+Ako ga refresh onda se izgubi

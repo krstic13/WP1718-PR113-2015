@@ -12,19 +12,121 @@
         $(document).ready(function () {
             var trenutnoUlogovan;
 
+            $(document).on("click", "#logovanje", function () {
+                var LogovanjeView = "<table>";
+                LogovanjeView += "    <tr>";
+                LogovanjeView += "        <td> Korisničko ime </td>";
+                LogovanjeView += "        <td> <input type=\"text\" id=\"Username\" /> </td>";
+                LogovanjeView += "    </tr>";
+                LogovanjeView += "    <tr>";
+                LogovanjeView += "        <td> Lozinka </td>";
+                LogovanjeView += "        <td> <input type=\"password\" id=\"Password\" /> </td>";
+                LogovanjeView += "    </tr>";
+                LogovanjeView += "    <tr>";
+                LogovanjeView += "        <td> <input type=\"button\" value=\"Uloguj se\" id=\"logovanjeButton\" /></td>";
+                LogovanjeView += "    </tr>";
+                LogovanjeView += "</table>";
+
+                $("#PageContent").html(LogovanjeView);
+            });
+
             $(document).on("click", "#logovanjeButton", function () {
                 if ($("#Username").val() != "" && $("#Password").val() != "")
                 {
                     var objekat = { Username: $("#Username").val(), Password: $("#Password").val() };
-                    $.post("/api/ahome/login", objekat, function (data, status) {
+                    $.get("/api/ahome/login", objekat, function (data, status) {
                         if (data.UserName == null) {
                             $("#Greske").html(data);
                         } else {
                             trenutnoUlogovan = data;
-                            //fali prikaz svega za korisnika koji se ulogavao
-                            //mora da se proveri u ifovima da li je korisnik admin/vozac ili dispecer
-                            //data tacka ne nudi sam po sebi mogucnosti 
-                            $("#Greske").html("korisnik se ulogovao " + data.UserName);
+                            //$("#Greske").html("korisnik se ulogovao " + data.UserName);
+                            if (data.Uloga == 0) {
+                                // KORISNIK 
+                                var UserView = " <br/> ";
+                                UserView += "    <table border=\"1\">";
+                                UserView += "        <tr> <th> Start </th> <th> Odredište </th> <th> Mušterija </th> <th> Vozač </th> <th> Dispečer </th> <th> Status vožnje </th> <th> </th> <th> </th> </tr>";
+
+                                for(v in data.Voznje)
+                                {
+                                    UserView += "   <tr> <td> " + data.Voznje[v] + " </td> <td>" + data.Voznje[v].Odrediste + " </td> <td>" + data.Voznje[v].Musterija.Name + " " + data.Voznje[v].Musterija.LastName + "  </td > <td> " + data.Voznje[v].Name + " " + data.Voznje[v].Vozac.LastName + "</td> <td>" + data.Voznje[v].Dispatcher.Name + " " + data.Voznje[v].Dispatcher.LastName + "</td> <td>" + data.Voznje[v].StatusVoznje +" </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                                }
+                                UserView += "    </table>";
+                                //UserView += "    <input type=\"submit\" value=\"Voznje na čekanju\" id=\"voznjeNaCekanju\"/>"; ovo vidi vozaccc
+                                UserView += " <p> Pretraga po statusu </p>";
+                                UserView += "<select name=\"vrsteVoznji\" size=\"1\">";
+                                UserView += "   <option value=\"1\">KREIRANA</option>";
+                                UserView += "    <option value=\"2\">FORMIRANA</option>";
+                                UserView += "    <option value=\"3\">OBRADJENA</option>";
+                                UserView += "    <option value=\"4\">PRIHVACENA</option>";
+                                UserView += "    <option value=\"5\">OTKAZANA</option>";
+                                UserView += "    <option value=\"6\">NEUSPESNA</option>";
+                                UserView += "    <option value=\"8\">USPESNA</option>";
+                                UserView += "    <option value=\"8\">U_TOKU</option>";
+                                UserView += "</select> <br/> <br/>"; 
+
+                                UserView += " <input value=\"Sortiranje po Datumu\" id=\"dateSort\" type=\"submit\" /> <br />";
+                                UserView += "    <input value=\"Sortiranje po Oceni   \" id=\"gradeSort\" type=\"submit\" /> <br />";
+
+                                UserView += "    <br/> Pretražite po datumu <br/> ";
+
+                                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime - local\" /> <br />";
+                                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime - local\" /> <br />";
+                                UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
+
+                                UserView += "     <br/>Pretražite po oceni <br/> ";
+                                UserView += "     Minimalna ocena: &nbsp;&nbsp;&nbsp;&nbsp;  ";
+
+                                UserView += "   <select name=\"OceneMin\" size=\"1\">";
+                                UserView += "        <option value=\"0\">0</option>"; 
+                                UserView += "        <option value=\"1\">1</option>"; 
+                                UserView += "        <option value=\"2\">2</option>";
+                                UserView += "        <option value=\"3\">3</option>";
+                                UserView += "        <option value=\"4\">4</option>";
+                                UserView += "        <option value=\"5\">5</option>";
+                                UserView += "    </select> <br/>";
+
+                                UserView += "     Maksimalna ocena: &nbsp;&nbsp;   ";
+
+                                UserView += "    <select name=\"OceneMax\" size=\"1\">";
+                                UserView += "        <option value=\"0\">0</option>"; 
+                                UserView += "         <option value=\"1\">1</option>";
+                                UserView += "        <option value=\"2\">2</option>";
+                                UserView += "        <option value=\"3\">3</option>";
+                                UserView += "        <option value=\"4\">4</option>";
+                                UserView += "        <option value=\"5\">5</option>";
+                                UserView += "    </select> <br/>";
+
+                                UserView += "     <input type=\"submit\" id=\"searchByGrade\" value=\"Pretraži\" />";
+
+                                UserView += "   <p> <br/>Pretraga po ceni </p>";
+                                UserView += "    Minimalna cena: &nbsp;&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
+                                UserView += "    Maksimalna cena:&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
+
+                                UserView += "    <input type=\"submit\" id=\"searchByPrice\" value=\"Pretraži\" />";
+
+                                var UserMenu = "<table align=\"center\">";
+                                UserMenu += "  <tr> ";
+                                UserMenu += "        <td id=\"opcije\"> Opcije </td>";
+                                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                                UserMenu += "        <td id=\"profil\"> Pregled profila </td>";
+                                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                                UserMenu += "        <td id=\"profil\"> Nova vožnja </td>";
+                                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                                UserMenu += "        <td id=\"logout\"> Izloguj se </td>";
+                                UserMenu += "    </tr>";
+                                UserMenu += "</table>";
+
+                                $("#PageContent").html(UserView);
+                                $("#PageMenu").html(UserMenu);
+
+                            }
+                            else if (data.Uloga == 1) {
+                                //  DRIVER
+
+                            }
+                            else if (data.Uloga == 2) {
+                                // ADMIN
+                            }
                         }
                     });
 
@@ -93,14 +195,137 @@
                 {
                     $("#Greske").html("Sva polja moraju biti popunjena!");
                 }
-
-
             });
 
+            $(document).on("click", "#opcije", function () {
+                if (trenutnoUlogovan.Uloga == 0) {
+                    // KORISNIK 
+                    var UserView = " <br/> ";
+                    UserView += "    <table border=\"1\">";
+                    UserView += "        <tr> <th> Start </th> <th> Odredište </th> <th> Mušterija </th> <th> Vozač </th> <th> Dispečer </th> <th> Status vožnje </th> <th> </th> <th> </th> </tr>";
+
+                    for (v in trenutnoUlogovan.Voznje) {
+                        UserView += "   <tr> <td> " + trenutnoUlogovan.Voznje[v] + " </td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> <td>" + trenutnoUlogovan.Voznje[v].Musterija.Name + " " + trenutnoUlogovan.Voznje[v].Musterija.LastName + "  </td > <td> " + trenutnoUlogovan.Voznje[v].Name + " " + trenutnoUlogovan.Voznje[v].Vozac.LastName + "</td> <td>" + trenutnoUlogovan.Voznje[v].Dispatcher.Name + " " + trenutnoUlogovan.Voznje[v].Dispatcher.LastName + "</td> <td>" + trenutnoUlogovan.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                    }
+                    UserView += "    </table>";
+                    //UserView += "    <input type=\"submit\" value=\"Voznje na čekanju\" id=\"voznjeNaCekanju\"/>"; ovo vidi vozaccc
+                    UserView += " <p> Pretraga po statusu </p>";
+                    UserView += "<select name=\"vrsteVoznji\" size=\"1\">";
+                    UserView += "   <option value=\"1\">KREIRANA</option>";
+                    UserView += "    <option value=\"2\">FORMIRANA</option>";
+                    UserView += "    <option value=\"3\">OBRADJENA</option>";
+                    UserView += "    <option value=\"4\">PRIHVACENA</option>";
+                    UserView += "    <option value=\"5\">OTKAZANA</option>";
+                    UserView += "    <option value=\"6\">NEUSPESNA</option>";
+                    UserView += "    <option value=\"8\">USPESNA</option>";
+                    UserView += "    <option value=\"8\">U_TOKU</option>";
+                    UserView += "</select> <br/> <br/>";
+
+                    UserView += " <input value=\"Sortiranje po Datumu\" id=\"dateSort\" type=\"submit\" /> <br />";
+                    UserView += "    <input value=\"Sortiranje po Oceni   \" id=\"gradeSort\" type=\"submit\" /> <br />";
+
+                    UserView += "    <br/> Pretražite po datumu <br/> ";
+
+                    UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime - local\" /> <br />";
+                    UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime - local\" /> <br />";
+                    UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
+
+                    UserView += "     <br/>Pretražite po oceni <br/> ";
+                    UserView += "     Minimalna ocena: &nbsp;&nbsp;&nbsp;&nbsp;  ";
+
+                    UserView += "   <select name=\"OceneMin\" size=\"1\">";
+                    UserView += "        <option value=\"0\">0</option>";
+                    UserView += "        <option value=\"1\">1</option>";
+                    UserView += "        <option value=\"2\">2</option>";
+                    UserView += "        <option value=\"3\">3</option>";
+                    UserView += "        <option value=\"4\">4</option>";
+                    UserView += "        <option value=\"5\">5</option>";
+                    UserView += "    </select> <br/>";
+
+                    UserView += "     Maksimalna ocena: &nbsp;&nbsp;   ";
+
+                    UserView += "    <select name=\"OceneMax\" size=\"1\">";
+                    UserView += "        <option value=\"0\">0</option>";
+                    UserView += "         <option value=\"1\">1</option>";
+                    UserView += "        <option value=\"2\">2</option>";
+                    UserView += "        <option value=\"3\">3</option>";
+                    UserView += "        <option value=\"4\">4</option>";
+                    UserView += "        <option value=\"5\">5</option>";
+                    UserView += "    </select> <br/>";
+
+                    UserView += "     <input type=\"submit\" id=\"searchByGrade\" value=\"Pretraži\" />";
+
+                    UserView += "   <p> <br/>Pretraga po ceni </p>";
+                    UserView += "    Minimalna cena: &nbsp;&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
+                    UserView += "    Maksimalna cena:&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
+
+                    UserView += "    <input type=\"submit\" id=\"searchByPrice\" value=\"Pretraži\" />";
+
+                    var UserMenu = "<table align=\"center\">";
+                    UserMenu += "  <tr> ";
+                    UserMenu += "        <td id=\"opcije\"> Opcije </td>";
+                    UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                    UserMenu += "        <td id=\"profil\"> Pregled profila </td>";
+                    UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                    UserMenu += "        <td id=\"profil\"> Nova vožnja </td>";
+                    UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                    UserMenu += "        <td id=\"logout\"> Izloguj se </td>";
+                    UserMenu += "    </tr>";
+                    UserMenu += "</table>";
+
+                    $("#PageContent").html(UserView);
+                    $("#PageMenu").html(UserMenu);
+
+                }
+                else if (data.Uloga == 1) {
+                    //  DRIVER
+
+                }
+                else if (data.Uloga == 2) {
+                    // ADMIN
+                }
+            });
+
+            $(document).on("click", "#profil", function () {
+                var profilHelper = " <table>";
+                profilHelper += " <tr> <td> Korisničko ime: </td> <td> <input type=\"text\" id=\"korisnickoIme\" value=" +trenutnoUlogovan.UserName+" /></td> </tr>";
+                profilHelper += "   <tr> <td> Lozinka: </td> <td> <input type=\"password\" id=\"korisnickaLozinka\" value=" + trenutnoUlogovan.Password + " /> </td> </tr>";
+                profilHelper += "    <tr> <td> Ime: </td> <td> <input type=\"text\" id=\"Ime\" value=" + trenutnoUlogovan.Name + " /></td> </tr>";
+                profilHelper += "   <tr> <td> Prezime: </td> <td> <input type=\"text\" id=\"Prezime\" value=" + trenutnoUlogovan.LastName + " /> </td> </tr>";
+                profilHelper += "   <tr> <td> Pol: </td> <td>";
+                profilHelper += "       <select name=\"Pol\" id=\"pol\" size=\"1\">";
+                profilHelper += "            <option value=\"1\">Žensko</option>";
+                profilHelper += "            <option value=\"2\">Muško</option>";
+                profilHelper += "        </select>";
+                profilHelper += "    </td> </tr>";
+                profilHelper += "    <tr> <td> JMBG: </td> <td> <input type=\"text\" id=\"korisnickiJMBG\" value=" + trenutnoUlogovan.JMBG + " /> </td> </tr>";
+                profilHelper += "    <tr> <td> Kontakt telefon: </td> <td> <input type=\"text\" id=\"korisnickiTelefon\" value=" + trenutnoUlogovan.PhoneNumber + " /> </td> </tr>";
+                profilHelper += "    <tr> <td> Email: </td> <td> <input type=\"text\" id=\"korisnickiEmail\" value=" + trenutnoUlogovan.Email + " /> </td> </tr>";
+                profilHelper += "   <tr><td colspan='2' align='center'> <input type=\"submit\" value=\"Promeni\" id=\"promeniProfil\" /></td></tr>";
+                profilHelper += " </table >";
+                $("#PageContent").html(profilHelper);
+            });
+
+            $(document).on("click", "#promeniProfil", function () {
+                if ($("#Username").val() != "" && $("#Password").val() != "") {
+                    var objekat = { Username: $("#Username").val(), Password: $("#Password").val() };
+                    $.get("/api/ahome/change", objekat, function (data, status) {
+                        if (data.UserName == null) {
+                            $("#Greske").html(data);
+                        }
+                    });
+                } else {
+                    var Greska = "Izmena koju ste uneli nije moguca";
+                    $("#Greske").html(Greska);
+                    }
+
+            });
 
         });
     </script>
 </head>
+
+
 
 
 <body>
@@ -108,18 +333,17 @@
         Taksi služba
     </div>
 
-    <div class="Meni">
+    <div id="PageMenu" class="Meni">
         <table align="center">
             <tr>
                 <td id="logovanje"> Uloguj se </td>
                 <td>&nbsp; &nbsp; &nbsp;</td>
                 <td id="registracija"> Registruj se </td>
             </tr>
-
         </table>
     </div>
 
-<br /><br /><br />
+    <br /><br /><br />
 
 
     <div id="PageContent">
@@ -135,7 +359,6 @@
             <tr>
                 <td> <input type="button" value="Uloguj se" id="logovanjeButton" /></td>
             </tr>
-
         </table>
     </div>
 
@@ -146,6 +369,8 @@
     <div id="AllGood" class="Good">
 
     </div>
+
+    
 
 
 </body>

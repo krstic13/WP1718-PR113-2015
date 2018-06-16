@@ -28,14 +28,23 @@ namespace TaksiSluzba.Controllers
             return Redirect(requestUri.AbsoluteUri + "Content/index.html");
         }
 
+        [HttpGet]
         [Route("api/ahome/login")]
-        public IHttpActionResult Prijava(UserLogin user)
+        public IHttpActionResult Prijava([FromUri]UserLogin user)
         {
 
             foreach (User u in korisnici)
             {
                 if (u.UserName == user.Username && u.Password == user.Password)
                 {
+                    if (ulogovani.Keys.Contains(user.Username))
+                    {
+
+                    }
+                    else {
+                        ulogovani.Add(u.Id, u);
+                    }
+                    
                     return Ok(u);
                 }
             }
@@ -57,6 +66,14 @@ namespace TaksiSluzba.Controllers
             }
 
                 return Ok("Korisnik ne postoji");
+        }
+
+
+        [Route("api/ahome/registration")]
+        public IHttpActionResult Change(User u)
+        {
+            //Implement changes here
+            return Ok();
         }
 
         [Route("api/ahome/registration")]
@@ -82,13 +99,16 @@ namespace TaksiSluzba.Controllers
                 return Ok("Korisnik vec postoji");
             }
 
-            u.Id = (korisnici.Count + 1).ToString();
+            u.Uloga = ROLE.USER;
+            u.Id = (korisnici.Count + admin.Count + vozaci.Count+ 1).ToString();
             korisnici.Add(u);
+
+            WriteToXMl(ROLE.USER);
 
             return Ok(u);
         }
 
-        private void WriteToXMl(ROLE uloga)
+        private void WriteToXMl(ROLE uloga) // za svako dodavanje i izmenu 
         {
             string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba" + uloga.ToString() + ".xml";
             XmlSerializer serializer;
@@ -134,3 +154,11 @@ namespace TaksiSluzba.Controllers
 
     }
 }
+
+/*
+ $.ajax({
+                    url: "/api/main/logoutuser",
+                    data: un,
+                    type: "DELETE"              
+                });
+*/
