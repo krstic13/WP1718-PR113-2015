@@ -37,9 +37,10 @@ namespace TaksiSluzba.Controllers
             {
                 if (u.UserName == user.Username && u.Password == user.Password)
                 {
-                    if (ulogovani.Keys.Contains(user.Username))
+                    if (ulogovani.Keys.Contains(u.Id))
                     {
-
+                        // Prosledi informaciju da je vec ulogovan korisnik i da ispise gresku
+                        return Ok("Korisnik je već ulogovan, nemoguće duplo logovanje");
                     }
                     else {
                         ulogovani.Add(u.Id, u);
@@ -49,10 +50,19 @@ namespace TaksiSluzba.Controllers
                 }
             }
 
-            foreach (Driver u in korisnici)
+            foreach (Driver u in vozaci)
             {
                 if (u.UserName == user.Username && u.Password == user.Password)
                 {
+                    if (ulogovani.Keys.Contains(u.Id))
+                    {
+                        // Prosledi informaciju da je vec ulogovan korisnik i da ispise gresku
+                        return Ok("Korisnik je već ulogovan, nemoguće duplo logovanje");
+                    }
+                    else
+                    {
+                        ulogovani.Add(u.Id, u);
+                    }
                     return Ok(u);
                 }
             }
@@ -61,6 +71,15 @@ namespace TaksiSluzba.Controllers
             {
                 if (u.UserName == user.Username && u.Password == user.Password)
                 {
+                    if (ulogovani.Keys.Contains(u.Id))
+                    {
+                        // Prosledi informaciju da je vec ulogovan korisnik i da ispise gresku
+                        return Ok("Korisnik je već ulogovan, nemoguće duplo logovanje");
+                    }
+                    else
+                    {
+                        ulogovani.Add(u.Id, u);
+                    }
                     return Ok(u);
                 }
             }
@@ -68,12 +87,48 @@ namespace TaksiSluzba.Controllers
                 return Ok("Korisnik ne postoji");
         }
 
-
-        [Route("api/ahome/registration")]
-        public IHttpActionResult Change(User u)
+        [HttpGet]
+        [Route("api/ahome/changeuser")]
+        public IHttpActionResult ChangeUser([FromUri]User u)
         {
             //Implement changes here
-            return Ok();
+            if (u.Email == "" || u.JMBG == "" || u.LastName == "" || u.Name == "" || u.Password == "" || u.PhoneNumber == "" || u.UserName == "")
+            {
+                return Ok("Jendno od polja je ostalo prazno, izmene nedozvoljene.");
+            }
+
+            User pomocni = new User();
+
+            if (ulogovani.Keys.Contains(u.Id))
+            {
+                pomocni = ulogovani[u.Id];
+                ulogovani.Remove(u.Id);         // obrisali ga iz trenutno ulogovanih
+                korisnici.Remove(pomocni);      // obrisali ga iz liste korisnika
+            }else
+            {
+                return Ok("Error occured");
+            }
+            
+            if (korisnici.Exists(k => k.UserName == u.UserName) || admin.Exists(a => a.UserName == u.UserName) || vozaci.Exists(v => v.UserName == u.UserName))
+            {
+                korisnici.Add(pomocni);
+                ulogovani.Add(pomocni.Id,pomocni);
+                return Ok("Ovo korisnicko ime vec postoji izmene nisu moguce");
+            }
+            pomocni.UserName = u.UserName;
+            pomocni.Email = u.Email;
+            pomocni.Gender = u.Gender;
+            pomocni.JMBG = u.JMBG;
+            pomocni.LastName = u.LastName;
+            pomocni.Name = u.Name;
+            pomocni.Password = u.Password;
+            pomocni.PhoneNumber = u.PhoneNumber;
+
+            korisnici.Add(pomocni);
+            ulogovani.Add(pomocni.Id,pomocni);
+            WriteToXMl(ROLE.USER);
+
+            return Ok(pomocni);
         }
 
         [Route("api/ahome/registration")]
@@ -108,9 +163,24 @@ namespace TaksiSluzba.Controllers
             return Ok(u);
         }
 
+        [HttpDelete]
+        [Route("api/ahome/logoutuser")]
+        public IHttpActionResult LogOut(User u)
+        {
+            User help = new User();
+            if (ulogovani.Keys.Contains(u.Id))
+            {
+                help = ulogovani[u.Id];
+            }
+
+            ulogovani.Remove(u.Id);
+
+            return Ok("Loged Out");
+        }
+
         private void WriteToXMl(ROLE uloga) // za svako dodavanje i izmenu 
         {
-            string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba" + uloga.ToString() + ".xml";
+            string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\" + uloga.ToString() + ".xml";
             XmlSerializer serializer;
             if (uloga == ROLE.DRIVER)
                 serializer = new XmlSerializer(typeof(List<Driver>));
@@ -151,6 +221,8 @@ namespace TaksiSluzba.Controllers
             }
             catch { }
         }
+
+
 
     }
 }

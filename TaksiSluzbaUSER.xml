@@ -13,17 +13,4 @@
     <Id> 1 </Id>
     <Voznje />
   </User>
-  <User>
-    <UserName>caki</UserName>
-    <Password>caki</Password>
-    <Name>cakicaki</Name>
-    <LastName>caki</LastName>
-    <Gender>Žensko</Gender>
-    <JMBG>caki</JMBG>
-    <PhoneNumber>caki</PhoneNumber>
-    <Email>caki</Email>
-    <Uloga>USER</Uloga>
-    <Id>6</Id>
-    <Voznje />
-  </User>
 </ArrayOfUser>

@@ -19,8 +19,8 @@ namespace TaksiSluzba.Models
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public ROLE Uloga { get; set; }
-        public List<Ride> Voznje { get; set; }
         public string Id { get; set; }
+        public List<Ride> Voznje { get; set; }
 
         public User(string username, string password, string name, string lastname, POL gender, string jmbg, string phonenumber,string email, ROLE uloga)
         {
