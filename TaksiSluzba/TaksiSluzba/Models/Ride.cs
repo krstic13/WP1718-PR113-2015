@@ -10,10 +10,10 @@ namespace TaksiSluzba.Models
     {
         public DateTime DatumIVremePorudzbine { get; set; }
         public Location LokacijaPolazna { get; set; }
-        public User Musterija { get; set; }
+        public string Musterija { get; set; }
         public Location Odrediste { get; set; }
-        public User Dispatcher { get; set; }
-        public Driver Vozac { get; set; }
+        public string Dispatcher { get; set; }
+        public string Vozac { get; set; }
         public string Iznos { get; set; }
         public Comment Komentar { get; set; }
         public RideStatus StatusVoznje { get; set; }
@@ -25,7 +25,7 @@ namespace TaksiSluzba.Models
 
         }
 
-        public Ride(DateTime datumporudzbine, Location lokacija, User musterija, Location odrediste, Driver vozac, string iznos, Comment komentar, RideStatus statusVoznje, User dispatcher, CARTYPE tipvozila)
+        public Ride(DateTime datumporudzbine, Location lokacija, string musterija, Location odrediste, string vozac, string iznos, Comment komentar, RideStatus statusVoznje, string dispatcher, CARTYPE tipvozila)
         {
             DatumIVremePorudzbine = datumporudzbine;
             LokacijaPolazna = lokacija;

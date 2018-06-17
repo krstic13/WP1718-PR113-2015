@@ -1,19 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <User>
-    <UserName>admin1</UserName>
-    <Password>admin1</Password>
-    <Name>Anđela</Name>
-    <LastName>Krstić</LastName>
-    <Gender>Žensko</Gender>
-    <JMBG>1001997756010</JMBG>
-    <PhoneNumber>069/5525131</PhoneNumber>
-    <Email>krs@gmail.com</Email>
-    <Uloga>ADMIN</Uloga>
-    <Voznje />
-	<Id> 1 </Id>
-  </User>
-  <User>
     <UserName>admin2</UserName>
     <Password>admin2</Password>
     <Name>Kristina</Name>
@@ -23,8 +10,8 @@
     <PhoneNumber>061/5525131</PhoneNumber>
     <Email>polich.christina@gmail.com</Email>
     <Uloga>ADMIN</Uloga>
+    <Id> 2 </Id>
     <Voznje />
-	<Id> 2 </Id>
   </User>
   <User>
     <UserName>admin3</UserName>
@@ -36,7 +23,20 @@
     <PhoneNumber>066/8721659</PhoneNumber>
     <Email>fil32@gmail.com</Email>
     <Uloga>ADMIN</Uloga>
+    <Id> 3 </Id>
     <Voznje />
-	<Id> 3 </Id>
+  </User>
+  <User>
+    <UserName>admin1</UserName>
+    <Password>admin1</Password>
+    <Name>Anđela</Name>
+    <LastName>Krstić</LastName>
+    <Gender>Žensko</Gender>
+    <JMBG>1001997756010</JMBG>
+    <PhoneNumber>069/5525131</PhoneNumber>
+    <Email>krstic113@gmail.com</Email>
+    <Uloga>ADMIN</Uloga>
+    <Id> 1 </Id>
+    <Voznje />
   </User>
 </ArrayOfUser>

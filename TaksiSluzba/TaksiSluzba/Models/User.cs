@@ -21,9 +21,11 @@ namespace TaksiSluzba.Models
         public ROLE Uloga { get; set; }
         public string Id { get; set; }
         public List<Ride> Voznje { get; set; }
+        public bool Blokiran { get; set; }
 
         public User(string username, string password, string name, string lastname, POL gender, string jmbg, string phonenumber,string email, ROLE uloga)
         {
+            Voznje = new List<Ride>();
             UserName = username;
             Password = password;
             Name = name;
@@ -34,10 +36,12 @@ namespace TaksiSluzba.Models
             Email = email;
             Uloga = uloga;
             Voznje = new List<Ride>();
+            Blokiran = false;
         }
 
         public User(User korisnik)
         {
+            Voznje = new List<Ride>();
             this.Email = korisnik.Email;
             this.Gender = korisnik.Gender;
             this.JMBG = korisnik.JMBG;
@@ -47,10 +51,12 @@ namespace TaksiSluzba.Models
             this.PhoneNumber = korisnik.PhoneNumber;
             this.Uloga = korisnik.Uloga;
             this.UserName = korisnik.UserName;
+            Blokiran = false;
         }
 
         public User()
         {
+            Blokiran = false;
             Voznje = new List<Ride>();
         }
 
