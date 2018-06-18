@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User>
+    <UserName>korisnik</UserName>
+    <Password>korisnik</Password>
+    <Name>MilicaKK</Name>
+    <LastName>Kostić</LastName>
+    <Gender>Žensko</Gender>
+    <JMBG>0605996755024</JMBG>
+    <PhoneNumber>062/225885</PhoneNumber>
+    <Email>kostiMicka@gmail.com</Email>
+    <Uloga>USER</Uloga>
+    <Id> 5 </Id>
+    <Voznje />
+  </User>
+  <User>
+    <UserName>caki</UserName>
+    <Password>caki</Password>
+    <Name>cakicaki</Name>
+    <LastName>caki</LastName>
+    <Gender>Žensko</Gender>
+    <JMBG>caki</JMBG>
+    <PhoneNumber>caki</PhoneNumber>
+    <Email>caki</Email>
+    <Uloga>USER</Uloga>
+    <Id>6</Id>
+    <Voznje />
+  </User>
+</ArrayOfUser>

@@ -390,7 +390,7 @@ namespace TaksiSluzba.Controllers
 
             WriteAllRides();
 
-            return Ok(r);
+            return Ok(dispecer);
         }
 
         [HttpDelete]
@@ -408,7 +408,10 @@ namespace TaksiSluzba.Controllers
 
         private void ReadAllRides()
         {
-            string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\RIDES.xml";
+            //string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\RIDES.xml";
+            var path = System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/RIDES.xml");
+
+
             XmlSerializer serializer;
             serializer = new XmlSerializer(typeof(List<Ride>));
 
@@ -424,7 +427,9 @@ namespace TaksiSluzba.Controllers
 
         private void WriteToXMl(ROLE uloga) // za svako dodavanje i izmenu 
         {
-            string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\" + uloga.ToString() + ".xml";
+            //string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\" + uloga.ToString() + ".xml";
+            var path = System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/" + uloga.ToString() + ".xml");
+
             XmlSerializer serializer;
             if (uloga == ROLE.DRIVER)
                 serializer = new XmlSerializer(typeof(List<Driver>));
@@ -444,7 +449,8 @@ namespace TaksiSluzba.Controllers
 
         private void ReadFromXML(ROLE uloga)
         {
-            string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\" + uloga.ToString() + ".xml";
+            //string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\" + uloga.ToString() + ".xml";
+            var path = System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/"+ uloga.ToString()+ ".xml");
             XmlSerializer serializer;
             if (uloga == ROLE.DRIVER)
                 serializer = new XmlSerializer(typeof(List<Driver>));
@@ -455,8 +461,10 @@ namespace TaksiSluzba.Controllers
             {
                 using (TextReader reader = new StreamReader(path))
                 {
-                    if (uloga == ROLE.ADMIN)
+                    if (uloga == ROLE.ADMIN) {
+
                         admin = (List<User>)serializer.Deserialize(reader);
+                    }  
                     else if (uloga == ROLE.USER)
                         korisnici = (List<User>)serializer.Deserialize(reader);
                     else if (uloga == ROLE.DRIVER)
@@ -468,7 +476,9 @@ namespace TaksiSluzba.Controllers
 
         private void WriteAllRides()
         {
-            string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\RIDES.xml";
+            // string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\RIDES.xml";
+            var path = System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/RIDES.xml");
+
             XmlSerializer serializer;
                 serializer = new XmlSerializer(typeof(List<Ride>));
 
@@ -483,6 +493,9 @@ namespace TaksiSluzba.Controllers
 }
 
 //svaki gumb za admina da se odradi
+//function ime i šta mu je stiglo 
+// function funkcija(parametarBezTipa){};
+
 
 /*
  $.ajax({

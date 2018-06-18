@@ -9,7 +9,7 @@ namespace TaksiSluzba.Models
     {
         public string Opis { get; set; }
         public DateTime DatumObjave { get; set; }
-        public User KorisnikKojiJeOstavioKomentar { get; set; }
+        public string KorisnikKojiJeOstavioKomentar { get; set; }
         public Ride VoznjaNaKojuSeOdnosiKomentar { get; set; }
         public string Ocena { get; set; }
 
@@ -18,7 +18,7 @@ namespace TaksiSluzba.Models
 
         }
 
-        public Comment(string opis, DateTime datumobjave, User korisnikkojijeostaviokomentar, Ride voznjanakojuseodnosikomentar, string ocena)
+        public Comment(string opis, DateTime datumobjave, string korisnikkojijeostaviokomentar, Ride voznjanakojuseodnosikomentar, string ocena)
         {
             Opis = opis;
             DatumObjave = datumobjave;

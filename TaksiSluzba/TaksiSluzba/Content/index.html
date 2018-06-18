@@ -865,7 +865,7 @@
                 UserView += "        <tr> <th> Start </th> <th> Odredište </th> <th> Mušterija </th> <th> Vozač </th> <th> Dispečer </th> <th> Status vožnje </th> <th> </th> <th> </th> </tr>";
 
                 for (v in trenutnoUlogovan.Voznje) {
-                    UserView += "   <tr> <td> " + trenutnoUlogovan.Voznje[v] + " </td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> <td>" + trenutnoUlogovan.Voznje[v].Musterija.Name + " " + trenutnoUlogovan.Voznje[v].Musterija.LastName + "  </td > <td> " + trenutnoUlogovan.Voznje[v].Name + " " + trenutnoUlogovan.Voznje[v].Vozac.LastName + "</td> <td>" + trenutnoUlogovan.Voznje[v].Dispatcher.Name + " " + trenutnoUlogovan.Voznje[v].Dispatcher.LastName + "</td> <td>" + trenutnoUlogovan.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                    UserView += "   <tr> <td> " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj + " " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski + " </td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> <td>" + trenutnoUlogovan.Voznje[v].Musterija + " " + "  </td > <td> " + trenutnoUlogovan.Voznje[v].Vozac + "</td> <td>" + trenutnoUlogovan.Voznje[v].Dispatcher + "</td> <td>" + trenutnoUlogovan.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
                 }
                 UserView += "    </table>";
                 UserView += " <p> Pretraga po statusu </p>";
@@ -1035,6 +1035,7 @@
 
                 //. . . . .pozovi funkciju za obracanje serveru. . . .
                 UserView = "";
+                sessionStorage.setItem("trenutniPrikaz", UserView);
                 $("#PageContent").html(UserView);
             });
 
@@ -1184,6 +1185,7 @@
                 // Sta ako izabrani vozac nema to vozilo
                 //NAPRAVI FUNKCIJU KOJA CE DA PROVERI DA LI TRAZENI VOZAC IMA AUTO KOJI JE SELEKTOVAN AKO NEMA ONDA VRATI GRESKU
 
+                sessionStorage.setItem("trenutniPrikaz", UserView);
                 $("#PageContent").html(UserView);
             });
 
@@ -1209,10 +1211,11 @@
                     };
 
                     $.post("/api/ahome/kreiranjevoznje", objekat, function (data, status) {
-                        if (data.Dispatcher == null) {
+                        if (data.Id == null) {
                             $("#Greske").html(data);
                         } else {
                             $("#AllGood").html("Vožnja uspešno kreirana");
+                            trenutnoUlogovan = data;
                         }
                     });
 

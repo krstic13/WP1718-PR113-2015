@@ -9,7 +9,7 @@ namespace TaksiSluzba.Models
 
     public class Car
     {
-      //  public Driver Vozac { get; set; }  string username? 
+        public string Vozac { get; set; }  
         public string GodisteAutomobila { get; set; }
         public string Registracija { get; set; }
         public string TaxiId { get; set; }

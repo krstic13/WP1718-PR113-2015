@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfDriver xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Driver>
+    <UserName>vozac1</UserName>
+    <Password>vozac1</Password>
+    <Name>Vitomir</Name>
+    <LastName>Žitić</LastName>
+    <Gender>Muško</Gender>
+    <JMBG>1710996800083</JMBG>
+    <PhoneNumber>064/2547543</PhoneNumber>
+    <Email>vitkoCar@gmail.com</Email>
+    <Uloga>DRIVER</Uloga>
+    <Id> 4 </Id>
+    <Voznje />
+    <Blokiran>false</Blokiran>
+    <Lokacija>
+      <Xcoordinate>19.84749102267682</Xcoordinate>
+      <Ycoordinate>45.24585981713608</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Bulevar Cara Lazara</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </Lokacija>
+    <Automobil>
+      <GodisteAutomobila>2011</GodisteAutomobila>
+      <Registracija>NS404-AK</Registracija>
+      <TipAutomobila>putnicki</TipAutomobila>
+    </Automobil>
+    <Slobodan>true</Slobodan>
+  </Driver>
+  <Driver>
+    <UserName>milisav</UserName>
+    <Password>milisav</Password>
+    <Name>milisav</Name>
+    <LastName>milisav</LastName>
+    <Gender>Muško</Gender>
+    <JMBG>milisav</JMBG>
+    <PhoneNumber>milisav</PhoneNumber>
+    <Email>milisav</Email>
+    <Uloga>DRIVER</Uloga>
+    <Id>7</Id>
+    <Voznje />
+    <Blokiran>false</Blokiran>
+    <Lokacija>
+      <Xcoordinate>19.834691353965617</Xcoordinate>
+      <Ycoordinate>45.239534807191774</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Narodnog fronta 52</UlicaBroj>
+        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+      </Adresa>
+    </Lokacija>
+    <Automobil>
+      <GodisteAutomobila>milisavmilisav</GodisteAutomobila>
+      <Registracija>milisav</Registracija>
+      <TipAutomobila>putnicki</TipAutomobila>
+    </Automobil>
+    <Slobodan>true</Slobodan>
+  </Driver>
+</ArrayOfDriver>
