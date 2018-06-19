@@ -19,7 +19,7 @@
 
             // Svuda napravi ono za refresh
 
-            var trenutnoUlogovan;
+            var trenutnoUlogovan; // trenutno ulogovan treba svuda da se zameni sa session storage user
             var UserMenu;
             var UserView;
 
@@ -303,7 +303,7 @@
 
                                 UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime - local\" /> <br />";
                                 UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime - local\" /> <br />";
-                                UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
+                                //UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
 
                                 UserView += "     <br/>Pretražite po oceni <br/> ";
                                 UserView += "     Minimalna ocena: &nbsp;&nbsp;&nbsp;&nbsp;  ";
@@ -328,13 +328,13 @@
                                 UserView += "        <option value=\"5\">5</option>";
                                 UserView += "    </select> <br/>";
 
-                                UserView += "     <input type=\"submit\" id=\"searchByGrade\" value=\"Pretraži\" />";
+                                //UserView += "     <input type=\"submit\" id=\"searchByGrade\" value=\"Pretraži\" />";
 
                                 UserView += "   <p> <br/>Pretraga po ceni </p>";
                                 UserView += "    Minimalna cena: &nbsp;&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
                                 UserView += "    Maksimalna cena:&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
 
-                                UserView += "    <input type=\"submit\" id=\"searchByPrice\" value=\"Pretraži\" />";
+                                //UserView += "    <input type=\"submit\" id=\"searchByPrice\" value=\"Pretraži\" />";
 
                                 UserView += "<p> <br/>Pretraga po imenu i/ili prezimenu korisnika </p>";
                                 UserView += " <br/>Ime korisnika: <br/>";
@@ -342,7 +342,7 @@
 
                                 UserView += " <br/>Prezime korisnika: <br/>";
                                 UserView += "<input type=\"text\" id=\"prezimeZaPretragu\" />";
-                                UserView += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" id=\"pretrazikorisnike\" value=\"Pretraži korisnike\" />";
+                                //UserView += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" id=\"pretrazikorisnike\" value=\"Pretraži korisnike\" />";
 
                                 UserView += "<p> <br/>Pretraga po imenu i/ili prezimenu vozača </p>";
                                 UserView += " <br/>Ime vozača: <br/>";
@@ -350,7 +350,7 @@
 
                                 UserView += " <br/>Prezime vozača: <br/>";
                                 UserView += "<input type=\"text\" id=\"vprezimeZaPretragu\" />";
-                                UserView += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" id=\"pretrazivozace\" value=\"Pretraži vozače\" />";
+                                UserView += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" id=\"izvrsipretragu\" value=\"Pretraži\" />";
 
                                 UserMenu = "<table align=\"center\">";
                                 UserMenu += "  <tr> ";
@@ -887,7 +887,7 @@
 
                 UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime - local\" /> <br />";
                 UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime - local\" /> <br />";
-                UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
+                //UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
 
                 UserView += "     <br/>Pretražite po oceni <br/> ";
                 UserView += "     Minimalna ocena: &nbsp;&nbsp;&nbsp;&nbsp;  ";
@@ -912,13 +912,13 @@
                 UserView += "        <option value=\"5\">5</option>";
                 UserView += "    </select> <br/>";
 
-                UserView += "     <input type=\"submit\" id=\"searchByGrade\" value=\"Pretraži\" />";
+                //UserView += "     <input type=\"submit\" id=\"searchByGrade\" value=\"Pretraži\" />";
 
                 UserView += "   <p> <br/>Pretraga po ceni </p>";
                 UserView += "    Minimalna cena: &nbsp;&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
                 UserView += "    Maksimalna cena:&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
 
-                UserView += "    <input type=\"submit\" id=\"searchByPrice\" value=\"Pretraži\" />";
+                //UserView += "    <input type=\"submit\" id=\"searchByPrice\" value=\"Pretraži\" />";
 
                 UserView += "<p> <br/>Pretraga po imenu i/ili prezimenu korisnika </p>";
                 UserView += " <br/>Ime korisnika: <br/>";
@@ -926,7 +926,7 @@
 
                 UserView += " <br/>Prezime korisnika: <br/>";
                 UserView += "<input type=\"text\" id=\"prezimeZaPretragu\" />";
-                UserView += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" id=\"pretrazikorisnike\" value=\"Pretraži korisnike\" />";
+                //UserView += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" id=\"pretrazikorisnike\" value=\"Pretraži korisnike\" />";
 
                 UserView += "<p> <br/>Pretraga po imenu i/ili prezimenu vozača </p>";
                 UserView += " <br/>Ime vozača: <br/>";
@@ -934,7 +934,7 @@
 
                 UserView += " <br/>Prezime vozača: <br/>";
                 UserView += "<input type=\"text\" id=\"vprezimeZaPretragu\" />";
-                UserView += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" id=\"pretrazivozace\" value=\"Pretraži vozače\" />";
+                UserView += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type=\"submit\" id=\"izvrsiPretragu\" value=\"Pretraži\" />";
 
                 UserMenu = "<table align=\"center\">";
                 UserMenu += "  <tr> ";
@@ -1024,9 +1024,8 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
-                //treba da dobavim listu blokiranih i ispisem je 
-                //ponudim unos za korisnika 
-                //proverim i na indexu i na serveru da li je unet ispravan korisnik tj da li postoji u listi - znaci mora da se stavi u neku global promenljivu ili u neki session
+             // var BlokView = "";
+                BlokView = "";
                 //onda na serveru stavim novi u listu (ako je validan) korisnika koji su blokirani i ne nalazi vec u listi blokiranih - vratiti poruku da postoji vec u listi blokiranih
                 //vratim novu listu
                 //ispisem novu listu
@@ -1034,9 +1033,276 @@
                 //else stavim da nije uspesno blokiran
 
                 //. . . . .pozovi funkciju za obracanje serveru. . . .
-                UserView = "";
+
+               // $("#Greske").html("Usao u funkciju");
+                $.get("/api/ahome/blockedList", "") 
+                    .done(function (data) {
+                       //  $("#Greske").html("Dobavio blokirane");
+
+                    var nesto = eval(data);
+                    var table = "";
+                    var table1 = "";
+                    table += "";
+                    table = " <h2> Blokirani korisnici </h2> ";
+                    table += "    <table border=\"1\">";
+                    table += "        <tr><th colspan=\"2\"> Blokirani korisnici </th> </tr>";
+
+                    var select = "";
+                    select += "<select name=\"Blokirani\" id=\"blocked\" size=\"1\">";
+                        counter = 1;
+
+                        for (v in nesto) {
+                            table1 += "   <tr> <td>" + counter + "</td> <td> " + nesto[v] + " </td> </tr>";
+                            select += " <option value =\"" + v + "\">" + nesto[v] + "</option>";
+                            counter++;
+                        }
+
+                        select += "</select>";
+
+                    if (table1 == "") {
+                        table = "";
+                        BlokView = "<br/> <br/><h2> Trenutno nema blokiranih korisnika </h2> <br/>";
+                        
+                    } else {
+                        table1 += "</table> <br/>";
+                        table += table1;
+                        BlokView += table;
+                        BlokView += select;
+                        BlokView += "<input type=\"submit\" name=\"Odblokiraj\" value=\"Odblokiraj\" id=\"odblokiraj\" /> <br/>";
+                    }
+
+                    // UserView = "<h2> Trenutno nema blokiranih korisnika </h2> <br/>";
+                    sessionStorage.setItem("PrviDeo", BlokView);
+
+                        $.get("/api/ahome/unblockedList", "")
+                            .done(function (data) {
+                        //$("#Greske").html("Dobavio ne blokirane");
+
+                        var nesto = eval(data);
+                        var select = "";
+                        //var BlokView1 = ""; S OVIM SIGURNO RADI!!!
+                                BlokView1 = "";
+                                BlokView1 += "<br/><select name=\"NeBlokirani\" id=\"nonblocked\" size=\"1\">";
+                        for (v in nesto) {
+                            select += " <option value =\"" + v + "\">" + nesto[v] + "</option>";
+                        }
+                        select += "</select> ";
+
+                                BlokView1 += select;
+
+                                BlokView1 += "<input type=\"submit\" id=\"blokirajk\" name=\"blokirajk\" value=\"Blokiraj\" />";
+
+                                sessionStorage.setItem("DrugiDeo", BlokView);
+                                UserView = BlokView + BlokView1;
+                                //UserView += sessionStorage.getItem("PrviiDeo");
+                                //UserView += sessionStorage.getItem("DrugiDeo");
+                                sessionStorage.setItem("trenutniPrikaz", UserView);
+                                $("#PageContent").html(UserView);
+                        });// 
+                    });
+               
+                /*UserView = "";
+                UserView = sessionStorage.getItem("PrviDeo");
+                if (sessionStorage.getItem("DrugiDeo") == null) {
+
+                    $.get("/api/ahome/unblockedList", "")
+                        .done(function (data) {
+                            //$("#Greske").html("Dobavio ne blokirane");
+
+                            var nesto = eval(data);
+                            var select = "";
+                            BlokView = "";
+                            BlokView += "<select name=\"NeBlokirani\" id=\"nonblocked\" size=\"1\">";
+                            for (v in nesto) {
+                                select += " <option value =\"" + v + "\">" + nesto[v] + "</option>";
+                            }
+                            select += "</select> <br/>";
+
+                            BlokView += select;
+
+                            BlokView += "<input type=\"submit\" id=\"blokiraj\" value=\"Blokiraj\" />";
+
+                            sessionStorage.setItem("DrugiDeo", BlokView);
+                        });//
+                }*/
+
+                /*UserView += sessionStorage.getItem("DrugiDeo");
                 sessionStorage.setItem("trenutniPrikaz", UserView);
                 $("#PageContent").html(UserView);
+                 */
+                
+
+                //Trazi listu neblokiranih
+               
+                //
+
+                
+            });
+
+            $(document).on("click", "#blokirajk", function () {
+
+                var korisnik = { nesto: $("#nonblocked").val() };
+                if (korisnik != null && korisnik != "") {
+
+                    $.get("/api/ahome/blokiranjga", korisnik, function (data, status) {
+                        if (data.UserName == null) {
+                            $("#Greske").html(data);
+                        } else {
+                            //Sve isto kao i kad dobavljamo inicijalno listu
+                            $("#Greske").empty();
+                            $("#AllGood").empty();
+
+                            // var BlokView = "";
+                            BlokView = "";
+
+                            $.get("/api/ahome/blockedList", "")
+                                .done(function (data) {
+
+                                    var nesto = eval(data);
+                                    var table = "";
+                                    var table1 = "";
+                                    table += "";
+                                    table = " <h2> Blokirani korisnici </h2> ";
+                                    table1 += "    <table border=\"1\">";
+                                    table1 += "        <tr> <th colspan=\"2\"> Blokirani korisnici </th> </tr>";
+
+                                    var select = "";
+                                    select += "<select name=\"Blokirani\" id=\"blocked\" size=\"1\">";
+
+                                    counter = 1;
+                                    for (v in nesto) {
+                                        table1 += "   <tr> <td>" + counter + "</td> <td> " + nesto[v] + " </td> </tr>";
+                                        select += " <option value =\"" + v + "\">" + nesto[v] + "</option>";
+                                        counter++;
+                                    }
+
+                                    select += "</select>";
+                                    table1 += "</table> <br/>";
+
+                                    if (table1 == "") {
+                                        table = "";
+                                        BlokView = "<br/> <br/><h2> Trenutno nema blokiranih korisnika </h2> <br/>";
+
+                                    } else {
+                                        table += table1;
+                                        BlokView += table;
+                                        BlokView += select;
+                                        BlokView += "<input type=\"submit\" name=\"Odblokiraj\" value=\"Odblokiraj\" id=\"odblokiraj\" /> <br/>";
+                                    }
+
+                                    sessionStorage.setItem("PrviDeo", BlokView);
+
+                                    $.get("/api/ahome/unblockedList", "")
+                                        .done(function (data) {
+
+                                            var nesto = eval(data);
+                                            var select = "";
+                                            BlokView1 = "";
+                                            BlokView1 += "<br/><select name=\"NeBlokirani\" id=\"nonblocked\" size=\"1\">";
+                                            for (v in nesto) {
+                                                select += " <option value =\"" + v + "\">" + nesto[v] + "</option>";
+                                            }
+                                            select += "</select> ";
+
+                                            BlokView1 += select;
+
+                                            BlokView1 += "<input type=\"submit\" id=\"blokirajk\" name=\"blokirajk\" value=\"Blokiraj\" />";
+
+                                            sessionStorage.setItem("DrugiDeo", BlokView);
+                                            UserView = BlokView + BlokView1;
+                                            sessionStorage.setItem("trenutniPrikaz", UserView);
+                                            $("#PageContent").html(UserView);
+                                        });// 
+                                });
+
+                            $("#AllGood").html("Korisnik je blokiran");
+                            // ponovo se obrati serveru da dobavis sve blokirane i sve neblokirane jer su sada izmenjeni 
+                        }
+
+                    });
+
+                }
+            });
+
+            $(document).on("click", "#odblokiraj", function () {
+                var korisnik = { nesto: $("#blocked").val() };
+                if (korisnik != null && korisnik != "") {
+
+                    $.get("/api/ahome/odblokirajga", korisnik, function (data, status) {
+                        if (data.UserName == null) {
+                            $("#Greske").html(data);
+                        } else {
+                            $("#Greske").empty();
+                            $("#AllGood").empty();
+                            $("#AllGood").html("Korisnik je odblokiran");
+
+                            BlokView = "";
+
+                            $.get("/api/ahome/blockedList", "")
+                                .done(function (data) {
+
+                                    var nesto = eval(data);
+                                    var table = "";
+                                    var table1 = "";
+                                    table += "";
+                                    table = " <h2> Blokirani korisnici </h2> ";
+                                    table1 += "    <table border=\"1\">";
+                                    table1 += "        <tr> <th colspan=\"2\"> Blokirani korisnici </th> </tr>";
+
+                                    var select = "";
+                                    select += "<select name=\"Blokirani\" id=\"blocked\" size=\"1\">";
+
+                                    counter = 1;
+                                    for (v in nesto) {
+                                        table1 += "   <tr> <td>" + counter + "</td> <td> " + nesto[v] + " </td> </tr>";
+                                        select += " <option value =\"" + v + "\">" + nesto[v] + "</option>";
+                                        counter++;
+                                    }
+
+                                    select += "</select>";
+                                    table1 += "</table> <br/>";
+
+                                    if (table1 == "") {
+                                        table = "";
+                                        BlokView = "<br/> <br/><h2> Trenutno nema blokiranih korisnika </h2> <br/>";
+
+                                    } else {
+                                        table += table1;
+                                        BlokView += table;
+                                        BlokView += select;
+                                        BlokView += "<input type=\"submit\" name=\"Odblokiraj\" value=\"Odblokiraj\" id=\"odblokiraj\" /> <br/>";
+                                    }
+
+                                    sessionStorage.setItem("PrviDeo", BlokView);
+
+                                    $.get("/api/ahome/unblockedList", "")
+                                        .done(function (data) {
+
+                                            var nesto = eval(data);
+                                            var select = "";
+                                            BlokView1 = "";
+                                            BlokView1 += "<br/><select name=\"NeBlokirani\" id=\"nonblocked\" size=\"1\">";
+                                            for (v in nesto) {
+                                                select += " <option value =\"" + v + "\">" + nesto[v] + "</option>";
+                                            }
+                                            select += "</select> ";
+
+                                            BlokView1 += select;
+
+                                            BlokView1 += "<input type=\"submit\" id=\"blokirajk\" name=\"blokirajk\" value=\"Blokiraj\" />";
+
+                                            sessionStorage.setItem("DrugiDeo", BlokView);
+                                            UserView = BlokView + BlokView1;
+                                            sessionStorage.setItem("trenutniPrikaz", UserView);
+                                            $("#PageContent").html(UserView);
+                                        });// 
+                                });
+
+                        }
+                    });
+                }
+
+
             });
 
             $(document).on("click", "#noviVozac", function () {
@@ -1085,8 +1351,26 @@
                 UserView += "   <tr><td colspan='2' align='center'> <input type=\"submit\" value=\"Kreiraj vozača\" id=\"kreirajVozaca\" /></td></tr>";
                 UserView += " </table >";
 
+                UserMenu = "<table align=\"center\">";
+                UserMenu += "  <tr> ";
+                UserMenu += "        <td id=\"opcijeAdmina\"> Opcije </td>";
+                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                UserMenu += "        <td id=\"profilAdmina\"> Pregled profila </td>";
+                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                UserMenu += "        <td id=\"novaVoznja\"> Nova vožnja </td>";
+                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                UserMenu += "        <td id=\"noviVozac\"> Novi vozač </td>";
+                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                UserMenu += "        <td id=\"blok\"> Blokiraj Korisnika </td>";
+                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                UserMenu += "        <td id=\"logout\"> Izloguj se </td>";
+                UserMenu += "    </tr>";
+                UserMenu += "</table>";
+
                 sessionStorage.setItem("trenutniPrikaz", UserView);
+                sessionStorage.setItem("trenutniMeni", UserMenu);
                 $("#PageContent").html(UserView);
+                $("#PageMenu").html(UserMenu);
             });
 
             $(document).on("click", "#kreirajVozaca", function () {

@@ -12,6 +12,7 @@
     <Uloga>USER</Uloga>
     <Id> 5 </Id>
     <Voznje />
+    <Blokiran>false</Blokiran>
   </User>
   <User>
     <UserName>caki</UserName>
@@ -25,5 +26,6 @@
     <Uloga>USER</Uloga>
     <Id>6</Id>
     <Voznje />
+    <Blokiran>true</Blokiran>
   </User>
 </ArrayOfUser>

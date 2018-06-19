@@ -40,7 +40,7 @@
     <Uloga>DRIVER</Uloga>
     <Id>7</Id>
     <Voznje />
-    <Blokiran>false</Blokiran>
+    <Blokiran>true</Blokiran>
     <Lokacija>
       <Xcoordinate>19.834691353965617</Xcoordinate>
       <Ycoordinate>45.239534807191774</Ycoordinate>

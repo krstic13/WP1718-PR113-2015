@@ -17,7 +17,9 @@ namespace TaksiSluzba.Controllers
         public static List<Driver> vozaci = new List<Driver>();
         public static List<User> admin = new List<User>();
         public static Dictionary<string, string> ulogovani = new Dictionary<string, string>();
+        public static Dictionary<string, string> neBlokirani = new Dictionary<string, string>();
         public static Dictionary<string, string> blokirani = new Dictionary<string, string>();
+
 
         public static List<Ride> korisnikKreiraoVoznju = new List<Ride>();
         public static List<Ride> sveVoznje = new List<Ride>();  // sadrzi sve voznje i one koje se dodeljuju nekome i one koje nisu dodeljene 
@@ -30,8 +32,34 @@ namespace TaksiSluzba.Controllers
             ReadFromXML(ROLE.USER);
             ReadAllRides();
             var requestUri = Request.RequestUri;
+
+            //
+            foreach (User u in korisnici)
+            {
+                if (u.Blokiran == true)
+                {
+                    blokirani.Add(u.Id, u.UserName);
+                }
+                else {
+                    neBlokirani.Add(u.Id, u.UserName);
+                }
+            }
+
+            foreach (Driver d in vozaci) {
+                if (d.Blokiran == true)
+                {
+                    blokirani.Add(d.Id, d.UserName);
+                }
+                else
+                {
+                    neBlokirani.Add(d.Id, d.UserName);
+                }
+            }
+            //
+
             return Redirect(requestUri.AbsoluteUri + "Content/index.html");
         }
+
 
         [HttpGet]
         [Route("api/ahome/login")]
@@ -46,6 +74,10 @@ namespace TaksiSluzba.Controllers
                     {
                         // Prosledi informaciju da je vec ulogovan korisnik i da ispise gresku
                         return Ok("Korisnik je već ulogovan, nemoguće duplo logovanje");
+                    }
+                    else if (u.Blokiran == true)
+                    {
+                        return Ok("Korisnik je blokiran, logovanje nije moguce");
                     }
                     else {
                         ulogovani.Add(u.Id, u.UserName);
@@ -63,6 +95,10 @@ namespace TaksiSluzba.Controllers
                     {
                         // Prosledi informaciju da je vec ulogovan korisnik i da ispise gresku
                         return Ok("Korisnik je već ulogovan, nemoguće duplo logovanje");
+                    }
+                    else if (u.Blokiran == true)
+                    {
+                        return Ok("Korisnik je blokiran, logovanje nije moguce");
                     }
                     else
                     {
@@ -237,30 +273,16 @@ namespace TaksiSluzba.Controllers
 
             return Ok(pomocni);
         }
-
-        [HttpGet]
-        [Route("api/ahome/blocking")]
-        public IHttpActionResult Blocking([FromUri]Driver u)
+        
+        [HttpGet, Route("api/ahome/blockedList")]
+        public IHttpActionResult BlockedList()
         {
-            /* if (u.Email == "" || u.JMBG == "" || u.LastName == "" || u.Name == "" || u.Password == "" || u.PhoneNumber == "" || u.UserName == ""
-                 || u.Automobil.GodisteAutomobila == "" || u.Automobil.Registracija == "")
-             {
-                 return Ok("Jedno od polja je ostalo prazno, izmene nedozvoljene.");
-             }
-
-             if (korisnici.Exists(k => k.UserName == u.UserName) || admin.Exists(a => a.UserName == u.UserName) || vozaci.Exists(v => v.UserName == u.UserName))
-             {
-                 return Ok("Ovo korisnicko ime vec postoji, dodavanje nije moguce");
-             }
-
-             u.Blokiran = false;
-             u.Id = (korisnici.Count() + admin.Count() + vozaci.Count()).ToString();
-             u.Uloga = ROLE.DRIVER;
-             u.Voznje = new List<Ride>();
-
-             vozaci.Add(u);
-             */
-            return Ok(u);
+            return Ok(blokirani);
+        }
+        [HttpGet]
+        [Route("api/ahome/unblockedList")]
+        public IHttpActionResult UnBlockedList() {
+            return Ok(neBlokirani);
         }
 
         [HttpGet]
@@ -281,7 +303,8 @@ namespace TaksiSluzba.Controllers
             {
                 Double xx = Convert.ToDouble(d.Lokacija.Xcoordinate);
                 Double yy = Convert.ToDouble(d.Lokacija.Ycoordinate);
-                Double r = Math.Sqrt(Math.Pow((xx - yy), 2) + Math.Pow((x - y), 2));
+                /* Double r = Math.Sqrt(Math.Pow((xx - yy), 2) + Math.Pow((x - y), 2));*/
+                Double r = Math.Sqrt(Math.Pow((xx - x), 2) + Math.Pow((yy - y), 2));
                 udaljenosti.Add(d.Id,r);
             }
 
@@ -320,10 +343,87 @@ namespace TaksiSluzba.Controllers
             u.Uloga = ROLE.DRIVER;
             u.Voznje = new List<Ride>();
 
+            neBlokirani.Add(u.Id, u.UserName);
+
             vozaci.Add(u);
             WriteToXMl(ROLE.DRIVER);
 
             return Ok(u);
+        }
+
+        [HttpGet]
+        [Route("api/ahome/blokiranjga")]
+        public IHttpActionResult BlokiranjeKorisnika([FromUri]string nesto) {
+
+            if (nesto == "" || nesto == null) {
+                return Ok("Ne mozete blokirati ako nema koga blokirati");
+            }
+
+            User u;
+            Driver d;
+
+            u = korisnici.Find(k => k.Id == nesto);
+            d = vozaci.Find(m => m.Id == nesto);
+
+            if (d == null)
+            {
+                //znaci da blokiramo korisnika
+                neBlokirani.Remove(nesto);
+                blokirani.Add(nesto,u.UserName);
+                korisnici.Remove(u);
+                u.Blokiran = true;
+                korisnici.Add(u);
+                WriteToXMl(ROLE.USER);
+                return Ok(u);
+            }
+            else {
+                neBlokirani.Remove(nesto);
+                /*if (blokirani.Keys.Contains(nesto)) {
+                    blokirani.Remove(nesto);
+                }*/
+                blokirani.Add(nesto, d.UserName);
+                vozaci.Remove(d);
+                d.Blokiran = true;
+                vozaci.Add(d);
+                WriteToXMl(ROLE.DRIVER);
+                return Ok(d);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/ahome/odblokirajga")]
+        public IHttpActionResult OdBlokiranjeKorisnika([FromUri]string nesto) {
+            if (nesto == "" || nesto == null)
+            {
+                return Ok("Pokusali ste da sprovedete nemogucu akciju. Ne mozete odblokirati ako nema osoba za odblokiranje");
+            }
+            User u;
+            Driver d;
+
+            u = korisnici.Find(k => k.Id == nesto);
+            d = vozaci.Find(m => m.Id == nesto);
+
+            if (d == null)
+            {
+                blokirani.Remove(nesto);
+                neBlokirani.Add(nesto, u.UserName);
+                korisnici.Remove(u);
+                u.Blokiran = false;
+                korisnici.Add(u);
+                WriteToXMl(ROLE.USER);
+                return Ok(u);
+            }
+            else
+            {
+                blokirani.Remove(nesto);
+                neBlokirani.Add(nesto, d.UserName);
+                vozaci.Remove(d);
+                d.Blokiran = false;
+                vozaci.Add(d);
+                WriteToXMl(ROLE.DRIVER);
+                return Ok(d);
+            }
+
         }
 
         [Route("api/ahome/registration")]
@@ -352,6 +452,7 @@ namespace TaksiSluzba.Controllers
             u.Uloga = ROLE.USER;
             u.Id = (korisnici.Count + admin.Count + vozaci.Count+ 1).ToString();
             korisnici.Add(u);
+            neBlokirani.Add(u.Id, u.UserName);
 
             WriteToXMl(ROLE.USER);
 
@@ -361,21 +462,28 @@ namespace TaksiSluzba.Controllers
         [Route("api/ahome/kreiranjevoznje")]
         public IHttpActionResult KreiranjeVoznje(Ride r)
         {
+            if (r.LokacijaPolazna == null) {
+                return Ok("Niste odabrali lokaciju");
+            }
+          
+
             // FORMIRANA
             r.StatusVoznje = RideStatus.FORMIRANA;
             User dispecer;
             dispecer = admin.Find(k=> k.Id == r.Dispatcher);
             //
             admin.Remove(dispecer);
-            
             //
 
             r.Dispatcher = dispecer.UserName;
 
             Driver d = vozaci.Find(k => k.Id == r.Vozac);
-            //
+            if (r.TipVozila != d.Automobil.TipAutomobila)
+            {
+                admin.Add(dispecer);
+                return Ok("Odabrani vozač ne poseduje izabrani tip automobila");
+            }
             vozaci.Remove(d);
-            //
 
             r.Id = r.Vozac +"_"+d.Voznje.Count;
             r.DatumIVremePorudzbine = DateTime.Now;
@@ -410,7 +518,6 @@ namespace TaksiSluzba.Controllers
         {
             //string path = @"C:\Users\asus\Desktop\Web\Web projekat\TaksiSluzba\RIDES.xml";
             var path = System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/RIDES.xml");
-
 
             XmlSerializer serializer;
             serializer = new XmlSerializer(typeof(List<Ride>));
