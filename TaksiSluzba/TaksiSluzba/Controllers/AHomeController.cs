@@ -20,7 +20,6 @@ namespace TaksiSluzba.Controllers
         public static Dictionary<string, string> neBlokirani = new Dictionary<string, string>();
         public static Dictionary<string, string> blokirani = new Dictionary<string, string>();
 
-
         public static List<Ride> korisnikKreiraoVoznju = new List<Ride>();
         public static List<Ride> sveVoznje = new List<Ride>();  // sadrzi sve voznje i one koje se dodeljuju nekome i one koje nisu dodeljene 
 
@@ -31,8 +30,8 @@ namespace TaksiSluzba.Controllers
             ReadFromXML(ROLE.DRIVER);
             ReadFromXML(ROLE.USER);
             ReadAllRides();
+            ReadCustomerMadeRide();
             var requestUri = Request.RequestUri;
-
             //
             foreach (User u in korisnici)
             {
@@ -56,10 +55,8 @@ namespace TaksiSluzba.Controllers
                 }
             }
             //
-
             return Redirect(requestUri.AbsoluteUri + "Content/index.html");
         }
-
 
         [HttpGet]
         [Route("api/ahome/login")]
@@ -279,6 +276,7 @@ namespace TaksiSluzba.Controllers
         {
             return Ok(blokirani);
         }
+
         [HttpGet]
         [Route("api/ahome/unblockedList")]
         public IHttpActionResult UnBlockedList() {
@@ -349,6 +347,46 @@ namespace TaksiSluzba.Controllers
             WriteToXMl(ROLE.DRIVER);
 
             return Ok(u);
+        }
+
+        [Route("api/ahome/izmenaLokacije")]
+        public IHttpActionResult IzmeniLokacijuVozaca(Driver korisnik) {
+
+            // proveri da nije poslat null 
+            if(korisnik.Lokacija!= null) {
+                // Driver d = vozaci.Find(dd => dd.Id == korisnik.Id);
+                Driver d = new Driver();
+                foreach (Driver k in vozaci) {
+                    if (k.Id == korisnik.Id) { d = k; break; }
+                        
+                }
+
+                if (d != null) {
+                vozaci.Remove(d);
+                d.Lokacija = korisnik.Lokacija;
+                vozaci.Add(d);
+                return Ok(d);
+                }
+            }
+
+            return Ok("Nije prosledjena validna lokacija.");
+        }
+
+        [Route("api/ahome/korisnikKreiraVoznju")]
+        public IHttpActionResult korisnikKreiraVoznju(Ride r)
+        {
+            if (r.LokacijaPolazna == null)
+            {
+                return Ok("");
+            }
+            r.StatusVoznje = RideStatus.KREIRANA;
+
+            // ID VOZNJE DODELITI KADA SE DODELI ??
+            r.DatumIVremePorudzbine = DateTime.Now;
+            korisnikKreiraoVoznju.Add(r);
+            WriteCustomerMadeRide();
+
+            return Ok(r.Musterija);
         }
 
         [HttpGet]
@@ -465,7 +503,6 @@ namespace TaksiSluzba.Controllers
             if (r.LokacijaPolazna == null) {
                 return Ok("Niste odabrali lokaciju");
             }
-          
 
             // FORMIRANA
             r.StatusVoznje = RideStatus.FORMIRANA;
@@ -595,7 +632,36 @@ namespace TaksiSluzba.Controllers
             }
         }
 
-        
+        private void ReadCustomerMadeRide()
+        {
+            var path = System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/CUSTOMER_RIDES.xml");
+
+            XmlSerializer serializer;
+            serializer = new XmlSerializer(typeof(List<Ride>));
+
+            try
+            {
+                using (TextReader reader = new StreamReader(path))
+                {
+                    korisnikKreiraoVoznju = (List<Ride>)serializer.Deserialize(reader);
+                }
+            }
+            catch { }
+        }
+
+        private void WriteCustomerMadeRide()
+        {
+            var path = System.Web.Hosting.HostingEnvironment.MapPath(@"~/App_Data/CUSTOMER_RIDES.xml");
+
+            XmlSerializer serializer;
+            serializer = new XmlSerializer(typeof(List<Ride>));
+
+            using (TextWriter writer = new StreamWriter(path))
+            {
+                serializer.Serialize(writer, korisnikKreiraoVoznju);
+            }
+        }
+
     }
 }
 

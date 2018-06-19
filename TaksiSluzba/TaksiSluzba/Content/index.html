@@ -20,8 +20,8 @@
             // Svuda napravi ono za refresh
 
             var trenutnoUlogovan; // trenutno ulogovan treba svuda da se zameni sa session storage user
-            var UserMenu;
-            var UserView;
+           // var UserMenu;
+           // var UserView;
 
             var pomocVozaci = "";
             //
@@ -73,6 +73,8 @@
 
             $(document).on("click", "#logovanje", function () {
 
+                var UserView = "";
+
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
@@ -98,6 +100,9 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
+                var UserMenu="";
+                var UserView="";
+
                 if ($("#Username").val() != "" && $("#Password").val() != "") {
                     var objekat = { Username: $("#Username").val(), Password: $("#Password").val() };
                     $.get("/api/ahome/login", objekat, function (data, status) {
@@ -107,6 +112,8 @@
                             trenutnoUlogovan = data;
                             sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(trenutnoUlogovan)); //  sessionStorage.removeItem("ulogovaniKorisnik");
                             //sessionStorage.getItem("ulogovaniKorisnik");
+                            sessionStorage.setItem("ulogovaniId", data.Id);
+
 
                             if (data.Uloga == 0) {
                                 // KORISNIK
@@ -135,8 +142,8 @@
 
                                 UserView += "    <br/> Pretražite po datumu <br/> ";
 
-                                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime - local\" /> <br />";
-                                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime - local\" /> <br />";
+                                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime-local\" /> <br />";
+                                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime-local\" /> <br />";
                                 UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
 
                                 UserView += "     <br/>Pretražite po oceni <br/> ";
@@ -176,7 +183,7 @@
                                 UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
                                 UserMenu += "        <td id=\"profil\"> Pregled profila </td>";
                                 UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
-                                UserMenu += "        <td id=\"novaVoznja\"> Nova vožnja </td>";
+                                UserMenu += "        <td id=\"novaVoznjaKorisnik\"> Nova vožnja </td>";
                                 UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
                                 UserMenu += "        <td id=\"logout\"> Izloguj se </td>";
                                 UserMenu += "    </tr>";
@@ -198,6 +205,8 @@
                                 UserMenu += "        <td id=\"opcijeVozaca\"> Opcije </td>";
                                 UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
                                 UserMenu += "        <td id=\"profilVozaca\"> Pregled profila </td>";
+                                UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
+                                UserMenu += "        <td id=\"promenaLokacije\"> Promena Lokacije </td>";
                                 UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
                                 UserMenu += "        <td id=\"logout\"> Izloguj se </td>";
                                 UserMenu += "    </tr>";
@@ -229,8 +238,8 @@
 
                                 UserView += "    <br/> Pretražite po datumu <br/> ";
 
-                                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime - local\" /> <br />";
-                                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime - local\" /> <br />";
+                                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime-local\" /> <br />";
+                                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime-local\" /> <br />";
                                 UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
 
                                 UserView += "     <br/>Pretražite po oceni <br/> ";
@@ -301,8 +310,8 @@
 
                                 UserView += "    <br/> Pretražite po datumu <br/> ";
 
-                                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime - local\" /> <br />";
-                                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime - local\" /> <br />";
+                                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime-local\" /> <br />";
+                                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime-local\" /> <br />";
                                 //UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
 
                                 UserView += "     <br/>Pretražite po oceni <br/> ";
@@ -387,6 +396,9 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
+                var UserMenu = "";
+                var UserView = "";
+
                 UserMenu = "<table align=\"center\">";
                 UserMenu += "  <tr> ";
                 UserMenu += "        <td id=\"opcijeVozaca\"> Opcije </td>";
@@ -425,8 +437,8 @@
 
                 UserView += "    <br/> Pretražite po datumu <br/> ";
 
-                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime - local\" /> <br />";
-                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime - local\" /> <br />";
+                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime-local\" /> <br />";
+                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime-local\" /> <br />";
                 UserView += "    <input type=\"submit\" id=\"searchByDate\" value=\"Pretraži\" /> <br/>";
 
                 UserView += "     <br/>Pretražite po oceni <br/> ";
@@ -473,6 +485,8 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
+                var UserView = "";
+
                 UserView = "    <table>";
                 UserView += "    <tr> <td> Korisničko ime: </td> <td> <input type=\"text\" id=\"korisnickoIme\" /></td> </tr > ";
                 UserView += "        <tr> <td> Lozinka: </td> <td> <input type=\"password\" id=\"korisnickaLozinka\" /> </td> </tr>";
@@ -481,7 +495,7 @@
                 UserView += "        <tr> <td> Pol: </td> <td>";
                 UserView += "            <select name=\"Pol\" id=\"pol\" size=\"1\">";
                 UserView += "               <option value=\"1\">Žensko</option>";
-                UserView += "               <option value=\"2\" selected>Muško</option>";
+                UserView += "               <option value=\"0\">Muško</option>";
                 UserView += "            </select>";
                 UserView += "       </td> </tr>";
                 UserView += "        <tr> <td> JMBG: </td> <td> <input type=\"text\" id=\"korisnickiJMBG\" /> </td> </tr>";
@@ -498,6 +512,8 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
                 // postaje musterija
+                var UserView = "";
+
                 if ($("#korisnickoIme").val() != "" && $("#korisnickaLozinka").val() != ""
                     && $("#Ime").val() != "" && $("#Prezime").val() != "" && $("#korisnickiJMBG").val() != "" && $("#korisnickiTelefon").val() != "" && $("#korisnickiEmail").val() != "") {
                     var objekat = {
@@ -539,6 +555,9 @@
             $(document).on("click", "#opcije", function () {
                 $("#Greske").empty();
                 $("#AllGood").empty();
+                var UserMenu = "";
+                var UserView = "";
+
                 if (trenutnoUlogovan.Uloga == 0) {
                     // KORISNIK
                     UserView = " <br/> ";
@@ -602,7 +621,7 @@
 
                     UserView += "    <input type=\"submit\" id=\"searchByPrice\" value=\"Pretraži\" />";
 
-                    var UserMenu = "<table align=\"center\">";
+                    UserMenu = "<table align=\"center\">";
                     UserMenu += "  <tr> ";
                     UserMenu += "        <td id=\"opcije\"> Opcije </td>";
                     UserMenu += "        <td>&nbsp; &nbsp; &nbsp;</td>";
@@ -633,6 +652,8 @@
             $(document).on("click", "#profil", function () {
                 $("#Greske").empty();
                 $("#AllGood").empty();
+
+                var UserView = "";
 
                 UserView = " <table>";
                 UserView += " <tr> <td> Korisničko ime: </td> <td> <input type=\"text\" id=\"korisnickoIme\" value=" + trenutnoUlogovan.UserName + " /></td> </tr>";
@@ -700,6 +721,9 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
+                var UserMenu = "";
+                var UserView = "";
+
                 $.ajax({
                     url: "/api/ahome/logoutuser",
                     data: trenutnoUlogovan,
@@ -739,6 +763,8 @@
             $(document).on("click", "#profilVozaca", function () {
                 $("#Greske").empty();
                 $("#AllGood").empty();
+
+                var UserView = "";
 
                 UserView = " <table>";
                 UserView += " <tr> <td> Korisničko ime: </td> <td> <input type=\"text\" id=\"korisnickoIme\" value=" + trenutnoUlogovan.UserName + " /></td> </tr>";
@@ -859,6 +885,9 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
+                var UserMenu = "";
+                var UserView = "";
+
                 UserView = " <br/> ";
                 UserView += "<input type=\"submit\" value=\"Prikazi sve voznje\" id=\"prikazSvihVoznji\"/>";
                 UserView += "    <table border=\"1\">";
@@ -964,6 +993,8 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
+                var UserView = "";
+
                 UserView = " <table>";
                 UserView += " <tr> <td> Korisničko ime: </td> <td> <input type=\"text\" id=\"korisnickoIme\" value=" + trenutnoUlogovan.UserName + " /></td> </tr>";
                 UserView += "   <tr> <td> Lozinka: </td> <td> <input type=\"password\" id=\"korisnickaLozinka\" value=" + trenutnoUlogovan.Password + " /> </td> </tr>";
@@ -1023,6 +1054,7 @@
             $(document).on("click", "#blok", function () {
                 $("#Greske").empty();
                 $("#AllGood").empty();
+                var UserView = "";
 
              // var BlokView = "";
                 BlokView = "";
@@ -1140,6 +1172,7 @@
             });
 
             $(document).on("click", "#blokirajk", function () {
+                var UserView = "";
 
                 var korisnik = { nesto: $("#nonblocked").val() };
                 if (korisnik != null && korisnik != "") {
@@ -1163,8 +1196,8 @@
                                     var table1 = "";
                                     table += "";
                                     table = " <h2> Blokirani korisnici </h2> ";
-                                    table1 += "    <table border=\"1\">";
-                                    table1 += "        <tr> <th colspan=\"2\"> Blokirani korisnici </th> </tr>";
+                                    table += "    <table border=\"1\">";
+                                    table += "        <tr> <th colspan=\"2\"> Blokirani korisnici </th> </tr>";
 
                                     var select = "";
                                     select += "<select name=\"Blokirani\" id=\"blocked\" size=\"1\">";
@@ -1177,13 +1210,14 @@
                                     }
 
                                     select += "</select>";
-                                    table1 += "</table> <br/>";
+                                    
 
                                     if (table1 == "") {
                                         table = "";
                                         BlokView = "<br/> <br/><h2> Trenutno nema blokiranih korisnika </h2> <br/>";
 
                                     } else {
+                                        table1 += "</table> <br/>";
                                         table += table1;
                                         BlokView += table;
                                         BlokView += select;
@@ -1225,6 +1259,8 @@
             });
 
             $(document).on("click", "#odblokiraj", function () {
+                var UserView = "";
+
                 var korisnik = { nesto: $("#blocked").val() };
                 if (korisnik != null && korisnik != "") {
 
@@ -1246,8 +1282,8 @@
                                     var table1 = "";
                                     table += "";
                                     table = " <h2> Blokirani korisnici </h2> ";
-                                    table1 += "    <table border=\"1\">";
-                                    table1 += "        <tr> <th colspan=\"2\"> Blokirani korisnici </th> </tr>";
+                                    table += "    <table border=\"1\">";
+                                    table += "        <tr> <th colspan=\"2\"> Blokirani korisnici </th> </tr>";
 
                                     var select = "";
                                     select += "<select name=\"Blokirani\" id=\"blocked\" size=\"1\">";
@@ -1260,13 +1296,14 @@
                                     }
 
                                     select += "</select>";
-                                    table1 += "</table> <br/>";
+                                    
 
                                     if (table1 == "") {
                                         table = "";
                                         BlokView = "<br/> <br/><h2> Trenutno nema blokiranih korisnika </h2> <br/>";
 
                                     } else {
+                                        table1 += "</table> <br/>";
                                         table += table1;
                                         BlokView += table;
                                         BlokView += select;
@@ -1308,6 +1345,9 @@
             $(document).on("click", "#noviVozac", function () {
                 $("#Greske").empty();
                 $("#AllGood").empty();
+
+                var UserMenu = "";
+                var UserView = "";
 
                 UserView = "<h2> Unesite informacije o vozaču </h2>"
                 UserView += " <table>";
@@ -1376,6 +1416,7 @@
             $(document).on("click", "#kreirajVozaca", function () {
                 $("#Greske").empty();
                 $("#AllGood").empty();
+
 
                 if ($("#korisnickoIme").val() != "" && $("#korisnickaLozinka").val() != ""
                     && $("#Ime").val() != "" && $("#Prezime").val() != "" && $("#korisnickiJMBG").val() != "" && $("#korisnickiTelefon").val() != "" && $("#korisnickiEmail").val() != ""
@@ -1447,6 +1488,8 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
+                var UserView = "";
+
                 UserView = "<p> Izaberite početnu lokaciju </p>";
                 UserView += map;
 
@@ -1471,6 +1514,64 @@
 
                 sessionStorage.setItem("trenutniPrikaz", UserView);
                 $("#PageContent").html(UserView);
+            });
+
+            $(document).on("click", "#novaVoznjaKorisnik", function () {
+                $("#Greske").empty();
+                $("#AllGood").empty();
+
+                var UserView = "";
+
+                UserView = "<h2> Izaberite početnu lokaciju </h2>";
+                UserView += map;
+
+                UserView += "<table> <tr> <td> Adresa: </td> <td id=\"kord\"> </td> </tr> </table>";
+
+                UserView += "    Tip vozila ";
+
+                UserView += "            <select name=\"TipVozila\" id=\"TipVozila\" size=\"1\">";
+                UserView += "                <option value=\"0\">putnicki</option>";
+                UserView += "<option value=\"1\">kombi</option> </select>";
+                //
+
+                UserView += "<input value=\"Kreiraj vožnju\" type=\"submit\"  id=\"kreirajvoznjuKORISNIK\" />";
+                // Sta ako izabrani vozac nema to vozilo
+                //NAPRAVI FUNKCIJU KOJA CE DA PROVERI DA LI TRAZENI VOZAC IMA AUTO KOJI JE SELEKTOVAN AKO NEMA ONDA VRATI GRESKU
+
+                sessionStorage.setItem("trenutniPrikaz", UserView);
+                $("#PageContent").html(UserView);
+            });
+
+            $(document).on("click", "#kreirajvoznjuKORISNIK", function () {
+                $("#Greske").empty();
+                $("#AllGood").empty();
+
+                if (kord == null) {
+                    $("#Greske").html("Niste izabrali lokaciju voznje");
+                } else {
+                    var objekat = {
+                        LokacijaPolazna: {
+                            Xcoordinate: xx,
+                            Ycoordinate: yy,
+                            Adresa: {
+                                UlicaBroj: ulica_broj,
+                                MestoPostanski: grad
+                            }
+                        },
+                        TipVozila: $("#TipVozila").val(),
+                        Musterija: (JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"))).UserName
+                    };
+
+                    $.post("/api/ahome/korisnikKreiraVoznju", objekat, function (data, status) {
+                        if (data == "") {
+                            $("#Greske").html("Morate izabrati lokaciju da bi ste kreirali vožnju");
+                        } else {
+                            $("#AllGood").html("Vožnja uspešno kreirana");
+                            trenutnoUlogovan = data;
+                        }
+                    });
+
+                }
             });
 
             $(document).on("click", "#kreirajvoznju", function () {
@@ -1509,6 +1610,62 @@
                 
             });
 
+            $(document).on("click", "#promenaLokacije", function () {
+
+                $("#Greske").empty();
+                $("#AllGood").empty();
+
+                var UserView = "";
+
+                UserView += "<h2> Izaberite lokaciju na mapi </h2>";
+                UserView += map;
+                UserView += "<br/> Vasa lokacija je: ";
+                UserView += "   <table> <tr> <td id=\"kord\"> </td> </tr> </table>";
+                UserView += "<input type=\"submit\" value=\"Promeni lokaciju\" id=\"promeniLok\"/>";
+
+                sessionStorage.setItem("trenutniPrikaz", UserView);
+                $("#PageContent").html(UserView);
+            });
+
+            $(document).on("click", "#promeniLok", function () {
+
+                //var korisnik = sessionStorage.getItem("ulogovaniKorisnik");
+                var korisnik = JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"));
+                var pomocni = JSON.parse(sessionStorage.getItem("ulogovaniId"));
+
+                korisnik = {
+                    Lokacija:
+                        {
+                            Xcoordinate: xx,
+                            Ycoordinate: yy,
+                            Adresa: {
+                                UlicaBroj: ulica_broj,
+                                MestoPostanski: grad
+                            }
+                        },
+                    Id : pomocni
+                }
+
+                if (xx == null)
+                {
+                    var Greska = "Niste ispravno popunili polja";
+                    $("#Greske").html(Greska);
+                }
+                else
+                {
+                    $.post("/api/ahome/izmenaLokacije", korisnik, function (data, status) {
+                        if (data.UserName == null) {
+                            $("#Greske").html(data);
+                        } else {
+                            trenutnoUlogovan = data;
+                            sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(trenutnoUlogovan));
+                            $("#AllGood").html("Lokacija izmenjena");
+                        }
+                    });
+                }
+
+                
+            });
 
         });
     </script>

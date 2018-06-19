@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfRide xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T01:27:47.0966664+02:00</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.85073858930489</Xcoordinate>
+      <Ycoordinate>45.24586311056842</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T01:28:33.875342+02:00</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.84392851339646</Xcoordinate>
+      <Ycoordinate>45.249087804406685</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Maksima Gorkog</UlicaBroj>
+        <MestoPostanski>Novi Sad 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>kombi</TipVozila>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T01:29:36.1499039+02:00</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.84392851339646</Xcoordinate>
+      <Ycoordinate>45.249087804406685</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Maksima Gorkog</UlicaBroj>
+        <MestoPostanski>Novi Sad 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>kombi</TipVozila>
+  </Ride>
+</ArrayOfRide>
