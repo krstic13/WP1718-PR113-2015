@@ -11,6 +11,7 @@ namespace TaksiSluzba.Models
         public DateTime DatumIVremePorudzbine { get; set; }
         public Location LokacijaPolazna { get; set; }
         public string Musterija { get; set; }
+        public string MusterijaId { get; set; }
         public Location Odrediste { get; set; }
         public string Dispatcher { get; set; }
         public string Vozac { get; set; }

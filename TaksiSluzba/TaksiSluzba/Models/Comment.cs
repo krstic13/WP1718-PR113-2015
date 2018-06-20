@@ -10,7 +10,7 @@ namespace TaksiSluzba.Models
         public string Opis { get; set; }
         public DateTime DatumObjave { get; set; }
         public string KorisnikKojiJeOstavioKomentar { get; set; }
-        public Ride VoznjaNaKojuSeOdnosiKomentar { get; set; }
+        public string IdVoznje { get; set; }
         public string Ocena { get; set; }
 
         public Comment()
@@ -18,12 +18,12 @@ namespace TaksiSluzba.Models
 
         }
 
-        public Comment(string opis, DateTime datumobjave, string korisnikkojijeostaviokomentar, Ride voznjanakojuseodnosikomentar, string ocena)
+        public Comment(string opis, DateTime datumobjave, string korisnikkojijeostaviokomentar, string voznjanakojuseodnosikomentar, string ocena)
         {
             Opis = opis;
             DatumObjave = datumobjave;
             KorisnikKojiJeOstavioKomentar = korisnikkojijeostaviokomentar;
-            VoznjaNaKojuSeOdnosiKomentar = voznjanakojuseodnosikomentar;
+            IdVoznje = voznjanakojuseodnosikomentar;
             Ocena = ocena;
         }
 
@@ -32,7 +32,7 @@ namespace TaksiSluzba.Models
             this.Opis = c.Opis;
             this.DatumObjave = c.DatumObjave;
             this.KorisnikKojiJeOstavioKomentar = c.KorisnikKojiJeOstavioKomentar;
-            this.VoznjaNaKojuSeOdnosiKomentar = c.VoznjaNaKojuSeOdnosiKomentar;
+            this.IdVoznje = c.IdVoznje;
             this.Ocena = c.Ocena;
         }
 

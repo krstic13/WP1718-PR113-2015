@@ -195,6 +195,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\ADMIN.xml" />
+    <Content Include="App_Data\CUSTOMER_RIDES.xml" />
     <Content Include="App_Data\DRIVER.xml" />
     <Content Include="App_Data\RIDES.xml" />
     <Content Include="App_Data\USER.xml" />

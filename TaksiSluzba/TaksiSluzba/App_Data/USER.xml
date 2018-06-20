@@ -5,13 +5,69 @@
     <Password>kornfleks</Password>
     <Name>kornfleks</Name>
     <LastName>kornfleks</LastName>
-    <Gender>Muško</Gender>
-    <JMBG>kornfleks</JMBG>
+    <Gender>Žensko</Gender>
+    <JMBG>kornfleks11</JMBG>
     <PhoneNumber>kornfleks</PhoneNumber>
     <Email>kornfleks</Email>
     <Uloga>USER</Uloga>
     <Id>6</Id>
-    <Voznje />
+    <Voznje>
+      <Ride>
+        <DatumIVremePorudzbine>2018-06-20T15:54:46.7346726+02:00</DatumIVremePorudzbine>
+        <LokacijaPolazna>
+          <Xcoordinate>19.850974623698196</Xcoordinate>
+          <Ycoordinate>45.246131317386585</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Vladimira Perica Valtera</UlicaBroj>
+            <MestoPostanski>Novi Sad 21101</MestoPostanski>
+          </Adresa>
+        </LokacijaPolazna>
+        <Musterija>kornfleks</Musterija>
+        <MusterijaId>6</MusterijaId>
+        <StatusVoznje>KREIRANA</StatusVoznje>
+        <TipVozila>putnicki</TipVozila>
+        <Id>12</Id>
+      </Ride>
+      <Ride>
+        <DatumIVremePorudzbine>2018-06-20T16:20:21.9034792+02:00</DatumIVremePorudzbine>
+        <LokacijaPolazna>
+          <Xcoordinate>19.84948722430022</Xcoordinate>
+          <Ycoordinate>45.24427315762503</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Dr Ilije Djuricica</UlicaBroj>
+            <MestoPostanski>Novi Sad 21101</MestoPostanski>
+          </Adresa>
+        </LokacijaPolazna>
+        <Musterija>kornfleks</Musterija>
+        <MusterijaId>6</MusterijaId>
+        <Komentar>
+          <Opis>Dobio sam proliv sry </Opis>
+          <DatumObjave>2018-06-20T19:54:34.6968484+02:00</DatumObjave>
+          <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+          <IdVoznje>13</IdVoznje>
+          <Ocena>5</Ocena>
+        </Komentar>
+        <StatusVoznje>OTKAZANA</StatusVoznje>
+        <TipVozila>kombi</TipVozila>
+        <Id>13</Id>
+      </Ride>
+      <Ride>
+        <DatumIVremePorudzbine>2018-06-20T20:16:45.1167605Z</DatumIVremePorudzbine>
+        <LokacijaPolazna>
+          <Xcoordinate>19.834668766649134</Xcoordinate>
+          <Ycoordinate>45.2395414666359</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Narodnog fronta 52</UlicaBroj>
+            <MestoPostanski>Novi Sad 21102</MestoPostanski>
+          </Adresa>
+        </LokacijaPolazna>
+        <Musterija>kornfleks</Musterija>
+        <MusterijaId>6</MusterijaId>
+        <StatusVoznje>KREIRANA</StatusVoznje>
+        <TipVozila>putnicki</TipVozila>
+        <Id>15</Id>
+      </Ride>
+    </Voznje>
     <Blokiran>false</Blokiran>
   </User>
 </ArrayOfUser>

@@ -380,13 +380,22 @@ namespace TaksiSluzba.Controllers
                 return Ok("");
             }
             r.StatusVoznje = RideStatus.KREIRANA;
+            // NADJI TOG KORISNIKA U LISTI KORISNIKA I SMESTI VOZNJU U NJEGOVOJ LISTI VOZNI
+            User u = korisnici.Find(uu=> uu.Id == r.Musterija);
 
-            // ID VOZNJE DODELITI KADA SE DODELI ??
-            r.DatumIVremePorudzbine = DateTime.Now;
+            r.Musterija = u.UserName;
+            r.MusterijaId = u.Id;
+            //r.Musterija = u.UserName; // Musterija je zapravo id musterije
+            korisnici.Remove(u);
+            // ID VOZNJE DODELITI KADA SE DODELI ?? ODMAH
+            r.Id = (sveVoznje.Count + korisnikKreiraoVoznju.Count).ToString();
+            r.DatumIVremePorudzbine = DateTime.UtcNow;
             korisnikKreiraoVoznju.Add(r);
             WriteCustomerMadeRide();
-
-            return Ok(r.Musterija);
+            u.Voznje.Add(r);
+            korisnici.Add(u);
+            WriteToXMl(ROLE.USER);
+            return Ok(u);
         }
 
         [HttpGet]
@@ -522,7 +531,8 @@ namespace TaksiSluzba.Controllers
             }
             vozaci.Remove(d);
 
-            r.Id = r.Vozac +"_"+d.Voznje.Count;
+           // r.Id = r.Vozac +"_"+d.Voznje.Count;
+           r.Id = (sveVoznje.Count + korisnikKreiraoVoznju.Count).ToString(); 
             r.DatumIVremePorudzbine = DateTime.Now;
 
             d.Voznje.Add(r);
@@ -536,6 +546,182 @@ namespace TaksiSluzba.Controllers
             WriteAllRides();
 
             return Ok(dispecer);
+        }
+
+        [HttpGet]
+        [Route("api/ahome/korisnikponistavavoznju")]//PROVERI DA LI IMA KOD ADMINA TE VOZNJE
+        public IHttpActionResult KorisnikPonistavaVoznju([FromUri]string nesto) {
+            //PROVERI DA LI IMA KOD ADMINA TE VOZNJE
+
+            Ride r = sveVoznje.Find(rr => rr.Id == nesto);
+            Ride r1 = korisnikKreiraoVoznju.Find(rr=> rr.Id == nesto);
+
+            User utoreturn = new User();
+
+            if (r != null)
+            {
+                sveVoznje.Remove(r);
+                r.StatusVoznje = RideStatus.OTKAZANA;
+                string IdKorisnika = r.MusterijaId;
+                sveVoznje.Add(r);
+
+                User u = korisnici.Find(uu=> uu.Id == IdKorisnika);
+                if (u != null)
+                {
+                    
+
+                    korisnici.Remove(u);
+                    Ride s = u.Voznje.Find(k => k.Id == nesto);
+                    if (s != null)
+                    {
+                        u.Voznje.Remove(s);
+                        s.StatusVoznje = RideStatus.OTKAZANA;
+                        u.Voznje.Add(s);
+                    }
+                    korisnici.Add(u);
+                    utoreturn = u;
+                }
+            }
+
+            if (r1 != null)
+            {
+                korisnikKreiraoVoznju.Remove(r1);
+                r1.StatusVoznje = RideStatus.OTKAZANA;
+                string IdKorisnika = r1.MusterijaId;
+                korisnikKreiraoVoznju.Add(r1);
+
+                User u = korisnici.Find(uu => uu.Id == IdKorisnika);
+                if (u != null)
+                {
+
+                    korisnici.Remove(u);
+                    Ride s = u.Voznje.Find(k => k.Id == nesto);
+                    if (s != null)
+                    {
+                        u.Voznje.Remove(s);
+                        s.StatusVoznje = RideStatus.OTKAZANA;
+                        u.Voznje.Add(s);
+                    }
+                    korisnici.Add(u);
+                    utoreturn = u;
+                }
+            }
+
+            WriteToXMl(ROLE.USER);
+            WriteCustomerMadeRide();
+
+            return Ok(utoreturn);
+        }
+
+        [HttpGet]
+        [Route("api/ahome/korisnikpostavljakomentarnaponistenu")]//PROVERI DA LI IMA KOD ADMINA TE VOZNJE
+        public IHttpActionResult KorisnikKomentarisePoinistenu([FromUri]string idVoznje, [FromUri] string komentar,[FromUri]string ocena)
+        {
+            //PROVERI DA LI IMA KOD ADMINA TE VOZNJE
+
+            string []nekiBroj = idVoznje.Split('/');
+
+            idVoznje = nekiBroj[0];
+
+            Ride r = sveVoznje.Find(rr => rr.Id == idVoznje);
+            Ride r1 = korisnikKreiraoVoznju.Find(rr => rr.Id == idVoznje);
+
+            User utoreturn = new User();
+
+            if (r != null)
+            {
+                sveVoznje.Remove(r);
+                string IdKorisnika = r.MusterijaId;
+                r.Komentar = new Comment();
+                r.Komentar.DatumObjave = DateTime.Now;
+                r.Komentar.IdVoznje = idVoznje;
+                r.Komentar.Opis = komentar;
+                r.Komentar.Ocena = ocena;
+                r.Komentar.KorisnikKojiJeOstavioKomentar = "";
+
+                User u = korisnici.Find(uu => uu.Id == IdKorisnika);
+                if (u != null)
+                {
+                    r.Komentar.KorisnikKojiJeOstavioKomentar = u.UserName;
+                    korisnici.Remove(u);
+                    Ride s = u.Voznje.Find(k => k.Id == idVoznje);
+                    if (s != null)
+                    {
+                        u.Voznje.Remove(s);
+                        s.Komentar = new Comment();
+                        s.Komentar.Opis = komentar;
+                        s.Komentar.IdVoznje = idVoznje;
+                        s.Komentar.DatumObjave = DateTime.Now;
+                        s.Komentar.Ocena = ocena;
+                        s.Komentar.KorisnikKojiJeOstavioKomentar = u.UserName;
+                        u.Voznje.Add(s);
+                    }
+                    korisnici.Add(u);
+                    utoreturn = u;
+                }
+                sveVoznje.Add(r);
+            }
+
+            if (r1 != null)
+            {
+                sveVoznje.Remove(r1);
+                string IdKorisnika = r1.MusterijaId;
+                r1.Komentar = new Comment();
+                r1.Komentar.DatumObjave = DateTime.Now;
+                r1.Komentar.IdVoznje = idVoznje;
+                r1.Komentar.Opis = komentar;
+                r1.Komentar.Ocena = ocena;
+
+                User u = korisnici.Find(uu => uu.Id == IdKorisnika);
+                if (u != null)
+                {
+                    r1.Komentar.KorisnikKojiJeOstavioKomentar = u.UserName;
+                    korisnici.Remove(u);
+                    Ride s = u.Voznje.Find(k => k.Id == idVoznje);
+                    if (s != null)
+                    {
+                        u.Voznje.Remove(s);
+                        //s.Komentar = komentar;
+                        s.Komentar = new Comment();
+                        s.Komentar.Opis = komentar;
+                        s.Komentar.IdVoznje = idVoznje;
+                        s.Komentar.DatumObjave = DateTime.Now;
+                        s.Komentar.Ocena = ocena;
+                        s.Komentar.KorisnikKojiJeOstavioKomentar = u.UserName;
+                        u.Voznje.Add(s);
+                    }
+                    korisnici.Add(u);
+                    utoreturn = u;
+                }
+                korisnikKreiraoVoznju.Add(r1);
+            }
+
+            WriteToXMl(ROLE.USER);
+            WriteCustomerMadeRide();
+
+            return Ok(utoreturn);
+        }
+
+        [HttpGet]
+        [Route("api/ahome/korisnikgledavoznju")]
+        public IHttpActionResult KorisnikGledaVoznju([FromUri]string idVoznje)
+        {
+
+            string[] nekiBroj = idVoznje.Split('/');
+            string name = nekiBroj[0];
+            //Vratimo celog korisnika sa sve voznjom da bi imali sta da stavimo u session storage
+            if (idVoznje == "" || idVoznje == null) { return Ok("Nepostojeci id"); }
+            User u = new User();
+
+            foreach (User uu in korisnici)
+            {
+                if (uu.Voznje.Exists(v=> v.Id == idVoznje)) {
+                    u = uu;
+                    break;
+                }
+            }
+
+            return Ok(u);
         }
 
         [HttpDelete]
