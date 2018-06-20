@@ -9,6 +9,7 @@ namespace TaksiSluzba.Models
     {
         public string Opis { get; set; }
         public DateTime DatumObjave { get; set; }
+        public String Objavljeno { get; set; }
         public string KorisnikKojiJeOstavioKomentar { get; set; }
         public string IdVoznje { get; set; }
         public string Ocena { get; set; }

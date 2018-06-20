@@ -58,6 +58,69 @@
     <Id>11</Id>
   </Ride>
   <Ride>
+    <DatumIVremePorudzbine>2018-06-20T16:20:21.9034792+02:00</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.84948722430022</Xcoordinate>
+      <Ycoordinate>45.24427315762503</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Dr Ilije Djuricica</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <Opis>Dobio sam proliv sry </Opis>
+      <DatumObjave>2018-06-20T19:54:34.6958484+02:00</DatumObjave>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>13</IdVoznje>
+      <Ocena>5</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>kombi</TipVozila>
+    <Id>13</Id>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T16:20:21.9034792+02:00</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.84948722430022</Xcoordinate>
+      <Ycoordinate>45.24427315762503</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Dr Ilije Djuricica</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <Opis>Dobio sam proliv sry </Opis>
+      <DatumObjave>2018-06-20T19:54:34.6958484+02:00</DatumObjave>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>13</IdVoznje>
+      <Ocena>5</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>kombi</TipVozila>
+    <Id>13</Id>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T20:28:45.7989812Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.79393055892331</Xcoordinate>
+      <Ycoordinate>45.27436041308033</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Donje Sajlovo</UlicaBroj>
+        <MestoPostanski>Novi Sad 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>17</Id>
+    <DATUMM>20 - 06 - 18  20: 28:45</DATUMM>
+  </Ride>
+  <Ride>
     <DatumIVremePorudzbine>2018-06-20T15:54:46.7346726+02:00</DatumIVremePorudzbine>
     <LokacijaPolazna>
       <Xcoordinate>19.850974623698196</Xcoordinate>
@@ -69,55 +132,39 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <Opis>Gnje</Opis>
+      <DatumObjave>2018-06-20T22:38:24.3450722+02:00</DatumObjave>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>12</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
     <StatusVoznje>OTKAZANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>12</Id>
   </Ride>
   <Ride>
-    <DatumIVremePorudzbine>2018-06-20T16:20:21.9034792+02:00</DatumIVremePorudzbine>
+    <DatumIVremePorudzbine>2018-06-20T15:54:46.7346726+02:00</DatumIVremePorudzbine>
     <LokacijaPolazna>
-      <Xcoordinate>19.84948722430022</Xcoordinate>
-      <Ycoordinate>45.24427315762503</Ycoordinate>
+      <Xcoordinate>19.850974623698196</Xcoordinate>
+      <Ycoordinate>45.246131317386585</Ycoordinate>
       <Adresa>
-        <UlicaBroj>Dr Ilije Djuricica</UlicaBroj>
+        <UlicaBroj>Vladimira Perica Valtera</UlicaBroj>
         <MestoPostanski>Novi Sad 21101</MestoPostanski>
       </Adresa>
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
     <Komentar>
-      <Opis>Dobio sam proliv sry </Opis>
-      <DatumObjave>2018-06-20T19:54:34.6958484+02:00</DatumObjave>
+      <Opis>Gnje</Opis>
+      <DatumObjave>2018-06-20T22:38:24.3450722+02:00</DatumObjave>
       <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
-      <IdVoznje>13</IdVoznje>
-      <Ocena>5</Ocena>
+      <IdVoznje>12</IdVoznje>
+      <Ocena>0</Ocena>
     </Komentar>
     <StatusVoznje>OTKAZANA</StatusVoznje>
-    <TipVozila>kombi</TipVozila>
-    <Id>13</Id>
-  </Ride>
-  <Ride>
-    <DatumIVremePorudzbine>2018-06-20T16:20:21.9034792+02:00</DatumIVremePorudzbine>
-    <LokacijaPolazna>
-      <Xcoordinate>19.84948722430022</Xcoordinate>
-      <Ycoordinate>45.24427315762503</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Dr Ilije Djuricica</UlicaBroj>
-        <MestoPostanski>Novi Sad 21101</MestoPostanski>
-      </Adresa>
-    </LokacijaPolazna>
-    <Musterija>kornfleks</Musterija>
-    <MusterijaId>6</MusterijaId>
-    <Komentar>
-      <Opis>Dobio sam proliv sry </Opis>
-      <DatumObjave>2018-06-20T19:54:34.6958484+02:00</DatumObjave>
-      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
-      <IdVoznje>13</IdVoznje>
-      <Ocena>5</Ocena>
-    </Komentar>
-    <StatusVoznje>OTKAZANA</StatusVoznje>
-    <TipVozila>kombi</TipVozila>
-    <Id>13</Id>
+    <TipVozila>putnicki</TipVozila>
+    <Id>12</Id>
   </Ride>
   <Ride>
     <DatumIVremePorudzbine>2018-06-20T20:16:45.1167605Z</DatumIVremePorudzbine>
@@ -131,8 +178,256 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
-    <StatusVoznje>KREIRANA</StatusVoznje>
+    <Komentar>
+      <Opis>Smara vozac</Opis>
+      <DatumObjave>2018-06-20T22:46:45.4837356+02:00</DatumObjave>
+      <Objavljeno>20-06-18  22:46:45</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>15</IdVoznje>
+      <Ocena>1</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>15</Id>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T20:16:45.1167605Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.834668766649134</Xcoordinate>
+      <Ycoordinate>45.2395414666359</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Narodnog fronta 52</UlicaBroj>
+        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <Opis>Smara vozac</Opis>
+      <DatumObjave>2018-06-20T22:46:45.4837356+02:00</DatumObjave>
+      <Objavljeno>20-06-18  22:46:45</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>15</IdVoznje>
+      <Ocena>1</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>15</Id>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T20:30:45.7128399Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.85099929989018</Xcoordinate>
+      <Ycoordinate>45.24832111390154</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Bulevar Cara Lazara 1</UlicaBroj>
+        <MestoPostanski>Novi Sad 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <Opis>Nanananan</Opis>
+      <DatumObjave>2018-06-21T00:14:15.7010309+02:00</DatumObjave>
+      <Objavljeno>21-06-18  0:14:15</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>18</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>18</Id>
+    <DATUMM>20-06-18  20:30:45</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T20:30:45.7128399Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.85099929989018</Xcoordinate>
+      <Ycoordinate>45.24832111390154</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Bulevar Cara Lazara 1</UlicaBroj>
+        <MestoPostanski>Novi Sad 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <Opis>Zaspao u kolima</Opis>
+      <DatumObjave>2018-06-20T22:48:36.8891077+02:00</DatumObjave>
+      <Objavljeno>20-06-18  22:48:36</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>18</IdVoznje>
+      <Ocena>5</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>18</Id>
+    <DATUMM>20-06-18  20:30:45</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T20:30:45.7128399Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.85099929989018</Xcoordinate>
+      <Ycoordinate>45.24832111390154</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Bulevar Cara Lazara 1</UlicaBroj>
+        <MestoPostanski>Novi Sad 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <Opis>He he izmene rade</Opis>
+      <DatumObjave>2018-06-21T00:03:33.8363183+02:00</DatumObjave>
+      <Objavljeno>21-06-18  0:03:33</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>18</IdVoznje>
+      <Ocena>2</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>18</Id>
+    <DATUMM>20-06-18  20:30:45</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T20:24:35.5056652Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.85194798547847</Xcoordinate>
+      <Ycoordinate>45.232183997087304</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Ribnjak Donji put 34</UlicaBroj>
+        <MestoPostanski>undefined 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <DatumObjave>2018-06-21T00:11:29.6855354+02:00</DatumObjave>
+      <Objavljeno>21-06-18  0:11:29</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>16</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>16</Id>
+    <DATUMM>June 20, 2018</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T20:24:35.5056652Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.85194798547847</Xcoordinate>
+      <Ycoordinate>45.232183997087304</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Ribnjak Donji put 34</UlicaBroj>
+        <MestoPostanski>undefined 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <DatumObjave>2018-06-21T00:11:29.6855354+02:00</DatumObjave>
+      <Objavljeno>21-06-18  0:11:29</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>16</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>16</Id>
+    <DATUMM>June 20, 2018</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T20:30:45.7128399Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.85099929989018</Xcoordinate>
+      <Ycoordinate>45.24832111390154</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Bulevar Cara Lazara 1</UlicaBroj>
+        <MestoPostanski>Novi Sad 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Komentar>
+      <Opis>Nanananan</Opis>
+      <DatumObjave>2018-06-21T00:14:15.7010309+02:00</DatumObjave>
+      <Objavljeno>21-06-18  0:14:15</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>18</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>18</Id>
+    <DATUMM>20-06-18  20:30:45</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T22:40:42.8648115Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.839383189284966</Xcoordinate>
+      <Ycoordinate>45.25006631897372</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Laze Kostica 12a</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>25</Id>
+    <DATUMM>20-06-18  22:40:42</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T22:53:59.0973534Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.825717334763308</Xcoordinate>
+      <Ycoordinate>45.24916936331161</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Futoska 55</UlicaBroj>
+        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>26</Id>
+    <DATUMM>20-06-18  22:53:59</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T22:55:58.2901708Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.854530697195973</Xcoordinate>
+      <Ycoordinate>45.245737008714826</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Dr Zorana Djindjica</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>26</Id>
+    <DATUMM>20-06-18  22:55:58</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-20T22:55:58.2901708Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.854530697195973</Xcoordinate>
+      <Ycoordinate>45.245737008714826</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Dr Zorana Djindjica</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>26</Id>
+    <DATUMM>20-06-18  22:55:58</DATUMM>
   </Ride>
 </ArrayOfRide>

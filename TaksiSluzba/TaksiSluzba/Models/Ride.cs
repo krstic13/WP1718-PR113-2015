@@ -20,6 +20,7 @@ namespace TaksiSluzba.Models
         public RideStatus StatusVoznje { get; set; }
         public CARTYPE TipVozila { get; set; }
         public string Id { get; set; }
+        public string DATUMM { get; set; }
 
         public Ride()
         {
