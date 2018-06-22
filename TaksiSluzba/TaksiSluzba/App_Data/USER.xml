@@ -24,6 +24,7 @@
         </LokacijaPolazna>
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
+        <Iznos>0</Iznos>
         <Komentar>
           <Opis>Dobio sam proliv sry </Opis>
           <DatumObjave>2018-06-20T19:54:34.6968484+02:00</DatumObjave>
@@ -48,6 +49,7 @@
         </LokacijaPolazna>
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
+        <Iznos>0</Iznos>
         <StatusVoznje>PRIHVACENA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>17</Id>
@@ -65,6 +67,7 @@
         </LokacijaPolazna>
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
+        <Iznos>0</Iznos>
         <Komentar>
           <Opis>Gnje</Opis>
           <DatumObjave>2018-06-20T22:38:24.3460722+02:00</DatumObjave>
@@ -89,6 +92,7 @@
         </LokacijaPolazna>
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
+        <Iznos>0</Iznos>
         <Komentar>
           <Opis>Smara vozac</Opis>
           <DatumObjave>2018-06-20T22:46:45.4997366+02:00</DatumObjave>
@@ -114,6 +118,7 @@
         </LokacijaPolazna>
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
+        <Iznos>0</Iznos>
         <Komentar>
           <DatumObjave>2018-06-21T00:11:29.697536+02:00</DatumObjave>
           <Objavljeno>21-06-18  0:11:29</Objavljeno>
@@ -138,6 +143,7 @@
         </LokacijaPolazna>
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
+        <Iznos>0</Iznos>
         <Komentar>
           <Opis>Nanananan</Opis>
           <DatumObjave>2018-06-21T00:14:15.7130316+02:00</DatumObjave>
@@ -163,6 +169,7 @@
         </LokacijaPolazna>
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
+        <Iznos>0</Iznos>
         <StatusVoznje>KREIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>25</Id>
@@ -180,6 +187,7 @@
         </LokacijaPolazna>
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
+        <Iznos>0</Iznos>
         <StatusVoznje>KREIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>26</Id>

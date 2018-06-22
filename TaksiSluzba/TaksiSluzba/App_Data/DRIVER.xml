@@ -1,75 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDriver xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Driver>
-    <UserName>vozac1</UserName>
-    <Password>vozac1</Password>
-    <Name>Vitomir</Name>
-    <LastName>Žitić</LastName>
+    <UserName>lepi</UserName>
+    <Password>lepi</Password>
+    <Name>lepi</Name>
+    <LastName>lepi</LastName>
     <Gender>Muško</Gender>
-    <JMBG>1710996800083</JMBG>
-    <PhoneNumber>064/2547543</PhoneNumber>
-    <Email>vitkoCar@gmail.com</Email>
+    <JMBG> lepi</JMBG>
+    <PhoneNumber>lepi</PhoneNumber>
+    <Email>lepi</Email>
     <Uloga>DRIVER</Uloga>
-    <Id>4</Id>
-    <Voznje />
-    <Blokiran>false</Blokiran>
-    <Lokacija>
-      <Xcoordinate>19.84749102267682</Xcoordinate>
-      <Ycoordinate>45.24585981713608</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Bulevar Cara Lazara</UlicaBroj>
-        <MestoPostanski>Novi Sad 21101</MestoPostanski>
-      </Adresa>
-    </Lokacija>
-    <Automobil>
-      <GodisteAutomobila>2011</GodisteAutomobila>
-      <Registracija>NS404-AK</Registracija>
-      <TipAutomobila>putnicki</TipAutomobila>
-    </Automobil>
-    <Slobodan>true</Slobodan>
-  </Driver>
-  <Driver>
-    <UserName>milisav</UserName>
-    <Password>milisav</Password>
-    <Name>milisav</Name>
-    <LastName>milisav</LastName>
-    <Gender>Muško</Gender>
-    <JMBG>milisav</JMBG>
-    <PhoneNumber>milisav</PhoneNumber>
-    <Email>milisav</Email>
-    <Uloga>DRIVER</Uloga>
-    <Id>7</Id>
+    <Id>5</Id>
     <Voznje>
       <Ride>
-        <DatumIVremePorudzbine>2018-06-21T14:51:15.2841127+02:00</DatumIVremePorudzbine>
+        <DatumIVremePorudzbine>2018-06-21T21:13:05.8343133+02:00</DatumIVremePorudzbine>
         <LokacijaPolazna>
-          <Xcoordinate>19.850395266550983</Xcoordinate>
-          <Ycoordinate>45.24578606169061</Ycoordinate>
+          <Xcoordinate>19.850360934267403</Xcoordinate>
+          <Ycoordinate>45.24578870551565</Ycoordinate>
           <Adresa>
             <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
             <MestoPostanski>Novi Sad 21101</MestoPostanski>
           </Adresa>
         </LokacijaPolazna>
+        <Odrediste>
+          <Xcoordinate>19.85410990109091</Xcoordinate>
+          <Ycoordinate>45.24622157267734</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Dr Zorana Djindjica</UlicaBroj>
+            <MestoPostanski>Novi Sad 21101</MestoPostanski>
+          </Adresa>
+        </Odrediste>
         <Dispatcher>admin1</Dispatcher>
-        <Vozac>milisav</Vozac>
-        <VozacId>7</VozacId>
-        <StatusVoznje>NEUSPESNA</StatusVoznje>
+        <Vozac>lepi</Vozac>
+        <VozacId>5</VozacId>
+        <Iznos>25</Iznos>
+        <StatusVoznje>USPESNA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
-        <Id>30</Id>
+        <Id>36</Id>
       </Ride>
     </Voznje>
     <Blokiran>false</Blokiran>
     <Lokacija>
-      <Xcoordinate>19.834691353965617</Xcoordinate>
-      <Ycoordinate>45.239534807191774</Ycoordinate>
+      <Xcoordinate>19.85033303935095</Xcoordinate>
+      <Ycoordinate>45.24588959616446</Ycoordinate>
       <Adresa>
-        <UlicaBroj>Narodnog fronta 52</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+        <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
       </Adresa>
     </Lokacija>
     <Automobil>
-      <GodisteAutomobila>milisavmilisav</GodisteAutomobila>
-      <Registracija>milisav</Registracija>
+      <GodisteAutomobila>lepi</GodisteAutomobila>
+      <Registracija>lepi</Registracija>
       <TipAutomobila>putnicki</TipAutomobila>
     </Automobil>
     <Slobodan>true</Slobodan>

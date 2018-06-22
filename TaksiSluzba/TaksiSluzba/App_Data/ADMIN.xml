@@ -53,6 +53,7 @@
         <Dispatcher>admin1</Dispatcher>
         <Vozac>vozac1</Vozac>
         <VozacId>4</VozacId>
+        <Iznos>0</Iznos>
         <StatusVoznje>FORMIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>31</Id>
@@ -70,6 +71,7 @@
         <Dispatcher>admin1</Dispatcher>
         <Vozac>vozac1</Vozac>
         <VozacId>4</VozacId>
+        <Iznos>0</Iznos>
         <StatusVoznje>FORMIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>32</Id>
@@ -87,6 +89,7 @@
         <Dispatcher>admin1</Dispatcher>
         <Vozac>vozac1</Vozac>
         <VozacId>4</VozacId>
+        <Iznos>0</Iznos>
         <StatusVoznje>FORMIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>33</Id>
@@ -104,6 +107,7 @@
         <Dispatcher>admin1</Dispatcher>
         <Vozac>vozac1</Vozac>
         <VozacId>4</VozacId>
+        <Iznos>0</Iznos>
         <StatusVoznje>FORMIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>34</Id>
@@ -121,43 +125,10 @@
         <Dispatcher>admin1</Dispatcher>
         <Vozac>vozac1</Vozac>
         <VozacId>4</VozacId>
+        <Iznos>0</Iznos>
         <StatusVoznje>FORMIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>35</Id>
-      </Ride>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-21T21:13:05.8343133+02:00</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.850360934267403</Xcoordinate>
-          <Ycoordinate>45.24578870551565</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
-            <MestoPostanski>Novi Sad 21101</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Dispatcher>admin1</Dispatcher>
-        <Vozac>vozac1</Vozac>
-        <VozacId>4</VozacId>
-        <StatusVoznje>FORMIRANA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>36</Id>
-      </Ride>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-21T21:13:50.6648775+02:00</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.850360934267403</Xcoordinate>
-          <Ycoordinate>45.24578870551565</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
-            <MestoPostanski>Novi Sad 21101</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Dispatcher>admin1</Dispatcher>
-        <Vozac>vozac1</Vozac>
-        <VozacId>4</VozacId>
-        <StatusVoznje>FORMIRANA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>37</Id>
       </Ride>
       <Ride>
         <DatumIVremePorudzbine>2018-06-21T14:51:15.2841127+02:00</DatumIVremePorudzbine>
@@ -172,9 +143,72 @@
         <Dispatcher>admin1</Dispatcher>
         <Vozac>milisav</Vozac>
         <VozacId>7</VozacId>
-        <StatusVoznje>NEUSPESNA</StatusVoznje>
+        <Iznos>0</Iznos>
+        <StatusVoznje>USPESNA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>30</Id>
+      </Ride>
+      <Ride>
+        <DatumIVremePorudzbine>2018-06-21T21:13:50.6648775+02:00</DatumIVremePorudzbine>
+        <LokacijaPolazna>
+          <Xcoordinate>19.850360934267403</Xcoordinate>
+          <Ycoordinate>45.24578870551565</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+            <MestoPostanski>Novi Sad 21101</MestoPostanski>
+          </Adresa>
+        </LokacijaPolazna>
+        <Dispatcher>admin1</Dispatcher>
+        <Vozac>lepi</Vozac>
+        <VozacId>5</VozacId>
+        <Iznos>0</Iznos>
+        <StatusVoznje>USPESNA</StatusVoznje>
+        <TipVozila>putnicki</TipVozila>
+        <Id>37</Id>
+      </Ride>
+      <Ride>
+        <DatumIVremePorudzbine>2018-06-21T21:13:05.8343133+02:00</DatumIVremePorudzbine>
+        <LokacijaPolazna>
+          <Xcoordinate>19.850360934267403</Xcoordinate>
+          <Ycoordinate>45.24578870551565</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+            <MestoPostanski>Novi Sad 21101</MestoPostanski>
+          </Adresa>
+        </LokacijaPolazna>
+        <Odrediste>
+          <Xcoordinate>19.85410990109091</Xcoordinate>
+          <Ycoordinate>45.24622157267734</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Dr Zorana Djindjica</UlicaBroj>
+            <MestoPostanski>Novi Sad 21101</MestoPostanski>
+          </Adresa>
+        </Odrediste>
+        <Dispatcher>admin1</Dispatcher>
+        <Vozac>lepi</Vozac>
+        <VozacId>5</VozacId>
+        <Iznos>25</Iznos>
+        <StatusVoznje>USPESNA</StatusVoznje>
+        <TipVozila>putnicki</TipVozila>
+        <Id>36</Id>
+      </Ride>
+      <Ride>
+        <DatumIVremePorudzbine>2018-06-23T00:19:22.4945138+02:00</DatumIVremePorudzbine>
+        <LokacijaPolazna>
+          <Xcoordinate>19.850369517328065</Xcoordinate>
+          <Ycoordinate>45.24576188948794</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+            <MestoPostanski>Novi Sad 21101</MestoPostanski>
+          </Adresa>
+        </LokacijaPolazna>
+        <Dispatcher>admin1</Dispatcher>
+        <Vozac>lepi</Vozac>
+        <VozacId>5</VozacId>
+        <Iznos>0</Iznos>
+        <StatusVoznje>FORMIRANA</StatusVoznje>
+        <TipVozila>putnicki</TipVozila>
+        <Id>38</Id>
       </Ride>
     </Voznje>
     <Blokiran>false</Blokiran>

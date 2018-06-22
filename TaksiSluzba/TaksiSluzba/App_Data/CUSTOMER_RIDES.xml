@@ -11,6 +11,7 @@
       </Adresa>
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
   </Ride>
@@ -25,6 +26,7 @@
       </Adresa>
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>kombi</TipVozila>
   </Ride>
@@ -39,6 +41,7 @@
       </Adresa>
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>kombi</TipVozila>
   </Ride>
@@ -53,6 +56,7 @@
       </Adresa>
     </LokacijaPolazna>
     <Musterija>6</Musterija>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>11</Id>
@@ -69,6 +73,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Dobio sam proliv sry </Opis>
       <DatumObjave>2018-06-20T19:54:34.6958484+02:00</DatumObjave>
@@ -92,6 +97,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Dobio sam proliv sry </Opis>
       <DatumObjave>2018-06-20T19:54:34.6958484+02:00</DatumObjave>
@@ -115,6 +121,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>17</Id>
@@ -132,6 +139,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Gnje</Opis>
       <DatumObjave>2018-06-20T22:38:24.3450722+02:00</DatumObjave>
@@ -155,6 +163,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Gnje</Opis>
       <DatumObjave>2018-06-20T22:38:24.3450722+02:00</DatumObjave>
@@ -178,6 +187,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Smara vozac</Opis>
       <DatumObjave>2018-06-20T22:46:45.4837356+02:00</DatumObjave>
@@ -202,6 +212,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Smara vozac</Opis>
       <DatumObjave>2018-06-20T22:46:45.4837356+02:00</DatumObjave>
@@ -226,6 +237,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Nanananan</Opis>
       <DatumObjave>2018-06-21T00:14:15.7010309+02:00</DatumObjave>
@@ -251,6 +263,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Zaspao u kolima</Opis>
       <DatumObjave>2018-06-20T22:48:36.8891077+02:00</DatumObjave>
@@ -276,6 +289,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>He he izmene rade</Opis>
       <DatumObjave>2018-06-21T00:03:33.8363183+02:00</DatumObjave>
@@ -301,6 +315,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <DatumObjave>2018-06-21T00:11:29.6855354+02:00</DatumObjave>
       <Objavljeno>21-06-18  0:11:29</Objavljeno>
@@ -325,6 +340,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <DatumObjave>2018-06-21T00:11:29.6855354+02:00</DatumObjave>
       <Objavljeno>21-06-18  0:11:29</Objavljeno>
@@ -349,6 +365,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <Komentar>
       <Opis>Nanananan</Opis>
       <DatumObjave>2018-06-21T00:14:15.7010309+02:00</DatumObjave>
@@ -374,6 +391,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>25</Id>
@@ -391,6 +409,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>26</Id>
@@ -408,6 +427,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>26</Id>
@@ -425,6 +445,7 @@
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
     <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
     <StatusVoznje>KREIRANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>26</Id>
