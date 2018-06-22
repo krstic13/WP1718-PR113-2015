@@ -115,7 +115,6 @@
                             //sessionStorage.getItem("ulogovaniKorisnik");
                             sessionStorage.setItem("ulogovaniId", data.Id);
 
-
                             if (data.Uloga == 0) {
                                 // KORISNIK
                                 UserView = " <br/> ";
@@ -141,13 +140,13 @@
 
                                     //{KREIRANA,FORMIRANA,OBRADJENA,PRIHVACENA,OTKAZANA,NEUSPESNA,USPESNA,U_TOKU}
                                     if (data.Voznje[v].StatusVoznje == 0) { UserView += "<td>KREIRANA</td>"; pomstat ="KREIRANA" ;ponistiDugme = "<td> <input type=\"submit\" id="+data.Voznje[v].Id+" name=\"ponistiVoznjuKorisnik\" value=\"Ponisti\"/></td>"; }
-                                    if (data.Voznje[v].StatusVoznje == 1) { UserView += "<td>FORMIRANA</td>"; pomstat = "FORMIRANA"  }
-                                    if (data.Voznje[v].StatusVoznje == 2) { UserView += "<td>OBRADJENA</td>"; pomstat = "OBRADJENA"  }
-                                    if (data.Voznje[v].StatusVoznje == 3) { UserView += "<td>PRIHVACENA</td>"; pomstat = "PRIHVACENA"  }
-                                    if (data.Voznje[v].StatusVoznje == 4) { UserView += "<td>OTKAZANA</td>"; pomstat = "OTKAZANA"  }
-                                    if (data.Voznje[v].StatusVoznje == 5) { UserView += "<td>NEUSPESNA</td>"; pomstat = "NEUSPESNA"  }
-                                    if (data.Voznje[v].StatusVoznje == 6) { UserView += "<td>USPESNA</td>"; pomstat = "USPESNA" }
-                                    if (data.Voznje[v].StatusVoznje == 7) { UserView += "<td>U_TOKU</td>"; pomstat = "U_TOKU" }
+                                    if (data.Voznje[v].StatusVoznje == 1) { UserView += "<td>FORMIRANA</td>"; pomstat = "FORMIRANA";  }
+                                    if (data.Voznje[v].StatusVoznje == 2) { UserView += "<td>OBRADJENA</td>"; pomstat = "OBRADJENA"; }
+                                    if (data.Voznje[v].StatusVoznje == 3) { UserView += "<td>PRIHVACENA</td>"; pomstat = "PRIHVACENA";  }
+                                    if (data.Voznje[v].StatusVoznje == 4) { UserView += "<td>OTKAZANA</td>"; pomstat = "OTKAZANA"; }
+                                    if (data.Voznje[v].StatusVoznje == 5) { UserView += "<td>NEUSPESNA</td>"; pomstat = "NEUSPESNA";  }
+                                    if (data.Voznje[v].StatusVoznje == 6) { UserView += "<td>USPESNA</td>"; pomstat = "USPESNA"; }
+                                    if (data.Voznje[v].StatusVoznje == 7) { UserView += "<td>U_TOKU</td>"; pomstat = "U_TOKU";}
 
                                     //<input type=\"submit\" name=\"detalji_voznje\" id=\"" + login_user.Voznje[t].Id + "\" value=\"Detalji voznje\" />
 
@@ -247,7 +246,43 @@
                                 UserView += "        <tr> <th> Start </th> <th> Odredište </th> <th> Mušterija </th> <th> Vozač </th> <th> Dispečer </th> <th> Status vožnje </th> <th> </th> <th> </th> </tr>";
 
                                 for (v in data.Voznje) {
-                                    UserView += "   <tr> <td> " + data.Voznje[v] + " </td> <td>" + data.Voznje[v].Odrediste + " </td> <td>" + data.Voznje[v].Musterija + "  </td > <td> " + data.Voznje[v].Name + " " + data.Voznje[v].Vozac + "</td> <td>" + data.Voznje[v].Dispatcher + "</td> <td>" + data.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                                    //UserView += "   <tr> <td> " + data.Voznje[v] + " </td> <td>" + data.Voznje[v].Odrediste + " </td> <td>" + data.Voznje[v].Musterija + "  </td > <td> " + data.Voznje[v].Name + " " + data.Voznje[v].Vozac + "</td> <td>" + data.Voznje[v].Dispatcher + "</td> <td>" + data.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                                    UserView += "<tr> <td> " + data.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj + " " + data.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski + " </td>";
+                                    if (data.Voznje[v].Odrediste == null) { UserView += "<td>" + "" + "</td>"; }
+                                    else { UserView += "<td>" + data.Voznje[v].Odrediste + " </td> " }
+
+                                    //UserView += "<td>" + data.Voznje[v].Musterija + "  </td >";
+
+                                    if (trenutnoUlogovan.Voznje[v].Musterija != null) {
+                                        UserView += "<td>" + trenutnoUlogovan.Voznje[v].Musterija + "  </td >";
+                                    } else {
+                                        UserView += "<td></td >";
+                                    }
+
+                                    if (data.Voznje[v].Vozac == null || data.Voznje[v].Vozac == "") { UserView += "<td>" + " " + "</td>"; }
+                                    else { UserView += "<td>" + data.Voznje[v].Vozac + " </td> " }
+
+                                    if (data.Voznje[v].Dispatcher == null || data.Voznje[v].Dispatcher == "") { UserView += "<td>" + " " + "</td>"; }
+                                    else { UserView += "<td>" + data.Voznje[v].Dispatcher + " </td> " }
+
+                                    var ponistiDugme = "<td> </td>";
+                                    var pomstat = "";
+
+                                    //{KREIRANA,FORMIRANA,OBRADJENA,PRIHVACENA,OTKAZANA,NEUSPESNA,USPESNA,U_TOKU}
+                                    if (data.Voznje[v].StatusVoznje == 0) { UserView += "<td>KREIRANA</td>"; pomstat = "KREIRANA"; ponistiDugme = "<td> <input type=\"submit\" id=" + data.Voznje[v].Id + " name=\"ponistiVoznjuKorisnik\" value=\"Ponisti\"/></td>"; }
+                                    if (data.Voznje[v].StatusVoznje == 1) { UserView += "<td>FORMIRANA</td>"; pomstat = "FORMIRANA"; }
+                                    if (data.Voznje[v].StatusVoznje == 2) { UserView += "<td>OBRADJENA</td>"; pomstat = "OBRADJENA"; }
+                                    if (data.Voznje[v].StatusVoznje == 3) { UserView += "<td>PRIHVACENA</td>"; pomstat = "PRIHVACENA"; }
+                                    if (data.Voznje[v].StatusVoznje == 4) { UserView += "<td>OTKAZANA</td>"; pomstat = "OTKAZANA"; }
+                                    if (data.Voznje[v].StatusVoznje == 5) { UserView += "<td>NEUSPESNA</td>"; pomstat = "NEUSPESNA"; }
+                                    if (data.Voznje[v].StatusVoznje == 6) { UserView += "<td>USPESNA</td>"; pomstat = "USPESNA"; }
+                                    if (data.Voznje[v].StatusVoznje == 7) { UserView += "<td>U_TOKU</td>"; pomstat = "U_TOKU"; }
+
+                                    //<input type=\"submit\" name=\"detalji_voznje\" id=\"" + login_user.Voznje[t].Id + "\" value=\"Detalji voznje\" />
+
+                                    UserView += "<td> <input type=\"submit\" value=\"Izmeni\" name=\"vozacMenjaVoznju\"  id=" + data.Voznje[v].Id + "_" + pomstat + " /> </td> <td> <input type=\"submit\" name=\"Pregledajvoznju\" value=\"Pregledaj\" id=" + data.Voznje[v].Id + " /> </td>"  + "</tr > ";
+
+
                                 }
                                 UserView += "    </table>";
                                 UserView += "    <input type=\"submit\" value=\"Voznje na čekanju\" id=\"voznjeNaCekanju\"/>";
@@ -317,10 +352,44 @@
                                 UserView = " <br/> ";
                                 UserView += "<input type=\"submit\" value=\"Prikazi sve voznje\" id=\"prikazSvihVoznji\"/>";
                                 UserView += "    <table border=\"1\">";
-                                UserView += "        <tr> <th> Start </th> <th> Odredište </th> <th> Mušterija </th> <th> Vozač </th> <th> Dispečer </th> <th> Status vožnje </th> <th> </th> <th> </th> </tr>";
+                                UserView += "        <tr> <th> Start </th> <th> Odredište </th> <th> Mušterija </th> <th> Vozač </th> <th> Dispečer </th> <th> Status vožnje </th> <th colspan=\"2\"> </th>  </tr>";
 
                                 for (v in data.Voznje) {
-                                    UserView += "   <tr> <td> " + data.Voznje[v] + " </td> <td>" + data.Voznje[v].Odrediste + " </td> <td>" + data.Voznje[v].Musterija.Name + " " + data.Voznje[v].Musterija + " " + data.Voznje[v].Vozac + "</td> <td>" + data.Voznje[v].Dispatcher + "</td> <td>" + data.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                                   // UserView += "   <tr> <td> " + data.Voznje[v] + " </td> <td>" + data.Voznje[v].Odrediste + " </td> <td>" + data.Voznje[v].Musterija.Name + " " + data.Voznje[v].Musterija + " " + data.Voznje[v].Vozac + "</td> <td>" + data.Voznje[v].Dispatcher + "</td> <td>" + data.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                                    UserView += "<tr> <td> " + data.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj + " " + data.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski + " </td>";
+                                    if (data.Voznje[v].Odrediste == null) { UserView += "<td>" + "" + "</td>"; }
+                                    else { UserView += "<td>" + data.Voznje[v].Odrediste + " </td> " }
+
+
+                                    if (data.Voznje[v].Musterija != null) {
+                                        UserView += "<td>" + data.Voznje[v].Musterija + "  </td >";
+                                    } else {
+                                        UserView += "<td></td >";
+                                    }
+
+                                    if (data.Voznje[v].Vozac == null || data.Voznje[v].Vozac == "") { UserView += "<td>" + " " + "</td>"; }
+                                    else { UserView += "<td>" + data.Voznje[v].Vozac + " </td> " }
+
+                                    if (data.Voznje[v].Dispatcher == null || data.Voznje[v].Dispatcher == "") { UserView += "<td>" + " " + "</td>"; }
+                                    else { UserView += "<td>" + data.Voznje[v].Dispatcher + " </td> " }
+
+                                    var dodeli = "<td> </td>";
+                                    var pomstat = "";
+
+                                    //{KREIRANA,FORMIRANA,OBRADJENA,PRIHVACENA,OTKAZANA,NEUSPESNA,USPESNA,U_TOKU}
+                                    if (data.Voznje[v].StatusVoznje == 0) { UserView += "<td>KREIRANA</td>"; pomstat = "KREIRANA"; dodeli = "<td> <input type=\"submit\" id=" + data.Voznje[v].Id + " name=\"adminDodeliVoznji\" value=\"Dodeli\"/></td>"; }
+                                    if (data.Voznje[v].StatusVoznje == 1) { UserView += "<td>FORMIRANA</td>"; pomstat = "FORMIRANA"; dodeli = "<td> <input type=\"submit\" id=" + data.Voznje[v].Id + " name=\"adminDodeliVoznji\" value=\"Dodeli\"/></td>"; }
+                                    if (data.Voznje[v].StatusVoznje == 2) { UserView += "<td>OBRADJENA</td>"; pomstat = "OBRADJENA"; }
+                                    if (data.Voznje[v].StatusVoznje == 3) { UserView += "<td>PRIHVACENA</td>"; pomstat = "PRIHVACENA"; }
+                                    if (data.Voznje[v].StatusVoznje == 4) { UserView += "<td>OTKAZANA</td>"; pomstat = "OTKAZANA"; }
+                                    if (data.Voznje[v].StatusVoznje == 5) { UserView += "<td>NEUSPESNA</td>"; pomstat = "NEUSPESNA"; }
+                                    if (data.Voznje[v].StatusVoznje == 6) { UserView += "<td>USPESNA</td>"; pomstat = "USPESNA"; }
+                                    if (data.Voznje[v].StatusVoznje == 7) { UserView += "<td>U_TOKU</td>"; pomstat = "U_TOKU"; }
+
+                                    //<input type=\"submit\" name=\"detalji_voznje\" id=\"" + login_user.Voznje[t].Id + "\" value=\"Detalji voznje\" />
+
+                                    UserView += "<td> <input type=\"submit\" name=\"AdminPregledajvoznju\" value=\"Pregledaj\" id=" + data.Voznje[v].Id + " /> </td>" + dodeli + "</tr > ";
+
                                 }
                                 UserView += "    </table>";
                                 UserView += " <p> Pretraga po statusu </p>";
@@ -429,6 +498,8 @@
                 var UserMenu = "";
                 var UserView = "";
 
+                trenutnoUlogovan = JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"));
+
                 UserMenu = "<table align=\"center\">";
                 UserMenu += "  <tr> ";
                 UserMenu += "        <td id=\"opcijeVozaca\"> Opcije </td>";
@@ -445,7 +516,43 @@
 
                 // if (data.Voznje != null) {
                 for (v in trenutnoUlogovan.Voznje) {
-                    UserView += "   <tr> <td> " + trenutnoUlogovan.Voznje[v] + " </td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> <td>" + trenutnoUlogovan.Voznje[v].Musterija.Name + " " + trenutnoUlogovan.Voznje[v].Musterija.LastName + "  </td > <td> " + trenutnoUlogovan.Voznje[v].Name + " " + trenutnoUlogovan.Voznje[v].Vozac.LastName + "</td> <td>" + trenutnoUlogovan.Voznje[v].Dispatcher.Name + " " + trenutnoUlogovan.Voznje[v].Dispatcher.LastName + "</td> <td>" + trenutnoUlogovan.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                   // UserView += "   <tr> <td> " + trenutnoUlogovan.Voznje[v] + " </td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> <td>" + trenutnoUlogovan.Voznje[v].Musterija.Name + " " + trenutnoUlogovan.Voznje[v].Musterija.LastName + "  </td > <td> " + trenutnoUlogovan.Voznje[v].Name + " " + trenutnoUlogovan.Voznje[v].Vozac.LastName + "</td> <td>" + trenutnoUlogovan.Voznje[v].Dispatcher.Name + " " + trenutnoUlogovan.Voznje[v].Dispatcher.LastName + "</td> <td>" + trenutnoUlogovan.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                    UserView += "<tr> <td> " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj + " " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski + " </td>";
+                    if (trenutnoUlogovan.Voznje[v].Odrediste == null) { UserView += "<td>" + "" + "</td>"; }
+                    else { UserView += "<td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> " }
+
+
+                    if (trenutnoUlogovan.Voznje[v].Musterija != null) {
+                        UserView += "<td>" + trenutnoUlogovan.Voznje[v].Musterija + "  </td >";
+                    } else {
+                        UserView += "<td></td >";
+                    }
+
+                    if (trenutnoUlogovan.Voznje[v].Vozac == null || trenutnoUlogovan.Voznje[v].Vozac == "") { UserView += "<td>" + " " + "</td>"; }
+                    else { UserView += "<td>" + trenutnoUlogovan.Voznje[v].Vozac + " </td> " }
+
+                    if (trenutnoUlogovan.Voznje[v].Dispatcher == null || trenutnoUlogovan.Voznje[v].Dispatcher == "") { UserView += "<td>" + " " + "</td>"; }
+                    else { UserView += "<td>" + trenutnoUlogovan.Voznje[v].Dispatcher + " </td> " }
+
+                    var dodeli = "<td> </td>";
+                    var pomstat = "";
+
+                    //{KREIRANA,FORMIRANA,OBRADJENA,PRIHVACENA,OTKAZANA,NEUSPESNA,USPESNA,U_TOKU}
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 0) { UserView += "<td>KREIRANA</td>"; pomstat = "KREIRANA"; dodeli = "<td> <input type=\"submit\" id=" + trenutnoUlogovan.Voznje[v].Id + " name=\"adminDodeliVoznji\" value=\"Dodeli\"/></td>"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 1) { UserView += "<td>FORMIRANA</td>"; pomstat = "FORMIRANA"; dodeli = "<td> <input type=\"submit\" id=" + trenutnoUlogovan.Voznje[v].Id + " name=\"adminDodeliVoznji\" value=\"Dodeli\"/></td>"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 2) { UserView += "<td>OBRADJENA</td>"; pomstat = "OBRADJENA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 3) { UserView += "<td>PRIHVACENA</td>"; pomstat = "PRIHVACENA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 4) { UserView += "<td>OTKAZANA</td>"; pomstat = "OTKAZANA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 5) { UserView += "<td>NEUSPESNA</td>"; pomstat = "NEUSPESNA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 6) { UserView += "<td>USPESNA</td>"; pomstat = "USPESNA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 7) { UserView += "<td>U_TOKU</td>"; pomstat = "U_TOKU"; }
+
+                    //<input type=\"submit\" name=\"detalji_voznje\" id=\"" + login_user.Voznje[t].Id + "\" value=\"Detalji voznje\" />
+
+                   // UserView += " <td> <input type=\"submit\" name=\"vozacMenjaVoznju\" value=\"Pregledaj\" id=" + trenutnoUlogovan.Voznje[v].Id + " /> </td>" + dodeli + "</tr > ";
+
+                    UserView += "<td> <input type=\"submit\" value=\"Izmeni\" name=\"vozacMenjaVoznju\"  id=" + trenutnoUlogovan.Voznje[v].Id + "_" + pomstat + " /> </td> <td> <input type=\"submit\" name=\"Pregledajvoznju\" value=\"Pregledaj\" id=" + trenutnoUlogovan.Voznje[v].Id + " /> </td>" + "</tr > ";
+
                 }
 
                 UserView += "    </table>";
@@ -1033,16 +1140,54 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
+                trenutnoUlogovan = JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"));
+
                 var UserMenu = "";
                 var UserView = "";
 
                 UserView = " <br/> ";
                 UserView += "<input type=\"submit\" value=\"Prikazi sve voznje\" id=\"prikazSvihVoznji\"/>";
                 UserView += "    <table border=\"1\">";
-                UserView += "        <tr> <th> Start </th> <th> Odredište </th> <th> Mušterija </th> <th> Vozač </th> <th> Dispečer </th> <th> Status vožnje </th> <th> </th> <th> </th> </tr>";
+                UserView += "        <tr> <th> Start </th> <th> Odredište </th> <th> Mušterija </th> <th> Vozač </th> <th> Dispečer </th> <th> Status vožnje </th> <th colspan=\"2\"> </th>  </tr>";
 
                 for (v in trenutnoUlogovan.Voznje) {
-                    UserView += "   <tr> <td> " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj + " " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski + " </td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> <td>" + trenutnoUlogovan.Voznje[v].Musterija + " " + "  </td > <td> " + trenutnoUlogovan.Voznje[v].Vozac + "</td> <td>" + trenutnoUlogovan.Voznje[v].Dispatcher + "</td> <td>" + trenutnoUlogovan.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                   // UserView += "   <tr> <td> " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj + " " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski + " </td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> <td>" + trenutnoUlogovan.Voznje[v].Musterija + " " + "  </td > <td> " + trenutnoUlogovan.Voznje[v].Vozac + "</td> <td>" + trenutnoUlogovan.Voznje[v].Dispatcher + "</td> <td>" + trenutnoUlogovan.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                    // UserView += "   <tr> <td> " + data.Voznje[v] + " </td> <td>" + data.Voznje[v].Odrediste + " </td> <td>" + data.Voznje[v].Musterija.Name + " " + data.Voznje[v].Musterija + " " + data.Voznje[v].Vozac + "</td> <td>" + data.Voznje[v].Dispatcher + "</td> <td>" + data.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
+                    UserView += "<tr> <td> " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj + " " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski + " </td>";
+                    if (trenutnoUlogovan.Voznje[v].Odrediste == null) { UserView += "<td>" + "" + "</td>"; }
+                    else { UserView += "<td>" + trenutnoUlogovan.Voznje[v].Odrediste + " </td> " }
+
+
+                    if (trenutnoUlogovan.Voznje[v].Musterija != null) {
+                        UserView += "<td>" + trenutnoUlogovan.Voznje[v].Musterija + "  </td >";
+                    } else {
+                        UserView += "<td></td >";
+                    }
+
+                    if (trenutnoUlogovan.Voznje[v].Vozac == null || trenutnoUlogovan.Voznje[v].Vozac == "") { UserView += "<td>" + " " + "</td>"; }
+                    else { UserView += "<td>" + trenutnoUlogovan.Voznje[v].Vozac + " </td> " }
+
+                    if (trenutnoUlogovan.Voznje[v].Dispatcher == null || trenutnoUlogovan.Voznje[v].Dispatcher == "") { UserView += "<td>" + " " + "</td>"; }
+                    else { UserView += "<td>" + trenutnoUlogovan.Voznje[v].Dispatcher + " </td> " }
+
+                    var dodeli = "<td> </td>";
+                    var pomstat = "";
+
+                    //{KREIRANA,FORMIRANA,OBRADJENA,PRIHVACENA,OTKAZANA,NEUSPESNA,USPESNA,U_TOKU}
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 0) { UserView += "<td>KREIRANA</td>"; pomstat = "KREIRANA"; dodeli = "<td> <input type=\"submit\" id=" + trenutnoUlogovan.Voznje[v].Id + " name=\"adminDodeliVoznji\" value=\"Dodeli\"/></td>"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 1) { UserView += "<td>FORMIRANA</td>"; pomstat = "FORMIRANA"; dodeli = "<td> <input type=\"submit\" id=" + trenutnoUlogovan.Voznje[v].Id + " name=\"adminDodeliVoznji\" value=\"Dodeli\"/></td>"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 2) { UserView += "<td>OBRADJENA</td>"; pomstat = "OBRADJENA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 3) { UserView += "<td>PRIHVACENA</td>"; pomstat = "PRIHVACENA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 4) { UserView += "<td>OTKAZANA</td>"; pomstat = "OTKAZANA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 5) { UserView += "<td>NEUSPESNA</td>"; pomstat = "NEUSPESNA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 6) { UserView += "<td>USPESNA</td>"; pomstat = "USPESNA"; }
+                    if (trenutnoUlogovan.Voznje[v].StatusVoznje == 7) { UserView += "<td>U_TOKU</td>"; pomstat = "U_TOKU"; }
+
+                    //<input type=\"submit\" name=\"detalji_voznje\" id=\"" + login_user.Voznje[t].Id + "\" value=\"Detalji voznje\" />
+
+                    UserView += " <td> <input type=\"submit\" name=\"AdminPregledajvoznju\" value=\"Pregledaj\" id=" + trenutnoUlogovan.Voznje[v].Id + " /> </td>" + dodeli + "</tr > ";
+
+
                 }
                 UserView += "    </table>";
                 UserView += " <p> Pretraga po statusu </p>";
@@ -1697,64 +1842,77 @@
                 $("#AllGood").empty();
                 trenutnoUlogovan = JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"));
 
-                if (xx == null) {
-                    $("#Greske").html("Niste izabrali lokaciju voznje");
-                } else {
-                    var objekat = {
-                        LokacijaPolazna: {
-                            Xcoordinate: xx,
-                            Ycoordinate: yy,
-                            Adresa: {
-                                UlicaBroj: ulica_broj,
-                                MestoPostanski: grad
+                if ($("#kord").val() != null) {
+
+                    if (xx == null) {
+                        $("#Greske").html("Niste izabrali lokaciju voznje");
+                    } else {
+                        var objekat = {
+                            LokacijaPolazna: {
+                                Xcoordinate: xx,
+                                Ycoordinate: yy,
+                                Adresa: {
+                                    UlicaBroj: ulica_broj,
+                                    MestoPostanski: grad
+                                }
+                            },
+                            TipVozila: $("#TipVozila").val(),
+                            Musterija: (JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"))).Id
+                        };
+
+                        $.post("/api/ahome/korisnikKreiraVoznju", objekat, function (data, status) {
+                            if (data == "") {
+                                $("#Greske").html("Morate izabrati lokaciju da bi ste kreirali vožnju");
+                            } else {
+                                $("#AllGood").html("Vožnja uspešno kreirana");
+                                trenutnoUlogovan = data;
                             }
-                        },
-                        TipVozila: $("#TipVozila").val(),
-                        Musterija: (JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"))).Id
-                    };
+                        });
 
-                    $.post("/api/ahome/korisnikKreiraVoznju", objekat, function (data, status) {
-                        if (data == "") {
-                            $("#Greske").html("Morate izabrati lokaciju da bi ste kreirali vožnju");
-                        } else {
-                            $("#AllGood").html("Vožnja uspešno kreirana");
-                            trenutnoUlogovan = data;
-                        }
-                    });
+                    }
 
+                } ////////////////////////////////////////////////////////////////////////////////////////////////////
+                else {
+                    $("#Greske").html("Lokacija nije unesena. Lokaciju selektujte dvoklikom.");
                 }
+                
             });
 
             $(document).on("click", "#kreirajvoznju", function () {
                 $("#Greske").empty();
                 $("#AllGood").empty();
+                //
+                if ($("#kord").val() != null) {
+                    if (kord == null) {
+                        $("#Greske").html("Niste izabrali lokaciju voznje");
+                    } else {
+                        var objekat = {
+                            LokacijaPolazna: {
+                                Xcoordinate: xx,
+                                Ycoordinate: yy,
+                                Adresa: {
+                                    UlicaBroj: ulica_broj,
+                                    MestoPostanski: grad
+                                }
+                            },
+                            Dispatcher: trenutnoUlogovan.Id,
+                            Vozac: $("#vozaci").val(),
+                            TipVozila: $("#TipVozila").val()
+                        };
 
-                if (kord == null) {
-                    $("#Greske").html("Niste izabrali lokaciju voznje");
-                } else {
-                    var objekat = {
-                        LokacijaPolazna: {
-                            Xcoordinate: xx,
-                            Ycoordinate: yy,
-                            Adresa: {
-                                UlicaBroj: ulica_broj,
-                                MestoPostanski: grad
+                        $.post("/api/ahome/kreiranjevoznje", objekat, function (data, status) {
+                            if (data.Id == null) {
+                                $("#Greske").html(data);
+                            } else {
+                                $("#AllGood").html("Vožnja uspešno kreirana");
+                                //trenutnoUlogovan = data;
+                                //sessionStorage.setItem();
+                                sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(data));
                             }
-                        },
-                        Dispatcher: trenutnoUlogovan.Id,
-                        Vozac: $("#vozaci").val(),
-                        TipVozila: $("#TipVozila").val()
-                    };
-
-                    $.post("/api/ahome/kreiranjevoznje", objekat, function (data, status) {
-                        if (data.Id == null) {
-                            $("#Greske").html(data);
-                        } else {
-                            $("#AllGood").html("Vožnja uspešno kreirana");
-                            trenutnoUlogovan = data;
-                        }
-                    });
-                }
+                        });
+                    }
+                }////////////////////////////////////////////////////////////////////////////////////////////////////
+                else { $("#Greske").html("Lokacija nije selektovana. Lokaciju unosite dvoklikom.");}
 
             });
 
@@ -1911,14 +2069,14 @@
                                 if (trenutnoUlogovan.Voznje[v].Id == i || ((trenutnoUlogovan.Voznje[v].Id + "/") == i)) {
 
                                     if (trenutnoUlogovan.Voznje[v].LokacijaPolazna != null) {
-                                        if (trenutnoUlogovan.Voznje[v].LokacijaPolazna.UlicaBroj != null) {
-                                            UserView += "<tr> <td> Adresa polaska:    </td> <td>" + trenutnoUlogovan.Voznje[v].LokacijaPolazna.UlicaBroj + " ";
+                                        if (trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj != null) {
+                                            UserView += "<tr> <td> Adresa polaska:    </td> <td>" + trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.UlicaBroj + " ";
                                         } else {
                                             UserView += "<tr> <td> Adresa polaska:    </td> <td>";
-                                        }
+                                       }
 
-                                        if (trenutnoUlogovan.Voznje[v].LokacijaPolazna.MestoPostanski != null) {
-                                            UserView += trenutnoUlogovan.Voznje[v].LokacijaPolazna.MestoPostanski + "</td > </tr >";
+                                        if (trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski != null) {
+                                            UserView += trenutnoUlogovan.Voznje[v].LokacijaPolazna.Adresa.MestoPostanski + "</td > </tr >";
                                         } else {
                                             UserView += "</td > </tr >";
                                         }
@@ -1929,8 +2087,8 @@
                                     //UserView += "<tr> <td> Adresa polaska:    </td> <td>" + trenutnoUlogovan.Voznje[v].LokacijaPolazna.UlicaBroj + " " + trenutnoUlogovan.Voznje[v].LokacijaPolazna.MestoPostanski + "</td> </tr>";
 
                                     if (trenutnoUlogovan.Voznje[v].Odrediste != null) {
-                                        if (trenutnoUlogovan.Voznje[v].Odrediste.UlicaBroj != null) {
-                                            UserView += "<tr> <td> Adresa odredišta:</td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste.UlicaBroj + " ";
+                                        if (trenutnoUlogovan.Voznje[v].Odrediste.Adresa.UlicaBroj != null) {
+                                            UserView += "<tr> <td> Adresa odredišta:</td> <td>" + trenutnoUlogovan.Voznje[v].Odrediste.Adresa.UlicaBroj + " ";
                                         }
                                         else {
                                             UserView += "<tr> <td> Adresa odredišta:</td> <td>";
@@ -2015,6 +2173,71 @@
                     });
                 }
                 else { $("#Greske").html("FAILS");}
+            });
+
+            $(document).on("click", "[name='adminDodeliVoznji']", function () {
+                $("#Greske").empty();
+                $("#AllGood").empty();
+                trenutnoUlogovan = JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"));
+
+                var UserMenu = "";
+                var UserView = "";
+
+                UserView += "<h2> Izaberite vozaca za izabranu voznju</h2>";
+                var help = {
+                    idVoznje: $(this).attr("id")
+                };
+
+                var h = $(this).attr("id");
+
+                $.get("/api/ahome/najblizi2", help, function (data, status) {
+                    var nesto = eval(data);
+                    var pom = "";
+                    for (var k in nesto) {
+                        pom += "<option value=\"" + k + "\">" + nesto[k] + "</option>";
+                    }
+                    var pomocVozaci = pom;
+                    sessionStorage.setItem("najblizivozaci", pomocVozaci);
+                    $("#vozaciAdmin").html(pom);
+                    UserView += "<select name=\"vozaci\" id=\"vozaci\" size=\"1\">";
+                    //
+                    UserView += pomocVozaci;
+                    //UserView += sessionStorage.getItem("najblizivozaci");
+
+                    UserView += "</select>"; // popuni select za najblize vozace 
+
+                    UserView += "<input type=\"submit\" value=\"Izaberi\" name=\"adminDodeljujeVozaca\" id ="+ h+ "/>"
+
+                    sessionStorage.setItem("trenutniPrikaz", UserView);
+                    $("#PageContent").html(UserView);
+                }); // VRACA 5 NAJBLIZIH 
+
+            });
+
+            $(document).on("click", "[name='adminDodeljujeVozaca']", function () {
+                var UserView = "";
+                $("#Greske").empty();
+                $("#AllGood").empty();
+                trenutnoUlogovan = JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"));
+                var UserView = "";
+
+                var help = { idVoznje: $(this).attr("id"), vozac: $("#vozaci").val() };
+
+                $.get("/api/ahome/adminOpDodeli", help, function (data, status) {
+                    if (data != null) {
+                        $("#AllGood").html("Uspesno dodeljen vozac");
+                        sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(data));
+                    } else {
+                        $("#Greske").html(data);
+                        //sessionStorage.setItem("trentutnoUlogovan", data);
+                        //sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(trenutnoUlogovan));
+                    }
+
+                });
+
+
+                //$("#AllGood").html("Usli u funkciju dodele vozaca");
+                sessionStorage.setItem("trenutniPrikaz", UserView);
             });
 
             $(document).on("click", "[name='korisnikMenjaVoznju']", function () {
@@ -2150,6 +2373,98 @@
                     }
                 } else { $("#Greske").html("Niste uneli komentar."); }
             });
+
+            $(document).on("click", "[name='vozacMenjaVoznju']", function () {
+                //
+                var UserView = "";
+                $("#Greske").empty();
+                $("#AllGood").empty();
+
+                var i = $(this).attr("id");
+                
+                var stat = ""; // CUPAM status 
+                var delovi = i.split("_");
+                var Id = { idVoznje: delovi[0] };
+                stat = delovi[1];
+                //
+                if (Id != null) {
+                   // var objekatSlanje = { idVoznje: idVoznje1 };
+                    if (stat == "OBRADJENA") {
+                        // PROMENI STANJE U PRIHVACENA
+                        //var UserView = "Stanje voznje je sada prihvacena";
+                        $.get("/api/ahome/vozacMenjaUuPrihvacena", Id, function (data, status) {
+                            if (data != null) {
+                                $("#AllGood").html("Uspesno promenjeno stanje u PRIHVACENA");
+                                sessionStorage.setItem("trenutniPrikaz", UserView);
+                                $("#PageContent").html(UserView);
+                               // sessionStorage.setItem("trentutnoUlogovan", data);
+                                sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(data));
+                            } else {
+                                $("#Greske").html(data);
+                            }
+                        });
+                    }
+                    else if (stat == "PRIHVACENA") {
+                        // PROMENI STANJE U U_TOKU
+                        $.get("/api/ahome/vozacMenjaUuToku", Id, function (data, status) {
+                            if (data != null) {
+                                sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(data));
+                                sessionStorage.setItem("trenutniPrikaz", UserView);
+                                $("#PageContent").html(UserView);
+                                $("#AllGood").html("Uspesno promenjeno stanje u U TOKU");
+                            } else {
+                                $("#Greske").html(data);
+                            }
+                        });
+                    }
+                    else if (stat == "U")
+                    {
+                        // POMENI STANJE U USPESNA NEUSPESNA
+                        /*UserView = "";
+                        UserView += "<h2> Izaberite novo stanje izabrane vožnje </h2>";
+                        UserView += "<table border=\"1\"> <tr> <td> <input type=\"submit\" name=\"Uspeh\" value=\"Uspešna\" id=\"USPEH" + "_" + delovi[0]  + "/> </td>";
+                        UserView += "<td> <input type=\"submit\" name=\"Uspeh\" value=\"Neuspešna\" id=\"NEUSPEH" + "_" + delovi[0] + "/> </td> </tr> </table>";*/
+
+                        //UserView += "<h2> Izaberite novo stanje izabrane vožnje </h2>";
+                        UserView += "    <table align=\"center\"> <th colspan=\"2\"> <h2> Izaberite novo stanje izabrane vožnje </h2> </th> ";
+                        UserView += "        <tr>";
+                        UserView += "        <td align=\"center\">";
+                        UserView += "            <input type=\"submit\" name=\"Uspeh\" value=\"Uspešna\" id=\"USPEH*"+delovi[0] +" \"/>";
+                        UserView += "        </td>";
+                        UserView += "<td align=\"center\">";
+                        UserView += "    <input type=\"submit\" name=\"Uspeh\" value=\"Neuspešna\" id=\"NEUSPEH*" + delovi[0] +"\"/>";
+                        UserView += "</td> ";
+                        UserView += "</tr > ";
+						
+                        UserView += "</table > ";
+                        sessionStorage.setItem("trenutniPrikaz", UserView);
+                        $("#PageContent").html(UserView);
+                    }
+                }
+
+            });
+
+            $(document).on("click", "[name='Uspeh']", function () {
+                // uzmi posalji funkciji USPEH/NE i id pa nek se ona snadje lakse ovde da imam jednu i tamo 1 funkciju 
+                var UserView = "";
+                $("#Greske").empty();
+                $("#AllGood").empty();
+
+                var Id = { s: $(this).attr("id")};
+
+                $.get("/api/ahome/vozacMenjaUspesnaNeuspesna", Id, function (data, status) {
+                    if (data != null) {
+                        $("#Greske").html("STATUS PROMENJEN");
+                        sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(data));
+                        sessionStorage.setItem("trenutniPrikaz", UserView);
+                        $("#PageContent").html(UserView);
+                        $("#AllGood").html("Uspesno promenjeno stanje u U TOKU");
+                    } else {
+                        $("#Greske").html(data);
+                    }
+                });
+            });
+
 
         });
     </script>

@@ -15,6 +15,7 @@ namespace TaksiSluzba.Models
         public Location Odrediste { get; set; }
         public string Dispatcher { get; set; }
         public string Vozac { get; set; }
+        public string VozacId { get; set; }
         public string Iznos { get; set; }
         public Comment Komentar { get; set; }
         public RideStatus StatusVoznje { get; set; }

@@ -291,9 +291,13 @@ namespace TaksiSluzba.Controllers
             Dictionary<string, double> udaljenosti = new Dictionary<string, double>();
 
             foreach (Driver d in vozaci) {
-                if(d.Slobodan == true)
+                if (d.Blokiran == false)
                 {
-                    slobodniVozaci.Add(d);
+                    if (d.Slobodan == true)
+                    {
+
+                            slobodniVozaci.Add(d);
+                    }
                 }
             }
 
@@ -522,10 +526,14 @@ namespace TaksiSluzba.Controllers
             //
             admin.Remove(dispecer);
             //
-
             r.Dispatcher = dispecer.UserName;
 
             Driver d = vozaci.Find(k => k.Id == r.Vozac); // PROVERI DA LI OVDE TREBA vozaci.Find(k => k.username == r.vozac);
+            r.VozacId = r.Vozac;
+            r.Vozac = d.UserName;
+            r.Id = (sveVoznje.Count + korisnikKreiraoVoznju.Count).ToString();
+            r.DatumIVremePorudzbine = DateTime.Now;
+            //dispecer.Voznje.Add(r);
             if (r.TipVozila != d.Automobil.TipAutomobila)
             {
                 admin.Add(dispecer);
@@ -534,8 +542,7 @@ namespace TaksiSluzba.Controllers
             vozaci.Remove(d);
 
            // r.Id = r.Vozac +"_"+d.Voznje.Count;
-           r.Id = (sveVoznje.Count + korisnikKreiraoVoznju.Count).ToString(); 
-            r.DatumIVremePorudzbine = DateTime.Now;
+
 
             d.Voznje.Add(r);
             dispecer.Voznje.Add(r);
@@ -544,7 +551,7 @@ namespace TaksiSluzba.Controllers
             vozaci.Add(d);
 
             sveVoznje.Add(r);
-
+            WriteToXMl(ROLE.ADMIN);
             WriteAllRides();
 
             return Ok(dispecer);
@@ -726,7 +733,6 @@ namespace TaksiSluzba.Controllers
                     break;
                 }
             }
-
             return Ok(u);
         }
 
@@ -863,6 +869,372 @@ namespace TaksiSluzba.Controllers
                 return Ok(u);
             }
             return Ok("");
+        }
+
+        [HttpGet]
+        [Route("api/ahome/najblizi2")]
+        public IHttpActionResult Najblizi2([FromUri]string idVoznje)
+        {
+            List<Driver> slobodniVozaci = new List<Driver>();
+            Dictionary<string, double> udaljenosti = new Dictionary<string, double>();
+
+            Ride mm = sveVoznje.Find(l =>l.Id == idVoznje);
+            if (mm == null) {
+                mm = korisnikKreiraoVoznju.Find(l => l.Id == idVoznje);
+            }
+
+            Double x = Convert.ToDouble(mm.LokacijaPolazna.Xcoordinate);
+            Double y = Convert.ToDouble(mm.LokacijaPolazna.Ycoordinate);
+
+            foreach (Driver d in vozaci)
+            {
+                if (d.Blokiran == false)
+                {
+                    if (d.Slobodan == true) {
+                        if (d.Automobil.TipAutomobila == mm.TipVozila)
+                        {
+                            slobodniVozaci.Add(d);
+                        }
+                    }
+                }
+            }
+
+            foreach (Driver d in slobodniVozaci)
+            {
+                Double xx = Convert.ToDouble(d.Lokacija.Xcoordinate);
+                Double yy = Convert.ToDouble(d.Lokacija.Ycoordinate);
+                Double r = Math.Sqrt(Math.Pow((xx - x), 2) + Math.Pow((yy - y), 2));
+                udaljenosti.Add(d.Id, r);
+            }
+
+            udaljenosti = udaljenosti.OrderBy(o => o.Value).ToDictionary(k => k.Key, k => k.Value);
+
+            Dictionary<string, string> povratni = new Dictionary<string, string>();
+            int counter = 0;
+
+            foreach (string i in udaljenosti.Keys)
+            {
+                Driver d = slobodniVozaci.Find(D => D.Id == i);
+                povratni.Add(d.Id, d.UserName);
+                counter++;
+                if (counter == 5) break;
+            }
+
+            return Ok(povratni);
+        }
+
+        [HttpGet]
+        [Route("api/ahome/adminOpDodeli")]
+        public IHttpActionResult AdminOpDodeli([FromUri]string idVoznje,[FromUri] string vozac)
+        {
+            string[] pom = idVoznje.Split('/');
+            idVoznje = pom[0];
+
+            Driver d = vozaci.Find(dd=>dd.Id == vozac);
+            Ride r = sveVoznje.Find(rr => rr.Id == idVoznje);
+            Ride ar = r;
+            if (r == null)
+            {
+                vozaci.Remove(d);
+                r = korisnikKreiraoVoznju.Find(rr => rr.Id == idVoznje);
+                korisnikKreiraoVoznju.Remove(r);
+                r.Vozac = "";
+                r.VozacId = "";
+                r.Vozac = d.UserName;
+
+                r.VozacId = d.Id;
+                r.StatusVoznje = RideStatus.OBRADJENA;
+
+                //Nadji kod admina tu voznju i kod njega izmenj
+                User ad = new User();
+                ad.UserName = "";
+                foreach (User koris in admin)
+                {
+                    if (koris.Voznje.Exists(v => v.Id == idVoznje))
+                    {
+                        ad = koris;
+                        break;
+                    }
+                }
+                if (ad.UserName != "")
+                {
+                    admin.Remove(ad);
+                    Ride del = ad.Voznje.Find(ff => ff.Id == idVoznje);
+                    ad.Voznje.Remove(del);
+                    //ad.Voznje.Remove(ar);
+                    r.Dispatcher = ad.UserName;
+                    ad.Voznje.Add(r);
+                    admin.Add(ad);
+                    WriteToXMl(ROLE.ADMIN);
+                }
+                //
+
+                d.Voznje.Add(r);
+                korisnikKreiraoVoznju.Add(r);
+                vozaci.Add(d);          // ispisi i u xml-ovima 
+                WriteCustomerMadeRide();
+                WriteToXMl(ROLE.DRIVER);
+                return Ok(ad); // vrati izmenjenog admina i stavi ga u sesiju 
+            }
+            else {
+                sveVoznje.Remove(r);
+                vozaci.Remove(d);
+                r.Vozac = "";
+                r.VozacId = "";
+                r.Vozac = d.UserName;
+                r.VozacId = d.Id;
+                r.StatusVoznje = RideStatus.OBRADJENA;
+
+                //
+                User ad = new User();
+                ad.UserName = "";
+                foreach (User koris in admin)
+                {
+                    if (koris.Voznje.Exists(v => v.Id == idVoznje))
+                    {
+                        ad = koris;
+                        break;
+                    }
+                }
+                if (ad.UserName != "")
+                {
+                    admin.Remove(ad);
+                    // NADJI bas tu voznju i unisti je
+                    Ride del = ad.Voznje.Find(ff=>ff.Id==idVoznje);
+                    ad.Voznje.Remove(del);
+                    //ad.Voznje.Remove(ar);
+                    r.Dispatcher = ad.UserName;
+                    ad.Voznje.Add(r);
+                    admin.Add(ad);
+                    WriteToXMl(ROLE.ADMIN);
+                }
+                d.Voznje.Add(r);
+                vozaci.Add(d);
+                sveVoznje.Add(r);
+                WriteAllRides();
+                WriteToXMl(ROLE.DRIVER);
+                //
+                return Ok(ad);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("api/ahome/vozacMenjaUuPrihvacena")]
+        public IHttpActionResult VozacPrihvacena([FromUri]string idVoznje)
+        {// promeni kod korisnika admina vozaca 
+            User u = new Models.User();
+            User dispec = new User();
+            Driver vozac = new Driver();
+
+            Ride r = sveVoznje.Find(f=>f.Id == idVoznje);
+            if (r != null)
+            {
+                sveVoznje.Remove(r);
+                r.StatusVoznje = RideStatus.PRIHVACENA;
+                sveVoznje.Add(r);
+            }
+
+            r = korisnikKreiraoVoznju.Find(f => f.Id == idVoznje);
+            if (r != null)
+            {
+                korisnikKreiraoVoznju.Remove(r);
+                r.StatusVoznje = RideStatus.PRIHVACENA;
+                korisnikKreiraoVoznju.Add(r);
+            }
+
+            u = korisnici.Find(p => p.Voznje.Exists(pp => pp.Id == idVoznje));
+            if (u!=null)
+            {
+                korisnici.Remove(u);
+                r = u.Voznje.Find(p => p.Id == idVoznje);
+                u.Voznje.Remove(r);
+                r.StatusVoznje = RideStatus.PRIHVACENA;
+                u.Voznje.Add(r);
+                korisnici.Add(u);
+            }
+            // Nadjemo dispecera
+            dispec = admin.Find(p=>p.Voznje.Exists(pp=>pp.Id == idVoznje));
+            if (dispec!=null)
+            {
+                admin.Remove(dispec);
+                r = dispec.Voznje.Find(p => p.Id == idVoznje);
+                dispec.Voznje.Remove(r);
+                r.StatusVoznje = RideStatus.PRIHVACENA;
+                dispec.Voznje.Add(r);
+                admin.Add(dispec);
+            }
+
+            //nadjemo vozaca 
+            vozac = vozaci.Find(g=>g.Voznje.Exists(gg=>gg.Id == idVoznje));
+            if(vozac!=null)
+            {
+                vozaci.Remove(vozac);
+                r = vozac.Voznje.Find(p => p.Id == idVoznje);
+                vozac.Voznje.Remove(r);
+                r.StatusVoznje = RideStatus.PRIHVACENA;
+                vozac.Voznje.Add(r);
+                vozaci.Add(vozac);
+            }
+
+            // ISPISEMO U XML promene
+            WriteToXMl(ROLE.ADMIN);
+            WriteToXMl(ROLE.DRIVER);
+            WriteToXMl(ROLE.USER);
+            WriteAllRides();
+            WriteCustomerMadeRide();
+
+            return Ok(vozac);
+        }
+
+        [HttpGet]
+        [Route("api/ahome/vozacMenjaUuToku")]
+        public IHttpActionResult VozacUtoku([FromUri]string idVoznje)
+        {
+            User u = new Models.User();
+            User dispec = new User();
+            Driver vozac = new Driver();
+
+            Ride r = sveVoznje.Find(f => f.Id == idVoznje);
+            if (r != null)
+            {
+                sveVoznje.Remove(r);
+                r.StatusVoznje = RideStatus.U_TOKU;
+                sveVoznje.Add(r);
+            }
+
+            r = korisnikKreiraoVoznju.Find(f => f.Id == idVoznje);
+            if (r != null)
+            {
+                korisnikKreiraoVoznju.Remove(r);
+                r.StatusVoznje = RideStatus.U_TOKU;
+                korisnikKreiraoVoznju.Add(r);
+            }
+
+            u = korisnici.Find(p => p.Voznje.Exists(pp => pp.Id == idVoznje));
+            if (u!=null)
+            {
+                korisnici.Remove(u);
+                r = u.Voznje.Find(p => p.Id == idVoznje);
+                u.Voznje.Remove(r);
+                r.StatusVoznje = RideStatus.PRIHVACENA;
+                u.Voznje.Add(r);
+                korisnici.Add(u);
+            }
+
+            // Nadjemo dispecera
+            dispec = admin.Find(p => p.Voznje.Exists(pp => pp.Id == idVoznje));
+            if (dispec!=null)
+            {
+                admin.Remove(dispec);
+                r = dispec.Voznje.Find(p => p.Id == idVoznje);
+                dispec.Voznje.Remove(r);
+                r.StatusVoznje = RideStatus.U_TOKU;
+                dispec.Voznje.Add(r);
+                admin.Add(dispec);
+            }
+
+            //nadjemo vozaca 
+            vozac = vozaci.Find(g => g.Voznje.Exists(gg => gg.Id == idVoznje));
+            if (vozac!=null)
+            {
+                vozaci.Remove(vozac);
+                r = vozac.Voznje.Find(p => p.Id == idVoznje);
+                vozac.Voznje.Remove(r);
+                r.StatusVoznje = RideStatus.U_TOKU;
+                vozac.Voznje.Add(r);
+                vozaci.Add(vozac);
+            }
+
+            // ISPISEMO U XML promene
+            WriteToXMl(ROLE.ADMIN);
+            WriteToXMl(ROLE.DRIVER);
+            WriteToXMl(ROLE.USER);
+            WriteAllRides();
+            WriteCustomerMadeRide();
+
+            return Ok(vozac);
+        }
+
+        [HttpGet]
+        [Route("api/ahome/vozacMenjaUspesnaNeuspesna")]
+        public IHttpActionResult VozacUspesnaNeuspesna([FromUri]string s)
+        {
+            string []niz = s.Split('*');
+            string tip = niz[0];
+            string idVoznje = niz[1];
+            idVoznje = idVoznje.Trim(' ');
+            Ride pom = new Ride();
+
+            if (tip == "USPEH") { pom.StatusVoznje = RideStatus.USPESNA; }
+            else { pom.StatusVoznje = RideStatus.NEUSPESNA; }
+
+            //
+            User u = new Models.User();
+            User dispec = new User();
+            Driver vozac = new Driver();
+
+            Ride r = sveVoznje.Find(f => f.Id == idVoznje);
+            if (r != null)
+            {
+                sveVoznje.Remove(r);
+                r.StatusVoznje = pom.StatusVoznje;
+                sveVoznje.Add(r);
+            }
+
+            r = korisnikKreiraoVoznju.Find(f => f.Id == idVoznje);
+            if (r != null)
+            {
+                korisnikKreiraoVoznju.Remove(r);
+                r.StatusVoznje = pom.StatusVoznje;
+                korisnikKreiraoVoznju.Add(r);
+            }
+
+
+            u = korisnici.Find(p => p.Voznje.Exists(pp => pp.Id == idVoznje));
+            if (u!=null)
+            {
+                korisnici.Remove(u);
+                r = u.Voznje.Find(p => p.Id == idVoznje);
+                u.Voznje.Remove(r);
+                r.StatusVoznje = pom.StatusVoznje;
+                u.Voznje.Add(r);
+                korisnici.Add(u);
+            }
+            // Nadjemo dispecera
+            dispec = admin.Find(p => p.Voznje.Exists(pp => pp.Id == idVoznje));
+            if (dispec!=null)
+            {
+                admin.Remove(dispec);
+                r = dispec.Voznje.Find(p => p.Id == idVoznje);
+                dispec.Voznje.Remove(r);
+                r.StatusVoznje = pom.StatusVoznje;
+                dispec.Voznje.Add(r);
+                admin.Add(dispec);
+            }
+
+            //nadjemo vozaca 
+            vozac = vozaci.Find(g => g.Voznje.Exists(gg => gg.Id == idVoznje));
+            if (vozac!=null)
+            {
+                vozaci.Remove(vozac);
+                r = vozac.Voznje.Find(p => p.Id == idVoznje);
+                vozac.Voznje.Remove(r);
+                r.StatusVoznje = pom.StatusVoznje;
+                vozac.Voznje.Add(r);
+                vozaci.Add(vozac);
+            }
+
+            // ISPISEMO U XML promene
+            WriteToXMl(ROLE.ADMIN);
+            WriteToXMl(ROLE.DRIVER);
+            WriteToXMl(ROLE.USER);
+            WriteAllRides();
+            WriteCustomerMadeRide();
+
+            return Ok(vozac);
+            //
+
         }
 
         [HttpDelete]
