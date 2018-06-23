@@ -725,6 +725,7 @@ namespace TaksiSluzba.Controllers
             //Vratimo celog korisnika sa sve voznjom da bi imali sta da stavimo u session storage
             if (idVoznje == "" || idVoznje == null) { return Ok("Nepostojeci id"); }
             User u = new User();
+            Driver d = new Driver();
 
             foreach (User uu in korisnici)
             {
@@ -733,8 +734,36 @@ namespace TaksiSluzba.Controllers
                     break;
                 }
             }
+
+            if (u.UserName == null) {
+                foreach (User uu in admin)
+                {
+                    if (uu.Voznje.Exists(v => v.Id == idVoznje))
+                    {
+                        u = uu;
+                        break;
+                    }
+                }
+            }
+
+            if (u.UserName == null)
+            {
+                foreach (Driver uu in vozaci)
+                {
+                    if (uu.Voznje.Exists(v => v.Id == idVoznje))
+                    {
+                        d = uu;
+                        return Ok(d);
+                        //break;
+                    }
+
+                }
+            }
+
             return Ok(u);
         }
+
+
 
         [HttpGet]
         [Route("api/ahome/korisnikmenjakomentar")] // PROVERI KAO I KOD SVIH OSTALIH DA LI IMA I KOD ADMINA U LISTI 
@@ -925,10 +954,12 @@ namespace TaksiSluzba.Controllers
 
         [HttpGet]
         [Route("api/ahome/adminOpDodeli")]
-        public IHttpActionResult AdminOpDodeli([FromUri]string idVoznje,[FromUri] string vozac)
+        public IHttpActionResult AdminOpDodeli([FromUri]string idVoznje,[FromUri] string vozac,[FromUri] string dispId)
         {
             string[] pom = idVoznje.Split('/');
             idVoznje = pom[0];
+
+            User adm = admin.Find(kk=>kk.Id == dispId);
 
             Driver d = vozaci.Find(dd=>dd.Id == vozac);
             Ride r = sveVoznje.Find(rr => rr.Id == idVoznje);
@@ -944,7 +975,8 @@ namespace TaksiSluzba.Controllers
 
                 r.VozacId = d.Id;
                 r.StatusVoznje = RideStatus.OBRADJENA;
-
+                r.DispatcherId = dispId;
+                r.Dispatcher = adm.UserName;
                 //Nadji kod admina tu voznju i kod njega izmenj
                 User ad = new User();
                 ad.UserName = "";
@@ -960,21 +992,35 @@ namespace TaksiSluzba.Controllers
                 {
                     admin.Remove(ad);
                     Ride del = ad.Voznje.Find(ff => ff.Id == idVoznje);
+                    if (adm.Voznje.Contains(del)) { adm.Voznje.Remove(del); }
+                    admin.Remove(adm);
+                    ad.Voznje.Remove(del);
+                    r.Dispatcher = adm.UserName;
+                    ad.Voznje.Add(r);
+                    adm.Voznje.Add(r);
+                    admin.Add(ad);
+                    admin.Add(adm);
+                    WriteToXMl(ROLE.ADMIN);
+                }
+                else {
+                    ad = adm;
+                    admin.Remove(ad);
+                    // NADJI bas tu voznju i unisti je
+                    Ride del = ad.Voznje.Find(ff => ff.Id == idVoznje);
                     ad.Voznje.Remove(del);
                     //ad.Voznje.Remove(ar);
                     r.Dispatcher = ad.UserName;
                     ad.Voznje.Add(r);
-                    admin.Add(ad);
+                    admin.Add(adm);
                     WriteToXMl(ROLE.ADMIN);
                 }
                 //
-
                 d.Voznje.Add(r);
                 korisnikKreiraoVoznju.Add(r);
                 vozaci.Add(d);          // ispisi i u xml-ovima 
                 WriteCustomerMadeRide();
                 WriteToXMl(ROLE.DRIVER);
-                return Ok(ad); // vrati izmenjenog admina i stavi ga u sesiju 
+                return Ok(adm); // vrati izmenjenog admina i stavi ga u sesiju 
             }
             else {
                 sveVoznje.Remove(r);
@@ -1003,18 +1049,36 @@ namespace TaksiSluzba.Controllers
                     Ride del = ad.Voznje.Find(ff=>ff.Id==idVoznje);
                     ad.Voznje.Remove(del);
                     //ad.Voznje.Remove(ar);
-                    r.Dispatcher = ad.UserName;
+                    r.Dispatcher = adm.UserName;
                     ad.Voznje.Add(r);
                     admin.Add(ad);
                     WriteToXMl(ROLE.ADMIN);
                 }
+                if (ad == null)
+                {
+                    ad = adm;
+                    admin.Remove(ad);
+                    admin.Remove(adm);
+                    Ride del = ad.Voznje.Find(ff => ff.Id == idVoznje);
+                    if (adm.Voznje.Contains(del)) { adm.Voznje.Remove(del); }
+                    
+                    ad.Voznje.Remove(del);
+                    r.Dispatcher = ad.UserName;
+                    ad.Voznje.Add(r);
+                    admin.Add(ad);
+                    
+                    adm.Voznje.Add(r);
+                    admin.Add(adm);
+                    WriteToXMl(ROLE.ADMIN);
+                }
+
                 d.Voznje.Add(r);
                 vozaci.Add(d);
                 sveVoznje.Add(r);
                 WriteAllRides();
                 WriteToXMl(ROLE.DRIVER);
                 //
-                return Ok(ad);
+                return Ok(adm);
             }
 
         }
@@ -1244,6 +1308,27 @@ namespace TaksiSluzba.Controllers
 
         }
 
+        [HttpGet]
+        [Route("api/ahome/vratiSve")]
+        public IHttpActionResult vratiSve()
+        {
+            List<Ride> celokupno = new List<Ride>();
+            foreach (Ride r in sveVoznje)
+            {
+                celokupno.Add(r);
+            }
+
+            foreach (Ride r in korisnikKreiraoVoznju)
+            {
+                if (!celokupno.Contains(r))
+                {
+                    celokupno.Add(r);
+                }
+            }
+
+            return Ok(celokupno);
+        }
+
         [Route("api/ahome/vozacOdredisteCena")]
         public IHttpActionResult VozacOdredisteCena(Ride voznja)
         {
@@ -1325,6 +1410,25 @@ namespace TaksiSluzba.Controllers
             //
         }
 
+        [Route("api/ahome/datesort")]
+        public IHttpActionResult DateSort(VoznjeObj voznje) {
+            List<Ride> voznje1 = voznje.PoslateVoznje;
+
+            voznje1 = voznje1.OrderBy(X => X.DatumIVremePorudzbine).ToList();
+
+            return Ok(voznje1);
+        }
+
+        //gradeSort
+        [Route("api/ahome/gradeSort")]
+        public IHttpActionResult GradeSort(VoznjeObj voznje)
+        {
+            List<Ride> voznje1 = voznje.PoslateVoznje;
+
+            voznje1 = voznje1.OrderBy(X => X.Iznos).ToList();
+
+            return Ok(voznje1);
+        }
 
         [HttpDelete]
         [Route("api/ahome/logoutuser")]
@@ -1450,8 +1554,11 @@ namespace TaksiSluzba.Controllers
             }
         }
 
+
     }
 }
+/*toSend = toSend.OrderBy(X => X.VremePorudjbine).ToList();   toSend je lista voznje  */
+
 
 //svaki gumb za admina da se odradi
 //function ime i šta mu je stiglo 

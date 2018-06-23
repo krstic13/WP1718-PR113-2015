@@ -186,11 +186,13 @@
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\KorisnikPretraga.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Driver.cs" />
     <Compile Include="Models\Ride.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\VoznjeObj.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

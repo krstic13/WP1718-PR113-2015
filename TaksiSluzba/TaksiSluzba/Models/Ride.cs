@@ -14,6 +14,7 @@ namespace TaksiSluzba.Models
         public string MusterijaId { get; set; }
         public Location Odrediste { get; set; }
         public string Dispatcher { get; set; }
+        public string DispatcherId { get; set; }
         public string Vozac { get; set; }
         public string VozacId { get; set; }
         public double Iznos { get; set; }
@@ -25,7 +26,7 @@ namespace TaksiSluzba.Models
 
         public Ride()
         {
-
+            Iznos = 0;
         }
 
         public Ride(DateTime datumporudzbine, Location lokacija, string musterija, Location odrediste, string vozac, double iznos, Comment komentar, RideStatus statusVoznje, string dispatcher, CARTYPE tipvozila)
