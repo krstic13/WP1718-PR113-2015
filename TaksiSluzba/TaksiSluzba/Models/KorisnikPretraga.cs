@@ -11,8 +11,15 @@ namespace TaksiSluzba.Models
         public DateTime DoVreme { get; set; }
         public int OdOcena { get; set; }
         public int DoOcena { get; set; }
-        public int OdCena { get; set; }
-        public int DoCena { get; set; }
+        public double OdCena { get; set; }
+        public double DoCena { get; set; }
+        public int StatusVoznje { get; set; }
+        public List<Ride> voznje { get; set; }
+
+        public KorisnikPretraga()
+        {
+            voznje = new List<Ride>();
+        }
 
     }
 }

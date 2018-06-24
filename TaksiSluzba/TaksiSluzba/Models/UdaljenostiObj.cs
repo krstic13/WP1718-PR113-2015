@@ -5,14 +5,15 @@ using System.Web;
 
 namespace TaksiSluzba.Models
 {
-    public class VoznjeObj
+    public class UdaljenostiObj
     {
+        public Location TrentutnaLokacijaVozaca { get; set; }
         public List<Ride> PoslateVoznje { get; set; }
-        public int Status { get; set; }
 
-        public VoznjeObj()
+        public UdaljenostiObj()
         {
             PoslateVoznje = new List<Ride>();
+            TrentutnaLokacijaVozaca = new Location();
         }
     }
 }

@@ -51,7 +51,7 @@
         <Vozac>rajko</Vozac>
         <VozacId>6</VozacId>
         <Iznos>0</Iznos>
-        <StatusVoznje>OBRADJENA</StatusVoznje>
+        <StatusVoznje>KREIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>1</Id>
         <DATUMM>23-06-18  18:10:01</DATUMM>
@@ -95,7 +95,7 @@
         <Vozac>rajko</Vozac>
         <VozacId>6</VozacId>
         <Iznos>0</Iznos>
-        <StatusVoznje>PRIHVACENA</StatusVoznje>
+        <StatusVoznje>KREIRANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>1</Id>
         <DATUMM>23-06-18  18:10:01</DATUMM>

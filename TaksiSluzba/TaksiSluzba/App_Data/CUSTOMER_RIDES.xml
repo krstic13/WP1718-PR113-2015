@@ -11,13 +11,51 @@
       </Adresa>
     </LokacijaPolazna>
     <Musterija>kornfleks</Musterija>
-    <MusterijaId>6</MusterijaId>
+    <MusterijaId>4</MusterijaId>
     <Dispatcher>admin3</Dispatcher>
     <DispatcherId> 3 </DispatcherId>
     <Vozac>rajko</Vozac>
     <VozacId>6</VozacId>
     <Iznos>0</Iznos>
-    <StatusVoznje>PRIHVACENA</StatusVoznje>
+    <Komentar>
+      <Opis>SUper</Opis>
+      <DatumObjave>2018-06-24T18:51:53.1898228+02:00</DatumObjave>
+      <Objavljeno>24-06-18  18:51:53</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>1</IdVoznje>
+      <Ocena>3</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>1</Id>
+    <DATUMM>23-06-18  18:10:01</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-23T18:10:01.8874797Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.85063773831141</Xcoordinate>
+      <Ycoordinate>45.2457434298004</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>kornfleks</Musterija>
+    <MusterijaId>4</MusterijaId>
+    <Dispatcher>admin3</Dispatcher>
+    <DispatcherId> 3 </DispatcherId>
+    <Vozac>rajko</Vozac>
+    <VozacId>6</VozacId>
+    <Iznos>0</Iznos>
+    <Komentar>
+      <Opis>SUper</Opis>
+      <DatumObjave>2018-06-24T18:51:53.1898228+02:00</DatumObjave>
+      <Objavljeno>24-06-18  18:51:53</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>1</IdVoznje>
+      <Ocena>3</Ocena>
+    </Komentar>
+    <StatusVoznje>OTKAZANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>1</Id>
     <DATUMM>23-06-18  18:10:01</DATUMM>

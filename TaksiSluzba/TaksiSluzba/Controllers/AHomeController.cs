@@ -624,7 +624,7 @@ namespace TaksiSluzba.Controllers
 
         [HttpGet]
         [Route("api/ahome/korisnikpostavljakomentarnaponistenu")]//PROVERI DA LI IMA KOD ADMINA TE VOZNJE
-        public IHttpActionResult KorisnikKomentarisePoinistenu([FromUri]string idVoznje, [FromUri] string komentar,[FromUri]string ocena)
+        public IHttpActionResult KorisnikKomentarisePoinistenu([FromUri]string idVoznje, [FromUri] string komentar,[FromUri]int ocena)
         {
             //PROVERI DA LI IMA KOD ADMINA TE VOZNJE
 
@@ -763,11 +763,9 @@ namespace TaksiSluzba.Controllers
             return Ok(u);
         }
 
-
-
         [HttpGet]
         [Route("api/ahome/korisnikmenjakomentar")] // PROVERI KAO I KOD SVIH OSTALIH DA LI IMA I KOD ADMINA U LISTI 
-        public IHttpActionResult KorisnikMenjaKomentar([FromUri]string idVoznje, [FromUri] string komentar, [FromUri]string ocena) {
+        public IHttpActionResult KorisnikMenjaKomentar([FromUri]string idVoznje, [FromUri] string komentar, [FromUri]int ocena) {
             string[] nekiBroj = idVoznje.Split('/');
 
             idVoznje = nekiBroj[0];
@@ -1329,6 +1327,55 @@ namespace TaksiSluzba.Controllers
             return Ok(celokupno);
         }
 
+        [Route("api/ahome/statusSort")]
+        public IHttpActionResult statusSort(VoznjeObj voznje) {
+            List<Ride> voznjeRet = new List<Ride>();
+
+            string ss = voznje.Status.ToString();
+            char s = ss[0];
+
+            if (voznje.Status >= 0)
+            {
+                //{KREIRANA,FORMIRANA,OBRADJENA,PRIHVACENA,OTKAZANA,NEUSPESNA,USPESNA,U_TOKU}
+                RideStatus stat = RideStatus.KREIRANA;
+                switch (s) {
+                    case '0':
+                        stat = RideStatus.KREIRANA;
+                        break;
+                    case '1':
+                        stat = RideStatus.FORMIRANA;
+                        break;
+                    case '2':
+                        stat = RideStatus.OBRADJENA;
+                        break;
+                    case '3':
+                        stat = RideStatus.PRIHVACENA;
+                        break;
+                    case '4':
+                        stat = RideStatus.OTKAZANA;
+                        break;
+                    case '5':
+                        stat = RideStatus.NEUSPESNA;
+                        break;
+                    case '6':
+                        stat = RideStatus.USPESNA;
+                        break;
+                    case '7':
+                        stat = RideStatus.U_TOKU;
+                        break;
+                }
+
+                foreach (Ride r in voznje.PoslateVoznje)
+                {
+                    if (r.StatusVoznje == stat) {
+                        voznjeRet.Add(r);
+                    }
+                }
+            }
+
+            return Ok(voznjeRet);
+        }
+
         [Route("api/ahome/vozacOdredisteCena")]
         public IHttpActionResult VozacOdredisteCena(Ride voznja)
         {
@@ -1418,8 +1465,7 @@ namespace TaksiSluzba.Controllers
 
             return Ok(voznje1);
         }
-
-        //gradeSort
+   
         [Route("api/ahome/gradeSort")]
         public IHttpActionResult GradeSort(VoznjeObj voznje)
         {
@@ -1428,6 +1474,104 @@ namespace TaksiSluzba.Controllers
             voznje1 = voznje1.OrderBy(X => X.Iznos).ToList();
 
             return Ok(voznje1);
+        }
+
+        [Route("api/ahome/voznjeNaCekanju")]
+        public IHttpActionResult voznjeNaCekanju(VoznjeObj voznje) {
+            List<Ride> ret = new List<Ride>();
+
+            foreach (Ride r in voznje.PoslateVoznje)
+            {
+                if (r.StatusVoznje == RideStatus.KREIRANA)
+                {
+                    ret.Add(r);                }
+            }
+
+            return Ok(ret);
+        }
+
+        [Route("api/ahome/lengthSort")]
+        public IHttpActionResult lengthSort(UdaljenostiObj objekat) {
+            List<Ride> povratni = new List<Ride>();
+            Dictionary<string, double> udaljenosti = new Dictionary<string, double>();
+            Double x = Convert.ToDouble(objekat.TrentutnaLokacijaVozaca.Xcoordinate);
+            Double y = Convert.ToDouble(objekat.TrentutnaLokacijaVozaca.Ycoordinate);
+
+            foreach (Ride d in objekat.PoslateVoznje)
+            {
+                Double xx = Convert.ToDouble(d.LokacijaPolazna.Xcoordinate);
+                Double yy = Convert.ToDouble(d.LokacijaPolazna.Ycoordinate);
+                // Double r = Math.Sqrt(Math.Pow((xx - yy), 2) + Math.Pow((x - y), 2));
+                Double r = Math.Sqrt(Math.Pow((xx - x), 2) + Math.Pow((yy - y), 2));
+                udaljenosti.Add(d.Id, r);
+            }
+
+            udaljenosti = udaljenosti.OrderBy(o => o.Value).ToDictionary(k => k.Key, k => k.Value);
+
+            foreach (string id in udaljenosti.Keys)
+            {
+                Ride p = objekat.PoslateVoznje.Find(o=>o.Id == id);
+                povratni.Add(p);
+            }
+
+            //Dictionary<string, string> povratni = new Dictionary<string, string>();
+
+            return Ok(povratni);
+        }
+
+        [Route("api/ahome/KorisnikPretraga")]
+        public IHttpActionResult KorisnikPretraga(KorisnikPretraga objekat) {
+
+            List<Ride> pretrazeno = new List<Ride>();
+
+            foreach (Ride r in objekat.voznje) {
+                int help = DateTime.Compare(r.DatumIVremePorudzbine,objekat.OdVreme);
+                if (help >=0) { pretrazeno.Add(r); }
+            }
+
+            foreach (Ride r in objekat.voznje)
+            {
+                int help = DateTime.Compare(r.DatumIVremePorudzbine, objekat.DoVreme);
+                if (help < 0) { pretrazeno.Add(r); }
+            }
+
+            if (objekat.StatusVoznje >= 0) {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.StatusVoznje.ToString() != objekat.StatusVoznje.ToString()) { pretrazeno.Remove(r); }
+                }
+            }
+
+            if (objekat.DoCena != 0)
+            {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Iznos < objekat.OdCena || r.Iznos > objekat.DoCena) { pretrazeno.Remove(r); }
+                }
+            }
+            else {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Iznos < objekat.OdCena) { pretrazeno.Remove(r); }
+                }
+            }
+
+            if (objekat.DoOcena != 0)
+            {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Komentar.Ocena < objekat.OdOcena || r.Komentar.Ocena > objekat.DoOcena) { pretrazeno.Remove(r); }
+                }
+            }
+            else {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Komentar.Ocena < objekat.OdOcena) { pretrazeno.Remove(r); }
+                }
+            }
+
+
+            return Ok(pretrazeno);
         }
 
         [HttpDelete]

@@ -25,7 +25,15 @@
         <Musterija>kornfleks</Musterija>
         <MusterijaId>6</MusterijaId>
         <Iznos>0</Iznos>
-        <StatusVoznje>PRIHVACENA</StatusVoznje>
+        <Komentar>
+          <Opis>SUper</Opis>
+          <DatumObjave>2018-06-24T18:51:53.1988233+02:00</DatumObjave>
+          <Objavljeno>24-06-18  18:51:53</Objavljeno>
+          <KorisnikKojiJeOstavioKomentar>kornfleks</KorisnikKojiJeOstavioKomentar>
+          <IdVoznje>1</IdVoznje>
+          <Ocena>3</Ocena>
+        </Komentar>
+        <StatusVoznje>OTKAZANA</StatusVoznje>
         <TipVozila>putnicki</TipVozila>
         <Id>1</Id>
         <DATUMM>23-06-18  18:10:01</DATUMM>
