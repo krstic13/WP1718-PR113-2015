@@ -37,7 +37,7 @@
             map += "map.on('dblclick', function (evt) {var coord = ol.proj.toLonLat(evt.coordinate); reverseGeocode(coord);";
             map += " xx = coord[0]; yy = coord[1];});";
             map += "<\/script>";
-            //
+           
 
             if (sessionStorage.getItem("trenutniPrikaz") != null) {
                 $("#PageContent").html(sessionStorage.getItem("trenutniPrikaz"));
@@ -1655,7 +1655,7 @@
                 //
                 if (Id != null) {
                    // var objekatSlanje = { idVoznje: idVoznje1 };
-                    if (stat == "OBRADJENA" || stat=="FORMIRANA") {
+                    if (stat == "OBRADJENA" || stat == "FORMIRANA" || stat == "KREIRANA"  ) {
                         // PROMENI STANJE U PRIHVACENA
                         //var UserView = "Stanje voznje je sada prihvacena";
                         $.get("/api/ahome/vozacMenjaUuPrihvacena", Id, function (data, status) {
@@ -1915,7 +1915,7 @@
                 var trenutnoUlogovan = JSON.parse(sessionStorage.getItem("ulogovaniKorisnik"));
 
                 var odv = $("#startdateSort").val();
-                if (odv == "") { odv = null; }
+                if (odv == "" || odv ==null) { odv = null; }
 
                 var dov = $("#enddateSort").val();
                 if (dov == "") { dov = null; }
@@ -1931,7 +1931,7 @@
                     OdCena: $("#CenaMin").val(),
                     DoCena: $("#CenaMax").val(),
                     StatusVoznje: status,
-                    voznje: (JSON.parse(sessionStorage.getItem("trenutneVoznje")))
+                    voznje: { PoslateVoznje:(JSON.parse(sessionStorage.getItem("trenutneVoznje")))} 
                 };
 
                 $.post("/api/ahome/KorisnikPretraga", objekat, function (data, status) {
@@ -1970,7 +1970,12 @@
                     // UserView += "   <tr> <td> " + data.Voznje[v] + " </td> <td>" + data.Voznje[v].Odrediste + " </td> <td>" + data.Voznje[v].Musterija + "  </td > <td> " + data.Voznje[v].Name + " " + data.Voznje[v].Vozac + "</td> <td>" + data.Voznje[v].Dispatcher + "</td> <td>" + data.Voznje[v].StatusVoznje + " </td> <td> <input type=\"submit\" value=\"Izmeni\" id=\"izmenivoznju\" /> </td> <td> <input type=\"submit\" value=\"Pregledaj\" id=\"pregledajvoznju\" /> </td>  </tr > ";
                     UserView += "<tr> <td> " + voznjeZaPrikaz[v].LokacijaPolazna.Adresa.UlicaBroj + " " + voznjeZaPrikaz[v].LokacijaPolazna.Adresa.MestoPostanski + " </td>";
                     if (voznjeZaPrikaz[v].Odrediste == null) { UserView += "<td>" + "" + "</td>"; }
-                    else { UserView += "<td>" + voznjeZaPrikaz[v].Odrediste + " </td> " }
+                    else {
+                        if (voznjeZaPrikaz[v].Odrediste.Adresa.UlicaBroj != null) { UserView += "<td>" + voznjeZaPrikaz[v].Odrediste.Adresa.UlicaBroj + " "; }
+                        else { UserView += "<td>"; }
+                        if (voznjeZaPrikaz[v].Odrediste.Adresa.MestoPostanski != null) { UserView +=  voznjeZaPrikaz[v].Odrediste.Adresa.MestoPostanski + "</td>"; }
+                        else { UserView += "</td>"; }
+                    }
 
                     UserView += "<td>" + voznjeZaPrikaz[v].Musterija + "  </td >";
 
@@ -2028,12 +2033,13 @@
 
                 UserView += "    <br/> Unesite kriterijume pretrage <br/> ";
 
-                UserView += "Početni datum: <input id=\"startdateSort\" type=\"date\" /> <br />";
-                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"date\" /> <br />";
+                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime-local\" /> <br />";
+                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime-local\" /> <br />";
 
                 UserView += "     Minimalna ocena: &nbsp;&nbsp;&nbsp;&nbsp;  ";
 
                 UserView += "   <select name=\"OceneMin\" id=\"OceneMin\"  size=\"1\">";
+                UserView += "        <option value=\"-1\"> </option>";
                 UserView += "        <option value=\"0\">0</option>";
                 UserView += "        <option value=\"1\">1</option>";
                 UserView += "        <option value=\"2\">2</option>";
@@ -2045,6 +2051,7 @@
                 UserView += "     Maksimalna ocena: &nbsp;&nbsp;   ";
 
                 UserView += "    <select name=\"OceneMax\" id=\"OceneMax\" size=\"1\">";
+                UserView += "        <option value=\"-1\"> </option>";
                 UserView += "        <option value=\"0\">0</option>";
                 UserView += "         <option value=\"1\">1</option>";
                 UserView += "        <option value=\"2\">2</option>";
@@ -2082,6 +2089,8 @@
 
                 $("#Greske").empty();
                 $("#AllGood").empty();
+
+                sessionStorage.setItem("trenutneVoznje", JSON.stringify(voznjeZaPrikaz));
 
                 UserMenu = "<table align=\"center\">";
                 UserMenu += "  <tr> ";
@@ -2179,12 +2188,13 @@
 
                 UserView += "    <br/> Unesite kriterijume pretrage <br/> ";
 
-                UserView += "Početni datum: <input id=\"startdateSort\" type=\"date\" /> <br />";
-                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"date\" /> <br />";
+                UserView += "Početni datum: <input id=\"startdateSort\" type=\"datetime-local\" /> <br />";
+                UserView += "Krajnji datum: &nbsp;<input id=\"enddateSort\" type=\"datetime-local\" /> <br />";
 
                 UserView += "     Minimalna ocena: &nbsp;&nbsp;&nbsp;&nbsp;  ";
 
                 UserView += "   <select name=\"OceneMin\" id=\"OceneMin\" size=\"1\">";
+                UserView += "        <option value=\"-1\"> </option>";
                 UserView += "        <option value=\"0\">0</option>";
                 UserView += "        <option value=\"1\">1</option>";
                 UserView += "        <option value=\"2\">2</option>";
@@ -2196,6 +2206,7 @@
                 UserView += "     Maksimalna ocena: &nbsp;&nbsp;   ";
 
                 UserView += "    <select name=\"OceneMax\" id=\"OceneMax\" size=\"1\">";
+                UserView += "        <option value=\"-1\"> </option>";
                 UserView += "        <option value=\"0\">0</option>";
                 UserView += "         <option value=\"1\">1</option>";
                 UserView += "        <option value=\"2\">2</option>";
@@ -2216,6 +2227,8 @@
             }
 
             function adminView(voznjeZaPrikaz) {
+
+                sessionStorage.setItem("trenutneVoznje", JSON.stringify(voznjeZaPrikaz));
 
                 UserView = " <br/> ";
                 UserView += "<input type=\"submit\" value=\"Prikazi sve voznje\" id=\"prikazSvihVoznji\"/>";
@@ -2282,7 +2295,8 @@
                 }
                 UserView += "    </table>";
                 UserView += " <p> Pretraga po statusu </p>";
-                UserView += "<select name=\"vrsteVoznji\" size=\"1\">";
+                UserView += "<select name=\"vrsteVoznji\" id=\"vrsteVoznji\" size=\"1\">";
+                UserView += "   <option value=\"-1\"></option>";
                 UserView += "   <option value=\"0\">KREIRANA</option>";
                 UserView += "    <option value=\"1\">FORMIRANA</option>";
                 UserView += "    <option value=\"2\">OBRADJENA</option>";
@@ -2303,7 +2317,8 @@
 
                 UserView += "     Minimalna ocena: &nbsp;&nbsp;&nbsp;&nbsp;  ";
 
-                UserView += "   <select name=\"OceneMin\" size=\"1\">";
+                UserView += "   <select id=\"OceneMin\" name=\"OceneMin\" size=\"1\">";
+                UserView += "   <option value=\"-1\"></option>";
                 UserView += "        <option value=\"0\">0</option>";
                 UserView += "        <option value=\"1\">1</option>";
                 UserView += "        <option value=\"2\">2</option>";
@@ -2314,7 +2329,8 @@
 
                 UserView += "     Maksimalna ocena: &nbsp;&nbsp;   ";
 
-                UserView += "    <select name=\"OceneMax\" size=\"1\">";
+                UserView += "    <select name=\"OceneMax\" id=\"OceneMax\" size=\"1\">";
+                UserView += "   <option value=\"-1\"></option>";
                 UserView += "        <option value=\"0\">0</option>";
                 UserView += "         <option value=\"1\">1</option>";
                 UserView += "        <option value=\"2\">2</option>";
@@ -2323,8 +2339,8 @@
                 UserView += "        <option value=\"5\">5</option>";
                 UserView += "    </select> <br/>";
 
-                UserView += "    Minimalna cena: &nbsp;&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
-                UserView += "    Maksimalna cena:&nbsp; <input type=\"text\" id=\"searchByDate\" /> <br />";
+                UserView += "    Minimalna cena: &nbsp;&nbsp; <input type=\"text\" id=\"CenaMin\" /> <br />";
+                UserView += "    Maksimalna cena:&nbsp; <input type=\"text\" id=\"CenaMax\" /> <br />";
 
                 UserView += " <br/>Ime korisnika: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
                 UserView += "<input type=\"text\" id=\"imeZaPretragu\" />";
@@ -2482,7 +2498,9 @@
                 if (dov == "") { dov = null; }
 
                 var status = $("#vrsteVoznji").val();
-                if (status < 0) { status = -1; }
+                if (status < 0 || status == "") { status = -1; }
+
+                var status = $("#vrsteVoznji").val();
 
                 var objekat = {
                     OdVreme: odv,
@@ -2492,7 +2510,7 @@
                     OdCena: $("#CenaMin").val(),
                     DoCena: $("#CenaMax").val(),
                     StatusVoznje: status,
-                    voznje: (JSON.parse(sessionStorage.getItem("trenutneVoznje"))),
+                    voznje: { PoslateVoznje: (JSON.parse(sessionStorage.getItem("trenutneVoznje"))) } ,
                     ImeMusterije: $("#imeZaPretragu").val(),
                     PrezimeMusterije: $("#prezimeZaPretragu").val(),
                     ImeVozaca: $("#vimeZaPretragu").val(),
@@ -2503,14 +2521,11 @@
                     if (data == null) { }
                     else {
                         sessionStorage.setItem("trenutneVoznje", JSON.stringify(data));
-                        if (trenutnoUlogovan.Status == 0) {
-                            korisnikView(data);
+                        if (trenutnoUlogovan.Uloga == 2) {
+                            adminView(data);
                             $("#AllGood").html("Pretraga obavljena");
-                        } else {
-                            vozacView(data);
-                            $("#AllGood").html("Pretraga obavljena");
-                        }
 
+                        }
                     }
                 });
             });

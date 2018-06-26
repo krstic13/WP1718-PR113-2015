@@ -1597,11 +1597,18 @@ namespace TaksiSluzba.Controllers
         public IHttpActionResult voznjeNaCekanju(VoznjeObj voznje) {
             List<Ride> ret = new List<Ride>();
 
-            foreach (Ride r in voznje.PoslateVoznje)
+            foreach (Ride r in korisnikKreiraoVoznju)
             {
                 if (r.StatusVoznje == RideStatus.KREIRANA)
                 {
                     ret.Add(r);                }
+            }
+
+            foreach (Ride r in sveVoznje) {
+                if (r.StatusVoznje == RideStatus.KREIRANA)
+                {if(!ret.Contains(r))
+                    ret.Add(r);
+                }
             }
 
             return Ok(ret);
@@ -1638,59 +1645,167 @@ namespace TaksiSluzba.Controllers
 
         //AdminPretraga
         [Route("api/ahome/AdminPretraga")]
-        public IHttpActionResult AdminPretraga(AdminSearchObj objekat) {
-
+        public IHttpActionResult AdminPretraga(AdminSearchObj objekat)
+        {
             List<Ride> pretrazeno = new List<Ride>();
-            foreach (Ride r in objekat.voznje)
+            List<Ride> result1 = new List<Ride>();
+            List<Ride> result2 = new List<Ride>();
+            List<Ride> result3 = new List<Ride>();
+            List<Ride> result4 = new List<Ride>();
+            List<Ride> result5 = new List<Ride>();
+            DateTime vremeOd = DateTime.Now;
+            DateTime vremeDo = DateTime.Now;
+
+
+            if (objekat.OdVreme != null)
             {
-                int help = DateTime.Compare(r.DatumIVremePorudzbine, objekat.OdVreme);
-                if (help >= 0) { pretrazeno.Add(r); }
+                vremeOd = DateTime.ParseExact(objekat.OdVreme, "yyyy-MM-ddTHH:mm", System.Globalization.CultureInfo.InvariantCulture);
+            }
+            if (objekat.DoVreme != null)
+            { vremeDo = DateTime.ParseExact(objekat.DoVreme, "yyyy-MM-ddTHH:mm", System.Globalization.CultureInfo.InvariantCulture); }
+
+            if (objekat.DoVreme != null && objekat.OdVreme != null)
+            {
+                foreach (Ride r in objekat.voznje.PoslateVoznje)
+                {
+                    int help = DateTime.Compare(r.DatumIVremePorudzbine, vremeOd);
+                    int help1 = DateTime.Compare(r.DatumIVremePorudzbine, vremeDo);
+                    if (help >= 0 && help1 <= 0) { pretrazeno.Add(r); }
+                }
+            }
+            else if (objekat.DoVreme != null)
+            {
+                foreach (Ride r in objekat.voznje.PoslateVoznje)
+                {
+                    int help1 = DateTime.Compare(r.DatumIVremePorudzbine, vremeDo);
+                    if (help1 <= 0)
+                    {
+                        pretrazeno.Add(r);
+                    }
+                }
+            }
+            else if (objekat.OdVreme != null)
+            {
+                foreach (Ride r in objekat.voznje.PoslateVoznje)
+                {
+                    int help1 = DateTime.Compare(r.DatumIVremePorudzbine, vremeOd);
+                    if (help1 >= 0)
+                    {
+                        pretrazeno.Add(r);
+                    }
+                }
+            }
+            else
+            {
+                pretrazeno = objekat.voznje.PoslateVoznje;
             }
 
-            foreach (Ride r in objekat.voznje)
+            if (objekat.DoCena != null)
             {
-                int help = DateTime.Compare(r.DatumIVremePorudzbine, objekat.DoVreme);
-                if (help < 0) { pretrazeno.Add(r); }
+
+                int doCena = Int32.Parse(objekat.DoCena);
+                if (doCena < 0) { return Ok("Cena ne sme biti negativna"); }
+
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Iznos <= doCena)
+                    {
+                        result1.Add(r);
+                    }
+                }
+                pretrazeno = result1;
             }
 
+            if (objekat.OdCena != null)
+            {
+                int odCena = Int32.Parse(objekat.OdCena);
+                if (odCena < 0) { return Ok("Cena ne sme biti negativna"); }
+
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Iznos >= odCena)
+                    {
+                        result2.Add(r);
+                    }
+                }
+                pretrazeno = result2;
+            }
+
+            if (objekat.DoOcena != null && objekat.DoOcena != "-1")
+            {
+                int doOcena = Int32.Parse(objekat.DoOcena);
+                if (doOcena >= 0)
+                {
+                    foreach (Ride r in pretrazeno)
+                    {
+                        if (r.Komentar.Ocena <= doOcena)
+                        {
+                            result3.Add(r);
+                        }
+                    }
+                }
+                pretrazeno = result3;
+            }
+
+            if (objekat.OdOcena != null && objekat.OdOcena != "-1")
+            {
+
+                int odOcena = Int32.Parse(objekat.OdOcena);
+                if (odOcena >= 0)
+                {
+                    foreach (Ride r in pretrazeno)
+                    {
+                        if (r.Komentar.Ocena >= odOcena)
+                        {
+                            result4.Add(r);
+                        }
+                    }
+                }
+                pretrazeno = result4;
+            }
+
+            RideStatus stat = RideStatus.FORMIRANA;
             if (objekat.StatusVoznje >= 0)
             {
+                switch (objekat.StatusVoznje)
+                {
+                    case 0:
+                        stat = RideStatus.KREIRANA;
+                        break;
+                    case 1:
+                        stat = RideStatus.FORMIRANA;
+                        break;
+                    case 2:
+                        stat = RideStatus.OBRADJENA;
+                        break;
+                    case 3:
+                        stat = RideStatus.PRIHVACENA;
+                        break;
+                    case 4:
+                        stat = RideStatus.OTKAZANA;
+                        break;
+                    case 5:
+                        stat = RideStatus.NEUSPESNA;
+                        break;
+                    case 6:
+                        stat = RideStatus.USPESNA;
+                        break;
+                    case 7:
+                        stat = RideStatus.U_TOKU;
+                        break;
+                }
+
                 foreach (Ride r in pretrazeno)
                 {
-                    if (r.StatusVoznje.ToString() != objekat.StatusVoznje.ToString()) { pretrazeno.Remove(r); }
+                    if (r.StatusVoznje == stat)
+                    {
+                        result5.Add(r);
+                    }
                 }
+                pretrazeno = result5;
             }
 
-            if (objekat.DoCena != 0)
-            {
-                foreach (Ride r in pretrazeno)
-                {
-                    if (r.Iznos < objekat.OdCena || r.Iznos > objekat.DoCena) { pretrazeno.Remove(r); }
-                }
-            }
-            else
-            {
-                foreach (Ride r in pretrazeno)
-                {
-                    if (r.Iznos < objekat.OdCena) { pretrazeno.Remove(r); }
-                }
-            }
-
-            if (objekat.DoOcena != 0)
-            {
-                foreach (Ride r in pretrazeno)
-                {
-                    if (r.Komentar.Ocena < objekat.OdOcena || r.Komentar.Ocena > objekat.DoOcena) { pretrazeno.Remove(r); }
-                }
-            }
-            else
-            {
-                foreach (Ride r in pretrazeno)
-                {
-                    if (r.Komentar.Ocena < objekat.OdOcena) { pretrazeno.Remove(r); }
-                }
-            }
-
+            // proverimo sad ime da li je uneto
 
             // MORA KOMPLEKSNIJA PRETRAGA
             // JER IME KOJE SE CUVA U VOZNJI ZAPRAVO PRETSTAVLJA KORISNICKO IME 
@@ -1700,59 +1815,163 @@ namespace TaksiSluzba.Controllers
 
 
             return Ok(pretrazeno);
-        }
 
+        }
         [Route("api/ahome/KorisnikPretraga")]
         public IHttpActionResult KorisnikPretraga(KorisnikPretraga objekat) {
 
             List<Ride> pretrazeno = new List<Ride>();
+            List<Ride> result1 = new List<Ride>();
+            List<Ride> result2 = new List<Ride>();
+            List<Ride> result3 = new List<Ride>();
+            List<Ride> result4 = new List<Ride>();
+            List<Ride> result5 = new List<Ride>();
+            DateTime vremeOd = DateTime.Now;
+            DateTime vremeDo = DateTime.Now;
 
-            foreach (Ride r in objekat.voznje) {
-                int help = DateTime.Compare(r.DatumIVremePorudzbine,objekat.OdVreme);
-                if (help >=0) { pretrazeno.Add(r); }
+
+            if (objekat.OdVreme != null) {
+                 vremeOd = DateTime.ParseExact(objekat.OdVreme, "yyyy-MM-ddTHH:mm", System.Globalization.CultureInfo.InvariantCulture);
             }
+            if (objekat.DoVreme != null)
+            {  vremeDo = DateTime.ParseExact(objekat.DoVreme, "yyyy-MM-ddTHH:mm", System.Globalization.CultureInfo.InvariantCulture); }
 
-            foreach (Ride r in objekat.voznje)
+            if (objekat.DoVreme != null && objekat.OdVreme != null)
             {
-                int help = DateTime.Compare(r.DatumIVremePorudzbine, objekat.DoVreme);
-                if (help < 0) { pretrazeno.Add(r); }
+                foreach (Ride r in objekat.voznje.PoslateVoznje)
+                {
+                    int help = DateTime.Compare(r.DatumIVremePorudzbine, vremeOd);
+                    int help1 = DateTime.Compare(r.DatumIVremePorudzbine, vremeDo);
+                    if (help >= 0 && help1 <= 0) { pretrazeno.Add(r); }
+                }
+            }
+            else if (objekat.DoVreme != null)
+            {
+                foreach (Ride r in objekat.voznje.PoslateVoznje)
+                {
+                    int help1 = DateTime.Compare(r.DatumIVremePorudzbine, vremeDo);
+                    if (help1 <= 0)
+                    {
+                        pretrazeno.Add(r);
+                    }
+                }
+            }
+            else if (objekat.OdVreme != null)
+            {
+                foreach (Ride r in objekat.voznje.PoslateVoznje)
+                {
+                    int help1 = DateTime.Compare(r.DatumIVremePorudzbine, vremeOd);
+                    if (help1 >= 0)
+                    {
+                        pretrazeno.Add(r);
+                    }
+                }
+            }
+            else {
+                pretrazeno = objekat.voznje.PoslateVoznje; 
             }
 
+            if (objekat.DoCena != null)
+            {
+
+                int doCena = Int32.Parse(objekat.DoCena);
+                if (doCena < 0) { return Ok("Cena ne sme biti negativna"); }
+
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Iznos <= doCena)
+                    {
+                        result1.Add(r);
+                    }
+                }
+                pretrazeno = result1;
+            }
+
+            if (objekat.OdCena != null) {
+                int odCena = Int32.Parse(objekat.OdCena);
+                if (odCena < 0) { return Ok("Cena ne sme biti negativna"); }
+
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Iznos >= odCena)
+                    {
+                        result2.Add(r);
+                    }
+                }
+                pretrazeno = result2;
+            }
+
+            if (objekat.DoOcena != null && objekat.DoOcena != "-1") {
+                int doOcena = Int32.Parse(objekat.DoOcena);
+                if (doOcena >= 0)
+                {
+                    foreach (Ride r in pretrazeno)
+                    {
+                        if (r.Komentar.Ocena <= doOcena)
+                        {
+                            result3.Add(r);
+                        }
+                    }
+                }
+                pretrazeno = result3;
+            }
+
+            if (objekat.OdOcena != null && objekat.OdOcena != "-1") {
+
+                int odOcena = Int32.Parse(objekat.OdOcena);
+                if (odOcena >= 0)
+                {
+                    foreach (Ride r in pretrazeno)
+                    {
+                        if (r.Komentar.Ocena >= odOcena)
+                        {
+                            result4.Add(r);
+                        }
+                    }
+                }
+                pretrazeno = result4;
+            }
+           
+            RideStatus stat = RideStatus.FORMIRANA;
             if (objekat.StatusVoznje >= 0) {
-                foreach (Ride r in pretrazeno)
+                switch (objekat.StatusVoznje)
                 {
-                    if (r.StatusVoznje.ToString() != objekat.StatusVoznje.ToString()) { pretrazeno.Remove(r); }
+                    case 0:
+                        stat = RideStatus.KREIRANA;
+                        break;
+                    case 1:
+                        stat = RideStatus.FORMIRANA;
+                        break;
+                    case 2:
+                        stat = RideStatus.OBRADJENA;
+                        break;
+                    case 3:
+                        stat = RideStatus.PRIHVACENA;
+                        break;
+                    case 4:
+                        stat = RideStatus.OTKAZANA;
+                        break;
+                    case 5:
+                        stat = RideStatus.NEUSPESNA;
+                        break;
+                    case 6:
+                        stat = RideStatus.USPESNA;
+                        break;
+                    case 7:
+                        stat = RideStatus.U_TOKU;
+                        break;
                 }
+            
+                foreach (Ride r in pretrazeno) {
+                    if (r.StatusVoznje == stat) {
+                        result5.Add(r);
+                    }
+                }
+                pretrazeno = result5;
             }
+            
 
-            if (objekat.DoCena != 0)
-            {
-                foreach (Ride r in pretrazeno)
-                {
-                    if (r.Iznos < objekat.OdCena || r.Iznos > objekat.DoCena) { pretrazeno.Remove(r); }
-                }
-            }
-            else {
-                foreach (Ride r in pretrazeno)
-                {
-                    if (r.Iznos < objekat.OdCena) { pretrazeno.Remove(r); }
-                }
-            }
-
-            if (objekat.DoOcena != 0)
-            {
-                foreach (Ride r in pretrazeno)
-                {
-                    if (r.Komentar.Ocena < objekat.OdOcena || r.Komentar.Ocena > objekat.DoOcena) { pretrazeno.Remove(r); }
-                }
-            }
-            else {
-                foreach (Ride r in pretrazeno)
-                {
-                    if (r.Komentar.Ocena < objekat.OdOcena) { pretrazeno.Remove(r); }
-                }
-            }
-
+           // foreach
 
             return Ok(pretrazeno);
         }

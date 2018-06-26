@@ -30,4 +30,22 @@
     <Id>1</Id>
     <DATUMM>26-06-18  17:41:18</DATUMM>
   </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-26T18:50:15.5729588Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.84434192732279</Xcoordinate>
+      <Ycoordinate>45.243821708873895</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Blagoja Parovica 9</UlicaBroj>
+        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>caki</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>7</Id>
+    <DATUMM>26-06-18  18:50:15</DATUMM>
+  </Ride>
 </ArrayOfRide>

@@ -7,18 +7,18 @@ namespace TaksiSluzba.Models
 {
     public class KorisnikPretraga
     {
-        public DateTime OdVreme { get; set; }
-        public DateTime DoVreme { get; set; }
-        public int OdOcena { get; set; }
-        public int DoOcena { get; set; }
-        public double OdCena { get; set; }
-        public double DoCena { get; set; }
+        public string OdVreme { get; set; }
+        public string DoVreme { get; set; }
+        public string OdOcena { get; set; }
+        public string DoOcena { get; set; }
+        public string OdCena { get; set; }
+        public string DoCena { get; set; }
         public int StatusVoznje { get; set; }
-        public List<Ride> voznje { get; set; }
+        public VoznjeObj voznje { get; set; }
 
         public KorisnikPretraga()
         {
-            voznje = new List<Ride>();
+            //voznje = new List<Ride>();
         }
 
     }
