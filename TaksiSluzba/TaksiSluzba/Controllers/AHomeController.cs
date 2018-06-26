@@ -160,13 +160,23 @@ namespace TaksiSluzba.Controllers
             {
                 return Ok("Error occured");
             }
-
+            u.Id = pomocni.Id;
             if (korisnici.Exists(k => k.UserName == u.UserName) || admin.Exists(a => a.UserName == u.UserName) || vozaci.Exists(v => v.UserName == u.UserName))
             {
                 korisnici.Add(pomocni);
                 ulogovani.Add(pomocni.Id, pomocni.UserName);
                 return Ok("Ovo korisnicko ime vec postoji izmene nisu moguce");
             }
+            if (u.UserName != pomocni.UserName)
+            {
+                // izmenimo u svakoj voznji koja postoji
+                IzmeniSveVoznjeAdmina(u.Id, u.UserName);
+                IzmeniKorisnikaUVozacima(u.Id, u.UserName);
+                IzmeniKorisnikaUAdminima(u.Id, u.UserName);
+                IzmeniSveVoznjeAdmina(u.Id, u.UserName);
+                IzmeniKorisnikKreiraoAdmina(u.Id, u.UserName);
+            }
+
             pomocni.UserName = u.UserName;
             pomocni.Email = u.Email;
             pomocni.Gender = u.Gender;
@@ -220,6 +230,7 @@ namespace TaksiSluzba.Controllers
             {
                 return Ok("Error occured");
             }
+            u.Id = pomocni.Id;
 
             if (korisnici.Exists(k => k.UserName == u.UserName) || admin.Exists(a => a.UserName == u.UserName) || vozaci.Exists(v => v.UserName == u.UserName))
             {
@@ -227,6 +238,19 @@ namespace TaksiSluzba.Controllers
                 ulogovani.Add(pomocni.Id, pomocni.UserName);
                 return Ok("Ovo korisnicko ime vec postoji izmene nisu moguce");
             }
+            if (u.UserName != pomocni.UserName)
+            {
+                // izmenimo u svakoj voznji koja postoji
+                //IzmeniSveVoznjeAdmina(u.Id, u.UserName);
+                //IzmeniKorisnikaUVozacima(u.Id, u.UserName);
+                //IzmeniKorisnikaUAdminima(u.Id, u.UserName);
+                IzmeniVozacaUKorisnicima(u.Id,u.UserName);
+                IzmeniVozacaUVozacima(u.Id,u.UserName);
+                IzmeniVozacaUAdminima(u.Id,u.UserName);
+                IzmeniSveVoznjeAdmina(u.Id, u.UserName);
+                IzmeniKorisnikKreiraoAdmina(u.Id, u.UserName);
+            }
+
             pomocni.UserName = u.UserName;
             pomocni.Email = u.Email;
             pomocni.Gender = u.Gender;
@@ -289,7 +313,7 @@ namespace TaksiSluzba.Controllers
             {
                 return Ok("Error occured");
             }
-
+            u.Id = pomocni.Id;
             if (korisnici.Exists(k => k.UserName == u.UserName) || admin.Exists(a => a.UserName == u.UserName) || vozaci.Exists(v => v.UserName == u.UserName))
             {
                 admin.Add(pomocni);
@@ -301,8 +325,8 @@ namespace TaksiSluzba.Controllers
                 IzmeniAdminaUVozacima(u.Id,u.UserName);
                 IzmeniAdminaUKorisnicima(u.Id,u.UserName);
                 IzmeniAdminoveVoznje(u.Id,u.UserName);
-                IzmeniKorisnikKreirao(u.Id,u.UserName);
-                IzmeniSveVoznje(u.Id,u.UserName);
+                IzmeniKorisnikKreiraoAdmina(u.Id,u.UserName);
+                IzmeniSveVoznjeAdmina(u.Id,u.UserName);
             }
 
             pomocni.UserName = u.UserName;
@@ -345,8 +369,11 @@ namespace TaksiSluzba.Controllers
                 {
                     if (d.Slobodan == true)
                     {
-
+                        //if (d.Automobil.TipAutomobila == mm.TipVozila)
+                        //{
                             slobodniVozaci.Add(d);
+                        //}
+                        //slobodniVozaci.Add(d);
                     }
                 }
             }
@@ -1030,6 +1057,13 @@ namespace TaksiSluzba.Controllers
             Ride ar = r;
             if (r == null)
             {
+                //
+                if (r.VozacId != "") {
+                    Driver ddd = vozaci.Find(ff=>ff.Id == r.VozacId);
+                    if (ddd != null) { vozaci.Remove(ddd); Ride rrr = ddd.Voznje.Find(rr => rr.Id == idVoznje); ddd.Voznje.Remove(rrr); vozaci.Add(ddd); }
+                }
+
+                //
                 vozaci.Remove(d);
                 r = korisnikKreiraoVoznju.Find(rr => rr.Id == idVoznje);
                 korisnikKreiraoVoznju.Remove(r);
@@ -1087,6 +1121,13 @@ namespace TaksiSluzba.Controllers
                 return Ok(adm); // vrati izmenjenog admina i stavi ga u sesiju 
             }
             else {
+
+                if (r.VozacId != "")
+                {
+                    Driver ddd = vozaci.Find(ff => ff.Id == r.VozacId);
+                    if (ddd != null) { vozaci.Remove(ddd); Ride rrr = ddd.Voznje.Find(rr => rr.Id == idVoznje); ddd.Voznje.Remove(rrr); vozaci.Add(ddd); }
+                }
+
                 sveVoznje.Remove(r);
                 vozaci.Remove(d);
                 r.Vozac = "";
@@ -1260,7 +1301,7 @@ namespace TaksiSluzba.Controllers
                 korisnici.Remove(u);
                 r = u.Voznje.Find(p => p.Id == idVoznje);
                 u.Voznje.Remove(r);
-                r.StatusVoznje = RideStatus.PRIHVACENA;
+                r.StatusVoznje = RideStatus.U_TOKU;
                 u.Voznje.Add(r);
                 korisnici.Add(u);
             }
@@ -1278,7 +1319,17 @@ namespace TaksiSluzba.Controllers
             }
 
             //nadjemo vozaca 
-
+            vozac = vozaci.Find(g => g.Voznje.Exists(gg => gg.Id == idVoznje));
+            if (vozac != null)
+            {
+                vozaci.Remove(vozac);
+                r = vozac.Voznje.Find(p => p.Id == idVoznje);
+                vozac.Voznje.Remove(r);
+                r.StatusVoznje = RideStatus.U_TOKU;
+                vozac.Slobodan = false;
+                vozac.Voznje.Add(r);
+                vozaci.Add(vozac);
+            }
 
             // ISPISEMO U XML promene
             WriteToXMl(ROLE.ADMIN);
@@ -1528,7 +1579,7 @@ namespace TaksiSluzba.Controllers
             List<Ride> voznje1 = voznje.PoslateVoznje;
 
             voznje1 = voznje1.OrderBy(X => X.DatumIVremePorudzbine).ToList();
-
+            
             return Ok(voznje1);
         }
    
@@ -1896,12 +1947,16 @@ namespace TaksiSluzba.Controllers
             WriteToXMl(ROLE.ADMIN);
         }
 
-        private void IzmeniKorisnikKreirao(string id,string username) {
+        private void IzmeniKorisnikKreiraoAdmina(string id,string username) {
             List<Ride> korisnikove = new List<Ride>();
             Ride r = new Ride();
             foreach (Ride rr in korisnikKreiraoVoznju) {
                 if (rr.DispatcherId == id) {
                     rr.Dispatcher = username;
+                } else if (rr.MusterijaId == id) {
+                    rr.Musterija = username;
+                } else if (rr.VozacId == id) {
+                    rr.Vozac = username;
                 }
                 korisnikove.Add(rr);
             }
@@ -1911,7 +1966,7 @@ namespace TaksiSluzba.Controllers
 
         }
 
-        private void IzmeniSveVoznje(string id, string username) {
+        private void IzmeniSveVoznjeAdmina(string id, string username) {
             List<Ride> NoveSve = new List<Ride>();
             Ride r = new Ride();
             foreach (Ride rr in sveVoznje)
@@ -1920,10 +1975,157 @@ namespace TaksiSluzba.Controllers
                 {
                     rr.Dispatcher = username;
                 }
+                else if (rr.MusterijaId == id)
+                {
+                    rr.Musterija = username;
+                }
+                else if (rr.VozacId == id)
+                {
+                    rr.Vozac = username;
+                }
                 NoveSve.Add(rr);
             }
             sveVoznje = NoveSve;
             WriteAllRides();
+        }
+
+        private void IzmeniKorisnikaUKorisnicima(string id, string username) {
+            List<User> korisniciNovi = new List<User>();
+            List<Ride> voznjeNove = new List<Ride>();
+            User pom = new User();
+            foreach (User u in korisnici)
+            {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in u.Voznje)
+                {
+                    if (r.MusterijaId == id)
+                    {
+                        r.Musterija = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = u;
+                pom.Voznje = voznjeNove;
+                korisniciNovi.Add(pom);
+            }
+            korisnici = korisniciNovi;
+            WriteToXMl(ROLE.USER);
+        }
+
+        private void IzmeniKorisnikaUVozacima(string id, string username)
+        {
+            List<Driver> vozaciNovi = new List<Driver>();
+            List<Ride> voznjeNove = new List<Ride>();
+            Driver pom = new Driver();
+            foreach (Driver d in vozaci)
+            {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in d.Voznje)
+                {
+                    if (r.MusterijaId == id)
+                    {
+                        r.Musterija = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = d;
+                pom.Voznje = voznjeNove;
+                vozaciNovi.Add(pom);
+            }
+            vozaci = vozaciNovi;
+            WriteToXMl(ROLE.DRIVER);
+        }
+
+        private void IzmeniKorisnikaUAdminima(string id, string username) {
+            List<User> adminiNovi = new List<User>();
+            List<Ride> voznjeNove = new List<Ride>();
+            User pom = new User();
+            foreach (User u in admin)
+            {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in u.Voznje)
+                {
+                    if (r.MusterijaId == id)
+                    {
+                        r.Musterija = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = u;
+                pom.Voznje = voznjeNove;
+                adminiNovi.Add(pom);
+            }
+            admin = adminiNovi;
+            WriteToXMl(ROLE.ADMIN);
+        }
+
+        private void IzmeniVozacaUKorisnicima(string id, string username) {
+            List<User> korisniciNovi = new List<User>();
+            List<Ride> voznjeNove = new List<Ride>();
+            User pom = new User();
+            foreach (User u in korisnici)
+            {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in u.Voznje)
+                {
+                    if (r.VozacId == id)
+                    {
+                        r.Vozac = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = u;
+                pom.Voznje = voznjeNove;
+                korisniciNovi.Add(pom);
+            }
+            korisnici = korisniciNovi;
+            WriteToXMl(ROLE.USER);
+        }
+
+        private void IzmeniVozacaUVozacima(string id, string username) {
+            List<Driver> vozaciNovi = new List<Driver>();
+            List<Ride> voznjeNove = new List<Ride>();
+            Driver pom = new Driver();
+            foreach (Driver d in vozaci)
+            {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in d.Voznje)
+                {
+                    if (r.VozacId == id)
+                    {
+                        r.Vozac = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = d;
+                pom.Voznje = voznjeNove;
+                vozaciNovi.Add(pom);
+            }
+            vozaci = vozaciNovi;
+            WriteToXMl(ROLE.DRIVER);
+        }
+
+        private void IzmeniVozacaUAdminima(string id, string username) {
+            List<User> adminiNovi = new List<User>();
+            List<Ride> voznjeNove = new List<Ride>();
+            User pom = new User();
+            foreach (User u in admin)
+            {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in u.Voznje)
+                {
+                    if (r.VozacId == id)
+                    {
+                        r.Vozac = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = u;
+                pom.Voznje = voznjeNove;
+                adminiNovi.Add(pom);
+            }
+            admin = adminiNovi;
+            WriteToXMl(ROLE.ADMIN);
         }
 
     }

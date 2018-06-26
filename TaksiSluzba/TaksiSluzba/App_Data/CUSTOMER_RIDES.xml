@@ -1,187 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfRide xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Ride>
-    <DatumIVremePorudzbine>2018-06-25T19:34:09.2545748Z</DatumIVremePorudzbine>
+    <DatumIVremePorudzbine>2018-06-26T17:41:18.1443114Z</DatumIVremePorudzbine>
     <LokacijaPolazna>
-      <Xcoordinate>19.837574498090284</Xcoordinate>
-      <Ycoordinate>45.236566423535066</Ycoordinate>
+      <Xcoordinate>19.830166585745665</Xcoordinate>
+      <Ycoordinate>45.25474989767787</Ycoordinate>
       <Adresa>
-        <UlicaBroj>Bulevar Despota Stefana 6</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+        <UlicaBroj>Novosadskog Sajma 42</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
       </Adresa>
     </LokacijaPolazna>
     <Musterija>maki</Musterija>
     <MusterijaId>7</MusterijaId>
-    <Iznos>0</Iznos>
-    <Komentar>
-      <Opis>Bas je dobraaa</Opis>
-      <DatumObjave>2018-06-25T22:27:09.4244702+02:00</DatumObjave>
-      <Objavljeno>25-06-18  22:27:09</Objavljeno>
-      <KorisnikKojiJeOstavioKomentar>maki</KorisnikKojiJeOstavioKomentar>
-      <IdVoznje>0</IdVoznje>
-      <Ocena>5</Ocena>
-    </Komentar>
-    <StatusVoznje>KREIRANA</StatusVoznje>
-    <TipVozila>putnicki</TipVozila>
-    <Id>0</Id>
-    <DATUMM>25-06-18  19:34:09</DATUMM>
-  </Ride>
-  <Ride>
-    <DatumIVremePorudzbine>2018-06-25T19:34:09.2545748Z</DatumIVremePorudzbine>
-    <LokacijaPolazna>
-      <Xcoordinate>19.837574498090284</Xcoordinate>
-      <Ycoordinate>45.236566423535066</Ycoordinate>
+    <Odrediste>
+      <Xcoordinate>19.84797966917766</Xcoordinate>
+      <Ycoordinate>45.24801519706389</Ycoordinate>
       <Adresa>
-        <UlicaBroj>Bulevar Despota Stefana 6</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+        <UlicaBroj>Lovcenska 9</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
       </Adresa>
-    </LokacijaPolazna>
-    <Musterija>maki</Musterija>
-    <MusterijaId>7</MusterijaId>
-    <Iznos>0</Iznos>
-    <StatusVoznje>KREIRANA</StatusVoznje>
+    </Odrediste>
+    <Dispatcher>admin1</Dispatcher>
+    <DispatcherId> 1 </DispatcherId>
+    <Vozac>daki</Vozac>
+    <VozacId>9</VozacId>
+    <Iznos>520</Iznos>
+    <StatusVoznje>USPESNA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
-    <Id>0</Id>
-    <DATUMM>25-06-18  19:34:09</DATUMM>
-  </Ride>
-  <Ride>
-    <DatumIVremePorudzbine>2018-06-25T19:38:45.3433662Z</DatumIVremePorudzbine>
-    <LokacijaPolazna>
-      <Xcoordinate>19.832298498584368</Xcoordinate>
-      <Ycoordinate>45.23751894997727</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Balzakova 28</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
-      </Adresa>
-    </LokacijaPolazna>
-    <Musterija>maki</Musterija>
-    <MusterijaId>7</MusterijaId>
-    <Iznos>0</Iznos>
-    <Komentar>
-      <Opis>Odlicna</Opis>
-      <DatumObjave>2018-06-25T21:41:01.1531341+02:00</DatumObjave>
-      <Objavljeno>25-06-18  21:41:01</Objavljeno>
-      <KorisnikKojiJeOstavioKomentar>maki</KorisnikKojiJeOstavioKomentar>
-      <IdVoznje>0</IdVoznje>
-      <Ocena>4</Ocena>
-    </Komentar>
-    <StatusVoznje>OTKAZANA</StatusVoznje>
-    <TipVozila>putnicki</TipVozila>
-    <Id>0</Id>
-    <DATUMM>25-06-18  19:38:45</DATUMM>
-  </Ride>
-  <Ride>
-    <DatumIVremePorudzbine>2018-06-25T19:38:45.3433662Z</DatumIVremePorudzbine>
-    <LokacijaPolazna>
-      <Xcoordinate>19.832298498584368</Xcoordinate>
-      <Ycoordinate>45.23751894997727</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Balzakova 28</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
-      </Adresa>
-    </LokacijaPolazna>
-    <Musterija>maki</Musterija>
-    <MusterijaId>7</MusterijaId>
-    <Iznos>0</Iznos>
-    <Komentar>
-      <Opis>Odlicna</Opis>
-      <DatumObjave>2018-06-25T21:41:01.1531341+02:00</DatumObjave>
-      <Objavljeno>25-06-18  21:41:01</Objavljeno>
-      <KorisnikKojiJeOstavioKomentar>maki</KorisnikKojiJeOstavioKomentar>
-      <IdVoznje>0</IdVoznje>
-      <Ocena>4</Ocena>
-    </Komentar>
-    <StatusVoznje>OTKAZANA</StatusVoznje>
-    <TipVozila>putnicki</TipVozila>
-    <Id>0</Id>
-    <DATUMM>25-06-18  19:38:45</DATUMM>
-  </Ride>
-  <Ride>
-    <DatumIVremePorudzbine>2018-06-25T19:32:32.7750565Z</DatumIVremePorudzbine>
-    <LokacijaPolazna>
-      <Xcoordinate>19.834005442496093</Xcoordinate>
-      <Ycoordinate>45.23941216022578</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Narodnog fronta 58</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
-      </Adresa>
-    </LokacijaPolazna>
-    <Musterija>maki</Musterija>
-    <MusterijaId>7</MusterijaId>
-    <Iznos>0</Iznos>
-    <StatusVoznje>OTKAZANA</StatusVoznje>
-    <TipVozila>putnicki</TipVozila>
-    <Id>0</Id>
-    <DATUMM>25-06-18  19:32:32</DATUMM>
-  </Ride>
-  <Ride>
-    <DatumIVremePorudzbine>2018-06-25T19:34:09.2545748Z</DatumIVremePorudzbine>
-    <LokacijaPolazna>
-      <Xcoordinate>19.837574498090284</Xcoordinate>
-      <Ycoordinate>45.236566423535066</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Bulevar Despota Stefana 6</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
-      </Adresa>
-    </LokacijaPolazna>
-    <Musterija>maki</Musterija>
-    <MusterijaId>7</MusterijaId>
-    <Iznos>0</Iznos>
-    <Komentar>
-      <Opis>Odlicna</Opis>
-      <DatumObjave>2018-06-25T21:40:33.9515782+02:00</DatumObjave>
-      <Objavljeno>25-06-18  21:40:33</Objavljeno>
-      <KorisnikKojiJeOstavioKomentar>maki</KorisnikKojiJeOstavioKomentar>
-      <IdVoznje>0</IdVoznje>
-      <Ocena>4</Ocena>
-    </Komentar>
-    <StatusVoznje>KREIRANA</StatusVoznje>
-    <TipVozila>putnicki</TipVozila>
-    <Id>0</Id>
-    <DATUMM>25-06-18  19:34:09</DATUMM>
-  </Ride>
-  <Ride>
-    <DatumIVremePorudzbine>2018-06-25T19:42:20.6896833Z</DatumIVremePorudzbine>
-    <LokacijaPolazna>
-      <Xcoordinate>19.830885620941455</Xcoordinate>
-      <Ycoordinate>45.24636638768709</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Doza Djerdja 34</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
-      </Adresa>
-    </LokacijaPolazna>
-    <Musterija>maki</Musterija>
-    <MusterijaId>7</MusterijaId>
-    <Iznos>0</Iznos>
-    <StatusVoznje>OTKAZANA</StatusVoznje>
-    <TipVozila>putnicki</TipVozila>
-    <Id>6</Id>
-    <DATUMM>25-06-18  19:42:20</DATUMM>
-  </Ride>
-  <Ride>
-    <DatumIVremePorudzbine>2018-06-25T19:34:09.2545748Z</DatumIVremePorudzbine>
-    <LokacijaPolazna>
-      <Xcoordinate>19.837574498090284</Xcoordinate>
-      <Ycoordinate>45.236566423535066</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Bulevar Despota Stefana 6</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
-      </Adresa>
-    </LokacijaPolazna>
-    <Musterija>maki</Musterija>
-    <MusterijaId>7</MusterijaId>
-    <Iznos>0</Iznos>
-    <Komentar>
-      <Opis>Bas je dobraaa</Opis>
-      <DatumObjave>2018-06-25T22:27:09.4244702+02:00</DatumObjave>
-      <Objavljeno>25-06-18  22:27:09</Objavljeno>
-      <KorisnikKojiJeOstavioKomentar>maki</KorisnikKojiJeOstavioKomentar>
-      <IdVoznje>0</IdVoznje>
-      <Ocena>5</Ocena>
-    </Komentar>
-    <StatusVoznje>KREIRANA</StatusVoznje>
-    <TipVozila>putnicki</TipVozila>
-    <Id>0</Id>
-    <DATUMM>25-06-18  19:34:09</DATUMM>
+    <Id>1</Id>
+    <DATUMM>26-06-18  17:41:18</DATUMM>
   </Ride>
 </ArrayOfRide>
