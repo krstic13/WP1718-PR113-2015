@@ -32,7 +32,7 @@ namespace TaksiSluzba.Controllers
             ReadAllRides();
             ReadCustomerMadeRide();
             var requestUri = Request.RequestUri;
-            //
+
             foreach (User u in korisnici)
             {
                 if (u.Blokiran == true)
@@ -54,7 +54,6 @@ namespace TaksiSluzba.Controllers
                     neBlokirani.Add(d.Id, d.UserName);
                 }
             }
-            //
             return Redirect(requestUri.AbsoluteUri + "Content/index.html");
         }
 
@@ -134,6 +133,20 @@ namespace TaksiSluzba.Controllers
             {
                 return Ok("Jedno od polja je ostalo prazno, izmene nedozvoljene.");
             }
+            //
+            if (u.JMBG.Count() != 13) {
+                return Ok("Dužina matičnog broja mora biti 13 brojeva.");
+            }
+
+            bool digitsOnly = u.JMBG.All(char.IsDigit);
+            
+
+            if (!digitsOnly) { return Ok("Matični broj ne sme posedovati slovo u sebi."); }
+
+            if (!u.Email.Contains('@')) { return Ok("Email nije korektnog formata."); }
+
+            if (u.PhoneNumber.Count() < 6 || u.PhoneNumber.Any(char.IsLetter)) { return Ok("Broj telefona mora biti duži od 6 i ne sme imati slova"); }
+            //
 
             User pomocni = new User();
 
@@ -179,7 +192,21 @@ namespace TaksiSluzba.Controllers
             {
                 return Ok("Jedno od polja je ostalo prazno, izmene nedozvoljene.");
             }
+            //
+            if (u.JMBG.Count() != 13)
+            {
+                return Ok("Dužina matičnog broja mora biti 13 brojeva.");
+            }
 
+            bool digitsOnly = u.JMBG.All(char.IsDigit);
+
+
+            if (!digitsOnly) { return Ok("Matični broj ne sme posedovati slovo u sebi."); }
+
+            if (!u.Email.Contains('@')) { return Ok("Email nije korektnog formata."); }
+
+            if (u.PhoneNumber.Count() < 6 || u.PhoneNumber.Any(char.IsLetter)) { return Ok("Broj telefona mora biti duži od 6 i ne sme imati slova"); }
+            //
             Driver pomocni = new Driver();
 
             if (ulogovani.Keys.Contains(u.Id))
@@ -234,12 +261,26 @@ namespace TaksiSluzba.Controllers
             {
                 return Ok("Jedno od polja je ostalo prazno, izmene nedozvoljene.");
             }
+            //
+            if (u.JMBG.Count() != 13)
+            {
+                return Ok("Dužina matičnog broja mora biti 13 brojeva.");
+            }
+
+            bool digitsOnly = u.JMBG.All(char.IsDigit);
+
+
+            if (!digitsOnly) { return Ok("Matični broj ne sme posedovati slovo u sebi."); }
+
+            if (!u.Email.Contains('@')) { return Ok("Email nije korektnog formata."); }
+
+            if (u.PhoneNumber.Count() < 6 || u.PhoneNumber.Any(char.IsLetter)) { return Ok("Broj telefona mora biti duži od 6 i ne sme imati slova"); }
+            //
 
             User pomocni = new User();
 
             if (ulogovani.Keys.Contains(u.Id))
             {
-                //pomocni = ulogovani[u.Id];
                 pomocni = admin.Find(uu => uu.Id == u.Id);
                 ulogovani.Remove(u.Id);         // obrisali ga iz trenutno ulogovanih
                 admin.Remove(pomocni);      // obrisali ga iz liste korisnika
@@ -255,6 +296,15 @@ namespace TaksiSluzba.Controllers
                 ulogovani.Add(pomocni.Id, pomocni.UserName);
                 return Ok("Ovo korisnicko ime vec postoji izmene nisu moguce");
             }
+            if (u.UserName != pomocni.UserName) {
+                // izmenimo u svakoj voznji koja postoji
+                IzmeniAdminaUVozacima(u.Id,u.UserName);
+                IzmeniAdminaUKorisnicima(u.Id,u.UserName);
+                IzmeniAdminoveVoznje(u.Id,u.UserName);
+                IzmeniKorisnikKreirao(u.Id,u.UserName);
+                IzmeniSveVoznje(u.Id,u.UserName);
+            }
+
             pomocni.UserName = u.UserName;
             pomocni.Email = u.Email;
             pomocni.Gender = u.Gender;
@@ -335,6 +385,21 @@ namespace TaksiSluzba.Controllers
                 return Ok("Jedno od polja je ostalo prazno, izmene nedozvoljene.");
             }
 
+            //
+            if (u.JMBG.Count() != 13)
+            {
+                return Ok("Dužina matičnog broja mora biti 13 brojeva.");
+            }
+
+            bool digitsOnly = u.JMBG.All(char.IsDigit);
+
+
+            if (!digitsOnly) { return Ok("Matični broj ne sme posedovati slovo u sebi."); }
+
+            if (!u.Email.Contains('@')) { return Ok("Email nije korektnog formata."); }
+
+            if (u.PhoneNumber.Count() < 6 || u.PhoneNumber.Any(char.IsLetter)) { return Ok("Broj telefona mora biti duži od 6 i ne sme imati slova"); }
+            //
             if (korisnici.Exists(k => k.UserName == u.UserName) || admin.Exists(a => a.UserName == u.UserName) || vozaci.Exists(v => v.UserName == u.UserName))
             {
                 return Ok("Ovo korisnicko ime vec postoji, dodavanje nije moguce");
@@ -533,6 +598,7 @@ namespace TaksiSluzba.Controllers
             r.Vozac = d.UserName;
             r.Id = (sveVoznje.Count + korisnikKreiraoVoznju.Count).ToString();
             r.DatumIVremePorudzbine = DateTime.Now;
+            r.DATUMM = (r.DatumIVremePorudzbine).ToString("dd/MM/yy  H:mm:ss");
             //dispecer.Voznje.Add(r);
             if (r.TipVozila != d.Automobil.TipAutomobila)
             {
@@ -1471,7 +1537,7 @@ namespace TaksiSluzba.Controllers
         {
             List<Ride> voznje1 = voznje.PoslateVoznje;
 
-            voznje1 = voznje1.OrderBy(X => X.Iznos).ToList();
+            voznje1 = voznje1.OrderBy(X => X.Komentar.Ocena).ToList();
 
             return Ok(voznje1);
         }
@@ -1517,6 +1583,72 @@ namespace TaksiSluzba.Controllers
             //Dictionary<string, string> povratni = new Dictionary<string, string>();
 
             return Ok(povratni);
+        }
+
+        //AdminPretraga
+        [Route("api/ahome/AdminPretraga")]
+        public IHttpActionResult AdminPretraga(AdminSearchObj objekat) {
+
+            List<Ride> pretrazeno = new List<Ride>();
+            foreach (Ride r in objekat.voznje)
+            {
+                int help = DateTime.Compare(r.DatumIVremePorudzbine, objekat.OdVreme);
+                if (help >= 0) { pretrazeno.Add(r); }
+            }
+
+            foreach (Ride r in objekat.voznje)
+            {
+                int help = DateTime.Compare(r.DatumIVremePorudzbine, objekat.DoVreme);
+                if (help < 0) { pretrazeno.Add(r); }
+            }
+
+            if (objekat.StatusVoznje >= 0)
+            {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.StatusVoznje.ToString() != objekat.StatusVoznje.ToString()) { pretrazeno.Remove(r); }
+                }
+            }
+
+            if (objekat.DoCena != 0)
+            {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Iznos < objekat.OdCena || r.Iznos > objekat.DoCena) { pretrazeno.Remove(r); }
+                }
+            }
+            else
+            {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Iznos < objekat.OdCena) { pretrazeno.Remove(r); }
+                }
+            }
+
+            if (objekat.DoOcena != 0)
+            {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Komentar.Ocena < objekat.OdOcena || r.Komentar.Ocena > objekat.DoOcena) { pretrazeno.Remove(r); }
+                }
+            }
+            else
+            {
+                foreach (Ride r in pretrazeno)
+                {
+                    if (r.Komentar.Ocena < objekat.OdOcena) { pretrazeno.Remove(r); }
+                }
+            }
+
+
+            // MORA KOMPLEKSNIJA PRETRAGA
+            // JER IME KOJE SE CUVA U VOZNJI ZAPRAVO PRETSTAVLJA KORISNICKO IME 
+            // MORAM PO ID-U DA DOBAVIM PROSLEDJENOG KORISNIKA
+            // TE DA NJEGOV ID POREDIM SA ONIM KOJI STOJI U VOZNJI 
+            // ISTO VAZI I ZA VOZACA
+
+
+            return Ok(pretrazeno);
         }
 
         [Route("api/ahome/KorisnikPretraga")]
@@ -1698,6 +1830,101 @@ namespace TaksiSluzba.Controllers
             }
         }
 
+        private void IzmeniAdminaUVozacima(string id,string username)
+        {
+            List<Driver> vozaciNovi = new List<Driver>();
+            List<Ride> voznjeNove = new List<Ride>();
+            Driver pom = new Driver();
+            foreach (Driver d in vozaci)
+            {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in d.Voznje)
+                {
+                    if (r.DispatcherId == id) {
+                        r.Dispatcher = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = d;
+                pom.Voznje = voznjeNove;
+                vozaciNovi.Add(pom);
+            }
+            vozaci = vozaciNovi;
+            WriteToXMl(ROLE.DRIVER);
+        }
+
+        private void IzmeniAdminaUKorisnicima(string id, string username) {
+            List<User> korisniciNovi = new List<User>();
+            List<Ride> voznjeNove = new List<Ride>();
+            User pom = new User();
+            foreach (User u in korisnici)
+            {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in u.Voznje)
+                {
+                    if (r.DispatcherId == id)
+                    {
+                        r.Dispatcher = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = u;
+                pom.Voznje = voznjeNove;
+                korisniciNovi.Add(pom);
+            }
+            korisnici = korisniciNovi;
+            WriteToXMl(ROLE.USER);
+        }
+
+        private void IzmeniAdminoveVoznje(string id,string username) {
+            List<User> adminiNovi = new List<User>();
+            List<Ride> voznjeNove = new List<Ride>();
+            User pom = new User();
+            foreach (User u in admin) {
+                voznjeNove = new List<Ride>();
+                foreach (Ride r in u.Voznje) {
+                    if (r.DispatcherId == id) {
+                        r.Dispatcher = username;
+                    }
+                    voznjeNove.Add(r);
+                }
+                pom = u;
+                pom.Voznje = voznjeNove;
+                adminiNovi.Add(pom);
+            }
+            admin = adminiNovi;
+            WriteToXMl(ROLE.ADMIN);
+        }
+
+        private void IzmeniKorisnikKreirao(string id,string username) {
+            List<Ride> korisnikove = new List<Ride>();
+            Ride r = new Ride();
+            foreach (Ride rr in korisnikKreiraoVoznju) {
+                if (rr.DispatcherId == id) {
+                    rr.Dispatcher = username;
+                }
+                korisnikove.Add(rr);
+            }
+
+            korisnikKreiraoVoznju = korisnikove;
+            WriteCustomerMadeRide();
+
+        }
+
+        private void IzmeniSveVoznje(string id, string username) {
+            List<Ride> NoveSve = new List<Ride>();
+            Ride r = new Ride();
+            foreach (Ride rr in sveVoznje)
+            {
+                if (rr.DispatcherId == id)
+                {
+                    rr.Dispatcher = username;
+                }
+                NoveSve.Add(rr);
+            }
+            sveVoznje = NoveSve;
+            WriteAllRides();
+        }
 
     }
 }
