@@ -793,7 +793,7 @@ namespace TaksiSluzba.Controllers
 
             if (r1 != null)
             {
-                sveVoznje.Remove(r1);
+                korisnikKreiraoVoznju.Remove(r1);
                 string IdKorisnika = r1.MusterijaId;
                 r1.Komentar = new Comment();
                 r1.Komentar.DatumObjave = DateTime.Now;
@@ -966,7 +966,7 @@ namespace TaksiSluzba.Controllers
 
             if (r1 != null)
             {
-                sveVoznje.Remove(r1);
+                korisnikKreiraoVoznju.Remove(r1);
                 string IdKorisnika = r1.MusterijaId;
                 r1.Komentar = new Comment();
                 r1.Komentar.DatumObjave = DateTime.Now;
@@ -1661,7 +1661,7 @@ namespace TaksiSluzba.Controllers
 
             if (r1 != null)
             {
-                sveVoznje.Remove(r1);
+                korisnikKreiraoVoznju.Remove(r1);
                 string IdKorisnika = r1.VozacId;
                 r1.Komentar = new Comment();
                 r1.Komentar.DatumObjave = DateTime.Now;
