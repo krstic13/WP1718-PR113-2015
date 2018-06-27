@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfRide xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Ride>
+    <DatumIVremePorudzbine>2018-06-26T18:50:15.5729588Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.84434192732279</Xcoordinate>
+      <Ycoordinate>45.243821708873895</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Blagoja Parovica 9</UlicaBroj>
+        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>caki</Musterija>
+    <MusterijaId>6</MusterijaId>
+    <Iznos>0</Iznos>
+    <StatusVoznje>KREIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>7</Id>
+    <DATUMM>26-06-18  18:50:15</DATUMM>
+  </Ride>
+  <Ride>
     <DatumIVremePorudzbine>2018-06-26T17:41:18.1443114Z</DatumIVremePorudzbine>
     <LokacijaPolazna>
       <Xcoordinate>19.830166585745665</Xcoordinate>
@@ -25,27 +43,168 @@
     <Vozac>daki</Vozac>
     <VozacId>9</VozacId>
     <Iznos>520</Iznos>
-    <StatusVoznje>USPESNA</StatusVoznje>
+    <Komentar>
+      <Opis>moj komentar</Opis>
+      <DatumObjave>2018-06-27T16:24:48.1916768+02:00</DatumObjave>
+      <Objavljeno>27-06-18  16:24:48</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>daki</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>1</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>PRIHVACENA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
     <Id>1</Id>
     <DATUMM>26-06-18  17:41:18</DATUMM>
   </Ride>
   <Ride>
-    <DatumIVremePorudzbine>2018-06-26T18:50:15.5729588Z</DatumIVremePorudzbine>
+    <DatumIVremePorudzbine>2018-06-26T17:41:18.1443114Z</DatumIVremePorudzbine>
     <LokacijaPolazna>
-      <Xcoordinate>19.84434192732279</Xcoordinate>
-      <Ycoordinate>45.243821708873895</Ycoordinate>
+      <Xcoordinate>19.830166585745665</Xcoordinate>
+      <Ycoordinate>45.25474989767787</Ycoordinate>
       <Adresa>
-        <UlicaBroj>Blagoja Parovica 9</UlicaBroj>
-        <MestoPostanski>Novi Sad 21102</MestoPostanski>
+        <UlicaBroj>Novosadskog Sajma 42</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
       </Adresa>
     </LokacijaPolazna>
-    <Musterija>caki</Musterija>
-    <MusterijaId>6</MusterijaId>
-    <Iznos>0</Iznos>
-    <StatusVoznje>KREIRANA</StatusVoznje>
+    <Musterija>maki</Musterija>
+    <MusterijaId>7</MusterijaId>
+    <Odrediste>
+      <Xcoordinate>19.84797966917766</Xcoordinate>
+      <Ycoordinate>45.24801519706389</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Lovcenska 9</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </Odrediste>
+    <Dispatcher>admin1</Dispatcher>
+    <DispatcherId> 1 </DispatcherId>
+    <Vozac>daki</Vozac>
+    <VozacId>9</VozacId>
+    <Iznos>520</Iznos>
+    <Komentar>
+      <Opis>Moj komentar napokon radi</Opis>
+      <DatumObjave>2018-06-27T16:23:19.7676193+02:00</DatumObjave>
+      <Objavljeno>27-06-18  16:23:19</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>daki</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>1</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>PRIHVACENA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
-    <Id>7</Id>
-    <DATUMM>26-06-18  18:50:15</DATUMM>
+    <Id>1</Id>
+    <DATUMM>26-06-18  17:41:18</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-26T17:41:18.1443114Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.830166585745665</Xcoordinate>
+      <Ycoordinate>45.25474989767787</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Novosadskog Sajma 42</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>maki</Musterija>
+    <MusterijaId>7</MusterijaId>
+    <Odrediste>
+      <Xcoordinate>19.84797966917766</Xcoordinate>
+      <Ycoordinate>45.24801519706389</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Lovcenska 9</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </Odrediste>
+    <Dispatcher>admin1</Dispatcher>
+    <DispatcherId> 1 </DispatcherId>
+    <Vozac>daki</Vozac>
+    <VozacId>9</VozacId>
+    <Iznos>520</Iznos>
+    <Komentar>
+      <Opis>smrdi</Opis>
+      <DatumObjave>2018-06-27T16:09:24.2338295+02:00</DatumObjave>
+      <Objavljeno>27-06-18  16:09:24</Objavljeno>
+      <IdVoznje>1</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>U_TOKU</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>1</Id>
+    <DATUMM>26-06-18  17:41:18</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-26T17:41:18.1443114Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.830166585745665</Xcoordinate>
+      <Ycoordinate>45.25474989767787</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Novosadskog Sajma 42</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>maki</Musterija>
+    <MusterijaId>7</MusterijaId>
+    <Odrediste>
+      <Xcoordinate>19.84797966917766</Xcoordinate>
+      <Ycoordinate>45.24801519706389</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Lovcenska 9</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </Odrediste>
+    <Dispatcher>admin1</Dispatcher>
+    <DispatcherId> 1 </DispatcherId>
+    <Vozac>daki</Vozac>
+    <VozacId>9</VozacId>
+    <Iznos>520</Iznos>
+    <Komentar>
+      <Opis>Komentar koji radi</Opis>
+      <DatumObjave>2018-06-27T16:20:01.2602653+02:00</DatumObjave>
+      <Objavljeno>27-06-18  16:20:01</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>daki</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>1</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>NEUSPESNA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>1</Id>
+    <DATUMM>26-06-18  17:41:18</DATUMM>
+  </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-26T17:41:18.1443114Z</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.830166585745665</Xcoordinate>
+      <Ycoordinate>45.25474989767787</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Novosadskog Sajma 42</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>maki</Musterija>
+    <MusterijaId>7</MusterijaId>
+    <Odrediste>
+      <Xcoordinate>19.84797966917766</Xcoordinate>
+      <Ycoordinate>45.24801519706389</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Lovcenska 9</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </Odrediste>
+    <Dispatcher>admin1</Dispatcher>
+    <DispatcherId> 1 </DispatcherId>
+    <Vozac>daki</Vozac>
+    <VozacId>9</VozacId>
+    <Iznos>520</Iznos>
+    <Komentar>
+      <Opis>moj komentar</Opis>
+      <DatumObjave>2018-06-27T16:24:48.1916768+02:00</DatumObjave>
+      <Objavljeno>27-06-18  16:24:48</Objavljeno>
+      <KorisnikKojiJeOstavioKomentar>daki</KorisnikKojiJeOstavioKomentar>
+      <IdVoznje>1</IdVoznje>
+      <Ocena>0</Ocena>
+    </Komentar>
+    <StatusVoznje>PRIHVACENA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>1</Id>
+    <DATUMM>26-06-18  17:41:18</DATUMM>
   </Ride>
 </ArrayOfRide>

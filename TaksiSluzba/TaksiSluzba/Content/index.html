@@ -408,57 +408,63 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
-                if ($("#korisnickoIme").val() != "" && $("#korisnickaLozinka").val() != ""
-                    && $("#Ime").val() != "" && $("#Prezime").val() != "" && $("#korisnickiJMBG").val() != "" && $("#korisnickiTelefon").val() != "" && $("#korisnickiEmail").val() != ""
-                    && $("#korisnickoGodiste").val() != "" && $("#korisnickaRegistracija").val() != "" && $("#TipVozila").val() != ""
-                ) {
-                    if (xx == null) {
-                        xx = trenutnoUlogovan.Lokacija.Xcoordinate;
-                        yy = trenutnoUlogovan.Lokacija.Ycoordinate;
-                        ulica_broj = trenutnoUlogovan.Lokacija.Adresa.UlicaBroj;
-                        grad = trenutnoUlogovan.Lokacija.Adresa.grad;
-                    }
-
-                    var objekat = {
-                        UserName: $("#korisnickoIme").val(),
-                        Password: $("#korisnickaLozinka").val(),
-                        Name: $("#Ime").val(),
-                        LastName: $("#Prezime").val(),
-                        Gender: $("#pol").val(),
-                        JMBG: $("#korisnickiJMBG").val(),
-                        PhoneNumber: $("#korisnickiTelefon").val(),
-                        Email: $("#korisnickiEmail").val(),
-                        Id: trenutnoUlogovan.Id,
-                        Lokacija:
-                            {
-                                Xcoordinate: xx,
-                                Ycoordinate: yy,
-                                Adresa: {
-                                    UlicaBroj: ulica_broj,
-                                    MestoPostanski: grad
-                                }
-                            },
-                        Automobil:
-                            {
-                                GodisteAutomobila: $("#korisnickoGodiste").val(),
-                                Registracija: $("#korisnickaRegistracija").val(),
-                                TipAutomobila: $("#TipVozila").val()
-                            }
-                    };
-                    xx = null;
-                    $.get("/api/ahome/changedriver", objekat, function (data, status) {
-                        if (data.UserName == null) {
-                            $("#Greske").html(data);
-                        } else {
-                            trenutnoUlogovan = data;
-                            sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(trenutnoUlogovan));
-                            $("#AllGood").html("Izmene izvršene");
-                        }
-                    }); xx = null; yy = null; ulica_broj = null;
+                var num1 = $("#korisnickoGodiste").val();
+                if (isNaN(num1)) {
+                    $("#Greske").html("Godište automobila nije odgovarajućeg formata");
                 } else {
 
-                    var Greska = "Izmena koju ste uneli nije moguca";
-                    $("#Greske").html(Greska);
+                    if ($("#korisnickoIme").val() != "" && $("#korisnickaLozinka").val() != ""
+                        && $("#Ime").val() != "" && $("#Prezime").val() != "" && $("#korisnickiJMBG").val() != "" && $("#korisnickiTelefon").val() != "" && $("#korisnickiEmail").val() != ""
+                        && $("#korisnickoGodiste").val() != "" && $("#korisnickaRegistracija").val() != "" && $("#TipVozila").val() != ""
+                    ) {
+                        if (xx == null) {
+                            xx = trenutnoUlogovan.Lokacija.Xcoordinate;
+                            yy = trenutnoUlogovan.Lokacija.Ycoordinate;
+                            ulica_broj = trenutnoUlogovan.Lokacija.Adresa.UlicaBroj;
+                            grad = trenutnoUlogovan.Lokacija.Adresa.grad;
+                        }
+
+                        var objekat = {
+                            UserName: $("#korisnickoIme").val(),
+                            Password: $("#korisnickaLozinka").val(),
+                            Name: $("#Ime").val(),
+                            LastName: $("#Prezime").val(),
+                            Gender: $("#pol").val(),
+                            JMBG: $("#korisnickiJMBG").val(),
+                            PhoneNumber: $("#korisnickiTelefon").val(),
+                            Email: $("#korisnickiEmail").val(),
+                            Id: trenutnoUlogovan.Id,
+                            Lokacija:
+                                {
+                                    Xcoordinate: xx,
+                                    Ycoordinate: yy,
+                                    Adresa: {
+                                        UlicaBroj: ulica_broj,
+                                        MestoPostanski: grad
+                                    }
+                                },
+                            Automobil:
+                                {
+                                    GodisteAutomobila: $("#korisnickoGodiste").val(),
+                                    Registracija: $("#korisnickaRegistracija").val(),
+                                    TipAutomobila: $("#TipVozila").val()
+                                }
+                        };
+                        xx = null;
+                        $.get("/api/ahome/changedriver", objekat, function (data, status) {
+                            if (data.UserName == null) {
+                                $("#Greske").html(data);
+                            } else {
+                                trenutnoUlogovan = data;
+                                sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(trenutnoUlogovan));
+                                $("#AllGood").html("Izmene izvršene");
+                            }
+                        }); xx = null; yy = null; ulica_broj = null;
+                    } else {
+
+                        var Greska = "Izmena koju ste uneli nije moguca";
+                        $("#Greske").html(Greska);
+                    }
                 }
 
             });
@@ -908,69 +914,73 @@
                 $("#Greske").empty();
                 $("#AllGood").empty();
 
-
-                if ($("#korisnickoIme").val() != "" && $("#korisnickaLozinka").val() != ""
-                    && $("#Ime").val() != "" && $("#Prezime").val() != "" && $("#korisnickiJMBG").val() != "" && $("#korisnickiTelefon").val() != "" && $("#korisnickiEmail").val() != ""
-                    && $("#korisnickoGodiste").val() != "" && $("#korisnickaRegistracija").val() != "" && $("#TipVozila").val() != ""
-                ) {
-                    if (xx == null) {
-                        /*xx = trenutnoUlogovan.Lokacija.Xcoordinate;
-                        yy = trenutnoUlogovan.Lokacija.Ycoordinate;
-                        ulica_broj = trenutnoUlogovan.Lokacija.Adresa.UlicaBroj;
-                        grad = trenutnoUlogovan.Lokacija.Adresa.grad;*/
-                        var Greska = "Niste ispravno popunili polja";
-                        $("#Greske").html(Greska);
-                        //break;
-
-                    } else {
-                        var objekat = {
-                            UserName: $("#korisnickoIme").val(),
-                            Password: $("#korisnickaLozinka").val(),
-                            Name: $("#Ime").val(),
-                            LastName: $("#Prezime").val(),
-                            Gender: $("#pol").val(),
-                            JMBG: $("#korisnickiJMBG").val(),
-                            PhoneNumber: $("#korisnickiTelefon").val(),
-                            Email: $("#korisnickiEmail").val(),
-                            Id: trenutnoUlogovan.Id,
-                            Lokacija:
-                                {
-                                    Xcoordinate: xx,
-                                    Ycoordinate: yy,
-                                    Adresa: {
-                                        UlicaBroj: ulica_broj,
-                                        MestoPostanski: grad
-                                    }
-                                },
-                            Automobil:
-                                {
-                                    GodisteAutomobila: $("#korisnickoGodiste").val(),
-                                    Registracija: $("#korisnickaRegistracija").val(),
-                                    TipAutomobila: $("#TipVozila").val()
-                                }
-                        };
-
-                        //
-                        $.post("/api/ahome/kreiranjekorisnika", objekat, function (data, status) {
-                            if (data.UserName == null) {
-                                $("#Greske").html(data);
-                            } else {
-                                //trenutnoUlogovan = data;
-                                //sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(trenutnoUlogovan));
-                                $("#AllGood").html("Vozač kreiran");
-                            }
-                            //
-
-                        });
-                    }
-
-                    
+                var num1 = $("#korisnickoGodiste").val();
+                if (isNaN(num1)) {
+                    $("#Greske").html("Godište automobila nije odgovarajućeg formata");
                 } else {
 
-                    var Greska = "Niste ispravno popunili polja";
-                    $("#Greske").html(Greska);
-                }
+                    if ($("#korisnickoIme").val() != "" && $("#korisnickaLozinka").val() != ""
+                        && $("#Ime").val() != "" && $("#Prezime").val() != "" && $("#korisnickiJMBG").val() != "" && $("#korisnickiTelefon").val() != "" && $("#korisnickiEmail").val() != ""
+                        && $("#korisnickoGodiste").val() != "" && $("#korisnickaRegistracija").val() != "" && $("#TipVozila").val() != ""
+                    ) {
+                        if (xx == null) {
+                            /*xx = trenutnoUlogovan.Lokacija.Xcoordinate;
+                            yy = trenutnoUlogovan.Lokacija.Ycoordinate;
+                            ulica_broj = trenutnoUlogovan.Lokacija.Adresa.UlicaBroj;
+                            grad = trenutnoUlogovan.Lokacija.Adresa.grad;*/
+                            var Greska = "Niste ispravno popunili polja";
+                            $("#Greske").html(Greska);
+                            //break;
 
+                        } else {
+                            var objekat = {
+                                UserName: $("#korisnickoIme").val(),
+                                Password: $("#korisnickaLozinka").val(),
+                                Name: $("#Ime").val(),
+                                LastName: $("#Prezime").val(),
+                                Gender: $("#pol").val(),
+                                JMBG: $("#korisnickiJMBG").val(),
+                                PhoneNumber: $("#korisnickiTelefon").val(),
+                                Email: $("#korisnickiEmail").val(),
+                                Id: trenutnoUlogovan.Id,
+                                Lokacija:
+                                    {
+                                        Xcoordinate: xx,
+                                        Ycoordinate: yy,
+                                        Adresa: {
+                                            UlicaBroj: ulica_broj,
+                                            MestoPostanski: grad
+                                        }
+                                    },
+                                Automobil:
+                                    {
+                                        GodisteAutomobila: $("#korisnickoGodiste").val(),
+                                        Registracija: $("#korisnickaRegistracija").val(),
+                                        TipAutomobila: $("#TipVozila").val()
+                                    }
+                            };
+
+                            //
+                            $.post("/api/ahome/kreiranjekorisnika", objekat, function (data, status) {
+                                if (data.UserName == null) {
+                                    $("#Greske").html(data);
+                                } else {
+                                    //trenutnoUlogovan = data;
+                                    //sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(trenutnoUlogovan));
+                                    $("#AllGood").html("Vozač kreiran");
+                                }
+                                //
+
+                            });
+                        }
+
+
+                    } else {
+
+                        var Greska = "Niste ispravno popunili polja";
+                        $("#Greske").html(Greska);
+                    }
+                }
                 xx = null; yy = null; ulica_broj = null;
                 //////////////////////////////////////////////////
 
@@ -1378,7 +1388,10 @@
                                         UserView += "<tr> <td> Komentar:</td><td>" + data.Voznje[v].Komentar.Opis + "</td> </tr>";
                                         UserView += "<tr> <td> Datum objave:</td><td>" + data.Voznje[v].Komentar.Objavljeno + "</td> </tr>";
                                         UserView += "<tr> <td> Ocena:</td><td>" + data.Voznje[v].Komentar.Ocena + "</td> </tr>";
-                                        UserView += "<tr> <td> Postavio:</td><td>" + data.Voznje[v].Komentar.KorisnikKojiJeOstavioKomentar + "</td> </tr>";
+                                        if (data.Voznje[v].Komentar.KorisnikKojiJeOstavioKomentar == null) {
+                                            UserView += "<tr> <td> Postavio:</td></tr>";
+                                        } else { UserView += "<tr> <td> Postavio:</td><td>" + data.Voznje[v].Komentar.KorisnikKojiJeOstavioKomentar + "</td> </tr>"; }
+                                        
                                     }
                                 }
                             }
@@ -1411,6 +1424,9 @@
 
                 $.get("/api/ahome/najblizi2", help, function (data, status) {
                     var nesto = eval(data);
+                    if (nesto.Count == 0 || nesto == null) {
+                        $("#AllGood").html("Trenutno nema slobodnih vozača");
+                    }
                     var pom = "";
                     for (var k in nesto) {
                         pom += "<option value=\"" + k + "\">" + nesto[k] + "</option>";
@@ -1419,17 +1435,15 @@
                     sessionStorage.setItem("najblizivozaci", pomocVozaci);
                     $("#vozaciAdmin").html(pom);
                     UserView += "<select name=\"vozaci\" id=\"vozaci\" size=\"1\">";
-                    //
                     UserView += pomocVozaci;
-                    //UserView += sessionStorage.getItem("najblizivozaci");
 
-                    UserView += "</select>"; // popuni select za najblize vozace 
+                    UserView += "</select>"; 
 
                     UserView += "<input type=\"submit\" value=\"Izaberi\" name=\"adminDodeljujeVozaca\" id =" + h + "/>"
 
                     sessionStorage.setItem("trenutniPrikaz", UserView);
                     $("#PageContent").html(UserView);
-                }); // VRACA 5 NAJBLIZIH 
+                });  
 
             });
 
@@ -1720,7 +1734,7 @@
 
                 $.get("/api/ahome/vozacMenjaUspesnaNeuspesna", Id, function (data, status) {
                     if (data != null) {
-                        $("#Greske").html("STATUS PROMENJEN");
+                        //$("#Greske").html("STATUS PROMENJEN");
                         sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(data));
 
                         if (stat == "USPEH") {
@@ -1759,10 +1773,12 @@
                             sessionStorage.setItem("trenutniMeni", UserMenu);
                             $("#PageMenu").html(UserMenu);
                             //
-
                         } else {
                             $("#AllGood").html("Uspesno promenjeno stanje u neuspeh");
-
+                            // ISCRTAJ UNOS KOMENTARA
+                            UserView = "<h2> Unesite komentar </h2>";
+                            UserView += "<input type=\"text\" name=\"vozacKomentar\" id=\"vozacKomentar\"/><br/>";
+                            UserView += "<input type=\"submit\" value=\"Postavi komentar\" name=\"VozacStaviKomentarNeuspeh\" id=" + delovi[1] + "/>";
                         }
 
                         $("#PageContent").html(UserView);
@@ -1771,6 +1787,24 @@
                         $("#Greske").html(data);
                     }
                 });
+            });
+
+            $(document).on("click", "[name='VozacStaviKomentarNeuspeh']", function () {
+                var UserView = "";
+                $("#Greske").empty();
+                $("#AllGood").empty();
+
+                var Id = { idVoznje: $(this).attr("id"), komentar: $("#vozacKomentar").val() };
+
+                //prosledim komentar
+                $.get("/api/ahome/VozacKomentariseNeuspesnu", Id, function (data, status) {
+                    if (data != null) {
+                        sessionStorage.setItem("ulogovaniKorisnik", JSON.stringify(data));
+                        $("#AllGood").html("Komentar uspešno postavljen.");
+                    }
+                    else { $("#Greske").html("Greška u sistemu."); }
+                });
+
             });
 
             $(document).on("click", "#CantLeave", function () {
@@ -1855,7 +1889,7 @@
                         $("#AllGood").html("Pokupio sve voznje");
                         //ispisi sve voznje
                         var voznjeTrenutne = data;
-                        sessionStorage.setItem("trenutneVoznje", JSON.stringify(voznjeTrenutne));
+                        sessionStorage.setItem("trenutneVoznje", JSON.stringify(data));
                         adminView(voznjeTrenutne);
                         //
                     }
@@ -2378,8 +2412,6 @@
                 $("#PageMenu").html(UserMenu);
             }
 
-                //sessionStorage.setItem("trenutneVoznje", JSON.stringify(voznjeTrenutne)); 
-
             $(document).on("click", "#gradeSort", function () {
                 $("#Greske").empty();
                 $("#AllGood").empty();
@@ -2519,9 +2551,11 @@
 
                 $.post("/api/ahome/AdminPretraga", objekat, function (data, status) {
                     if (data == null) { }
+                    else if (data.Count == 0) { $("#Greske").html(data);}
                     else {
                         sessionStorage.setItem("trenutneVoznje", JSON.stringify(data));
-                        if (trenutnoUlogovan.Uloga == 2) {
+                        if (trenutnoUlogovan.Uloga == 2)
+                        {
                             adminView(data);
                             $("#AllGood").html("Pretraga obavljena");
 
@@ -2531,11 +2565,10 @@
             });
 
             // ako je zauzet ne moze da promeni da stavi da je neka voznja u toku 
+            //sessionStorage.setItem("trenutneVoznje", JSON.stringify(voznjeTrenutne)); 
         });
     </script>
 </head>
-
-
 
 <body>
 
