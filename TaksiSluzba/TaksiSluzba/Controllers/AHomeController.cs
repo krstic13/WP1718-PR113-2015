@@ -628,6 +628,7 @@ namespace TaksiSluzba.Controllers
             r.Dispatcher = dispecer.UserName;
 
             Driver d = vozaci.Find(k => k.Id == r.Vozac); // PROVERI DA LI OVDE TREBA vozaci.Find(k => k.username == r.vozac);
+            vozaci.Remove(d);
             r.VozacId = r.Vozac;
             r.Vozac = d.UserName;
             r.Id = (sveVoznje.Count + korisnikKreiraoVoznju.Count).ToString();
@@ -639,19 +640,15 @@ namespace TaksiSluzba.Controllers
                 admin.Add(dispecer);
                 return Ok("Odabrani vozač ne poseduje izabrani tip automobila");
             }
-            vozaci.Remove(d);
-
-           // r.Id = r.Vozac +"_"+d.Voznje.Count;
-
-
+            
             d.Voznje.Add(r);
             dispecer.Voznje.Add(r);
-
             admin.Add(dispecer);
             vozaci.Add(d);
 
             sveVoznje.Add(r);
             WriteToXMl(ROLE.ADMIN);
+            WriteToXMl(ROLE.DRIVER);
             WriteAllRides();
 
             return Ok(dispecer);

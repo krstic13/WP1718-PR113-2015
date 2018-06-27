@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfRide xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Ride>
-    <DatumIVremePorudzbine>2018-06-27T23:08:56.8006179+02:00</DatumIVremePorudzbine>
+    <DatumIVremePorudzbine>2018-06-27T23:30:00.2918855+02:00</DatumIVremePorudzbine>
     <LokacijaPolazna>
-      <Xcoordinate>19.84845710246416</Xcoordinate>
-      <Ycoordinate>45.24666645248777</Ycoordinate>
+      <Xcoordinate>19.849601109311777</Xcoordinate>
+      <Ycoordinate>45.25374892058642</Ycoordinate>
       <Adresa>
-        <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+        <UlicaBroj>Bulevar Mihajla Pupina 17</UlicaBroj>
         <MestoPostanski>Novi Sad 21101</MestoPostanski>
       </Adresa>
     </LokacijaPolazna>
@@ -16,7 +16,7 @@
     <Iznos>0</Iznos>
     <StatusVoznje>FORMIRANA</StatusVoznje>
     <TipVozila>putnicki</TipVozila>
-    <Id>0</Id>
-    <DATUMM>27-06-18  23:08:56</DATUMM>
+    <Id>1</Id>
+    <DATUMM>27-06-18  23:30:00</DATUMM>
   </Ride>
 </ArrayOfRide>
