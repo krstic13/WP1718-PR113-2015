@@ -1152,15 +1152,16 @@ namespace TaksiSluzba.Controllers
             Ride ar = r;
             if (r == null)
             {
-                //
-                if (r.VozacId != "") {
-                    Driver ddd = vozaci.Find(ff=>ff.Id == r.VozacId);
-                    if (ddd != null) { vozaci.Remove(ddd); Ride rrr = ddd.Voznje.Find(rr => rr.Id == idVoznje); ddd.Voznje.Remove(rrr); vozaci.Add(ddd); }
-                }
+                //to ne postoji jer smo vec utvrdili da je r null
 
                 //
                 vozaci.Remove(d);
                 r = korisnikKreiraoVoznju.Find(rr => rr.Id == idVoznje);
+                if (r.VozacId != "" && r.VozacId != null)
+                {
+                    Driver ddd = vozaci.Find(ff => ff.Id == r.VozacId);
+                    if (ddd != null) { vozaci.Remove(ddd); Ride rrr = ddd.Voznje.Find(rr => rr.Id == idVoznje); ddd.Voznje.Remove(rrr); vozaci.Add(ddd); }
+                }
                 korisnikKreiraoVoznju.Remove(r);
                 r.Vozac = "";
                 r.VozacId = "";

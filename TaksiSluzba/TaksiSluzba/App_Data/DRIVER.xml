@@ -29,34 +29,6 @@
     <Slobodan>true</Slobodan>
   </Driver>
   <Driver>
-    <UserName>boki</UserName>
-    <Password>boki</Password>
-    <Name>Borisav</Name>
-    <LastName> Bekić</LastName>
-    <Gender>Muško</Gender>
-    <JMBG> 24091925852</JMBG>
-    <PhoneNumber>256236</PhoneNumber>
-    <Email>boki@bokile.com</Email>
-    <Uloga>DRIVER</Uloga>
-    <Id>4</Id>
-    <Voznje />
-    <Blokiran>false</Blokiran>
-    <Lokacija>
-      <Xcoordinate>19.890348376795792</Xcoordinate>
-      <Ycoordinate>45.239151957864465</Ycoordinate>
-      <Adresa>
-        <UlicaBroj>Nova 9 3</UlicaBroj>
-        <MestoPostanski>undefined 21000</MestoPostanski>
-      </Adresa>
-    </Lokacija>
-    <Automobil>
-      <GodisteAutomobila>1999</GodisteAutomobila>
-      <Registracija>285Pr226</Registracija>
-      <TipAutomobila>putnicki</TipAutomobila>
-    </Automobil>
-    <Slobodan>true</Slobodan>
-  </Driver>
-  <Driver>
     <UserName>lepi</UserName>
     <Password>lepi</Password>
     <Name>Leposav</Name>
@@ -127,6 +99,57 @@
     <Automobil>
       <GodisteAutomobila>1986</GodisteAutomobila>
       <Registracija>dakik</Registracija>
+      <TipAutomobila>putnicki</TipAutomobila>
+    </Automobil>
+    <Slobodan>true</Slobodan>
+  </Driver>
+  <Driver>
+    <UserName>boki</UserName>
+    <Password>boki</Password>
+    <Name>Borisav</Name>
+    <LastName> Bekić</LastName>
+    <Gender>Muško</Gender>
+    <JMBG> 24091925852</JMBG>
+    <PhoneNumber>256236</PhoneNumber>
+    <Email>boki@bokile.com</Email>
+    <Uloga>DRIVER</Uloga>
+    <Id>4</Id>
+    <Voznje>
+      <Ride>
+        <DatumIVremePorudzbine>2018-06-28T00:00:30.7465815+02:00</DatumIVremePorudzbine>
+        <LokacijaPolazna>
+          <Xcoordinate>19.84972364143002</Xcoordinate>
+          <Ycoordinate>45.24584162943532</Ycoordinate>
+          <Adresa>
+            <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+            <MestoPostanski>Novi Sad 21101</MestoPostanski>
+          </Adresa>
+        </LokacijaPolazna>
+        <Musterija>maki</Musterija>
+        <MusterijaId>7</MusterijaId>
+        <Dispatcher>admin1</Dispatcher>
+        <DispatcherId> 1 </DispatcherId>
+        <Vozac>boki</Vozac>
+        <VozacId>4</VozacId>
+        <Iznos>0</Iznos>
+        <StatusVoznje>OBRADJENA</StatusVoznje>
+        <TipVozila>putnicki</TipVozila>
+        <Id>2</Id>
+        <DATUMM>28-06-18  0:00:30</DATUMM>
+      </Ride>
+    </Voznje>
+    <Blokiran>false</Blokiran>
+    <Lokacija>
+      <Xcoordinate>19.890348376795792</Xcoordinate>
+      <Ycoordinate>45.239151957864465</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Nova 9 3</UlicaBroj>
+        <MestoPostanski>undefined 21000</MestoPostanski>
+      </Adresa>
+    </Lokacija>
+    <Automobil>
+      <GodisteAutomobila>1999</GodisteAutomobila>
+      <Registracija>285Pr226</Registracija>
       <TipAutomobila>putnicki</TipAutomobila>
     </Automobil>
     <Slobodan>true</Slobodan>

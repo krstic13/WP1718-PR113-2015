@@ -18,4 +18,26 @@
     <Id>1</Id>
     <DATUMM>27-06-18  23:09:40</DATUMM>
   </Ride>
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-28T00:00:30.7465815+02:00</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.84972364143002</Xcoordinate>
+      <Ycoordinate>45.24584162943532</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Musterija>maki</Musterija>
+    <MusterijaId>7</MusterijaId>
+    <Dispatcher>admin1</Dispatcher>
+    <DispatcherId> 1 </DispatcherId>
+    <Vozac>boki</Vozac>
+    <VozacId>4</VozacId>
+    <Iznos>0</Iznos>
+    <StatusVoznje>OBRADJENA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>2</Id>
+    <DATUMM>28-06-18  0:00:30</DATUMM>
+  </Ride>
 </ArrayOfRide>
