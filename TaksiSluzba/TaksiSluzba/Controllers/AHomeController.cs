@@ -1152,9 +1152,7 @@ namespace TaksiSluzba.Controllers
             Ride ar = r;
             if (r == null)
             {
-                //to ne postoji jer smo vec utvrdili da je r null
 
-                //
                 vozaci.Remove(d);
                 r = korisnikKreiraoVoznju.Find(rr => rr.Id == idVoznje);
                 if (r.VozacId != "" && r.VozacId != null)
