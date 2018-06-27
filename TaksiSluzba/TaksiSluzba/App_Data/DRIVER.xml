@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDriver xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Driver>
-    <UserName>lepi</UserName>
-    <Password>lepi</Password>
-    <Name>Leposav</Name>
-    <LastName>lepi</LastName>
-    <Gender>Žensko</Gender>
-    <JMBG>lepi</JMBG>
-    <PhoneNumber>lepi</PhoneNumber>
-    <Email>lepi</Email>
+    <UserName>pera</UserName>
+    <Password>pera</Password>
+    <Name> Pera</Name>
+    <LastName>Perić</LastName>
+    <Gender>Muško</Gender>
+    <JMBG>1234567891234</JMBG>
+    <PhoneNumber>256256</PhoneNumber>
+    <Email>pera@gmail.com</Email>
     <Uloga>DRIVER</Uloga>
-    <Id>4</Id>
+    <Id>6</Id>
     <Voznje />
     <Blokiran>false</Blokiran>
     <Lokacija>
-      <Xcoordinate>19.890348376795792</Xcoordinate>
-      <Ycoordinate>45.239151957864465</Ycoordinate>
+      <Xcoordinate>19.85087162697024</Xcoordinate>
+      <Ycoordinate>45.24509681857316</Ycoordinate>
       <Adresa>
-        <UlicaBroj>Nova 9 3</UlicaBroj>
-        <MestoPostanski>undefined 21000</MestoPostanski>
+        <UlicaBroj>Vladimira Perica Valtera</UlicaBroj>
+        <MestoPostanski>Novi Sad 21101</MestoPostanski>
       </Adresa>
     </Lokacija>
     <Automobil>
-      <GodisteAutomobila>lepi</GodisteAutomobila>
-      <Registracija>lepi</Registracija>
+      <GodisteAutomobila>2003</GodisteAutomobila>
+      <Registracija>225883</Registracija>
       <TipAutomobila>putnicki</TipAutomobila>
     </Automobil>
-    <Slobodan>false</Slobodan>
+    <Slobodan>true</Slobodan>
   </Driver>
   <Driver>
     <UserName>boki</UserName>
@@ -38,85 +38,8 @@
     <PhoneNumber>256236</PhoneNumber>
     <Email>boki@bokile.com</Email>
     <Uloga>DRIVER</Uloga>
-    <Id>8</Id>
-    <Voznje>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-26T19:50:44.375698+02:00</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.848381301518423</Xcoordinate>
-          <Ycoordinate>45.246774627317535</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Dr Sime Milosevica</UlicaBroj>
-            <MestoPostanski>Novi Sad 21101</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Dispatcher>admin1</Dispatcher>
-        <Vozac>boki</Vozac>
-        <VozacId>8</VozacId>
-        <Iznos>0</Iznos>
-        <StatusVoznje>FORMIRANA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>2</Id>
-        <DATUMM>26-06-18  19:50:44</DATUMM>
-      </Ride>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-26T19:51:01.9587037+02:00</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.827137295217202</Xcoordinate>
-          <Ycoordinate>45.249092649514125</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Futoska 45</UlicaBroj>
-            <MestoPostanski>Novi Sad 21000</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Dispatcher>admin1</Dispatcher>
-        <Vozac>boki</Vozac>
-        <VozacId>8</VozacId>
-        <Iznos>0</Iznos>
-        <StatusVoznje>FORMIRANA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>3</Id>
-        <DATUMM>26-06-18  19:51:01</DATUMM>
-      </Ride>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-26T20:07:45.2390881+02:00</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.844239021894744</Xcoordinate>
-          <Ycoordinate>45.25043876129561</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Pavla Simica 1</UlicaBroj>
-            <MestoPostanski>Novi Sad 21101</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Dispatcher>admin2</Dispatcher>
-        <Vozac>boki</Vozac>
-        <VozacId>8</VozacId>
-        <Iznos>0</Iznos>
-        <StatusVoznje>FORMIRANA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>6</Id>
-        <DATUMM>26-06-18  20:07:45</DATUMM>
-      </Ride>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-26T19:59:05.3373514+02:00</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.846355883506988</Xcoordinate>
-          <Ycoordinate>45.24767458505522</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Radnicka</UlicaBroj>
-            <MestoPostanski>Novi Sad 21101</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Dispatcher>admin2</Dispatcher>
-        <Vozac>boki</Vozac>
-        <VozacId>8</VozacId>
-        <Iznos>0</Iznos>
-        <StatusVoznje>NEUSPESNA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>5</Id>
-        <DATUMM>26-06-18  19:59:05</DATUMM>
-      </Ride>
-    </Voznje>
+    <Id>4</Id>
+    <Voznje />
     <Blokiran>false</Blokiran>
     <Lokacija>
       <Xcoordinate>19.890348376795792</Xcoordinate>
@@ -134,108 +57,58 @@
     <Slobodan>true</Slobodan>
   </Driver>
   <Driver>
-    <UserName>daki</UserName>
-    <Password>daki</Password>
-    <Name>daki</Name>
-    <LastName>daki</LastName>
+    <UserName>dakik</UserName>
+    <Password>dakik</Password>
+    <Name>dakik</Name>
+    <LastName>dakik</LastName>
     <Gender>Muško</Gender>
-    <JMBG>1234567891234</JMBG>
+    <JMBG>1001997756010</JMBG>
     <PhoneNumber>225883</PhoneNumber>
-    <Email>daki@gmail.com</Email>
+    <Email>dakik@gmail.com</Email>
     <Uloga>DRIVER</Uloga>
-    <Id>9</Id>
-    <Voznje>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-26T19:51:22.821897+02:00</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.847246043466683</Xcoordinate>
-          <Ycoordinate>45.25108263571718</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Strazilovska 5</UlicaBroj>
-            <MestoPostanski>Novi Sad 21000</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Dispatcher>admin1</Dispatcher>
-        <Vozac>daki</Vozac>
-        <VozacId>9</VozacId>
-        <Iznos>0</Iznos>
-        <StatusVoznje>NEUSPESNA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>5</Id>
-        <DATUMM>26-06-18  19:51:22</DATUMM>
-      </Ride>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-26T19:51:22.821897+02:00</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.847246043466683</Xcoordinate>
-          <Ycoordinate>45.25108263571718</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Strazilovska 5</UlicaBroj>
-            <MestoPostanski>Novi Sad 21000</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Dispatcher>admin1</Dispatcher>
-        <Vozac>daki</Vozac>
-        <VozacId>9</VozacId>
-        <Iznos>0</Iznos>
-        <StatusVoznje>NEUSPESNA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>4</Id>
-        <DATUMM>26-06-18  19:51:22</DATUMM>
-      </Ride>
-      <Ride>
-        <DatumIVremePorudzbine>2018-06-26T17:41:18.1443114Z</DatumIVremePorudzbine>
-        <LokacijaPolazna>
-          <Xcoordinate>19.830166585745665</Xcoordinate>
-          <Ycoordinate>45.25474989767787</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Novosadskog Sajma 42</UlicaBroj>
-            <MestoPostanski>Novi Sad 21101</MestoPostanski>
-          </Adresa>
-        </LokacijaPolazna>
-        <Musterija>maki</Musterija>
-        <MusterijaId>7</MusterijaId>
-        <Odrediste>
-          <Xcoordinate>19.84797966917766</Xcoordinate>
-          <Ycoordinate>45.24801519706389</Ycoordinate>
-          <Adresa>
-            <UlicaBroj>Lovcenska 9</UlicaBroj>
-            <MestoPostanski>Novi Sad 21101</MestoPostanski>
-          </Adresa>
-        </Odrediste>
-        <Dispatcher>admin1</Dispatcher>
-        <DispatcherId> 1 </DispatcherId>
-        <Vozac>daki</Vozac>
-        <VozacId>9</VozacId>
-        <Iznos>520</Iznos>
-        <Komentar>
-          <Opis>moj komentar</Opis>
-          <DatumObjave>2018-06-27T16:24:48.1916768+02:00</DatumObjave>
-          <Objavljeno>27-06-18  16:24:48</Objavljeno>
-          <KorisnikKojiJeOstavioKomentar>daki</KorisnikKojiJeOstavioKomentar>
-          <IdVoznje>1</IdVoznje>
-          <Ocena>0</Ocena>
-        </Komentar>
-        <StatusVoznje>NEUSPESNA</StatusVoznje>
-        <TipVozila>putnicki</TipVozila>
-        <Id>1</Id>
-        <DATUMM>26-06-18  17:41:18</DATUMM>
-      </Ride>
-    </Voznje>
+    <Id>5</Id>
+    <Voznje />
     <Blokiran>false</Blokiran>
     <Lokacija>
-      <Xcoordinate>19.84995323870176</Xcoordinate>
-      <Ycoordinate>45.24506282608064</Ycoordinate>
+      <Xcoordinate>19.8395067490542</Xcoordinate>
+      <Ycoordinate>45.24752074259115</Ycoordinate>
       <Adresa>
-        <UlicaBroj>Dr Ilije Djuricica</UlicaBroj>
-        <MestoPostanski>Novi Sad 21101</MestoPostanski>
+        <UlicaBroj>Bulevar oslobodjenja</UlicaBroj>
       </Adresa>
     </Lokacija>
     <Automobil>
-      <GodisteAutomobila>1956</GodisteAutomobila>
-      <Registracija>225883AC</Registracija>
+      <GodisteAutomobila>1986</GodisteAutomobila>
+      <Registracija>dakik</Registracija>
       <TipAutomobila>putnicki</TipAutomobila>
     </Automobil>
     <Slobodan>true</Slobodan>
+  </Driver>
+  <Driver>
+    <UserName>lepi</UserName>
+    <Password>lepi</Password>
+    <Name>Leposav</Name>
+    <LastName>lepi</LastName>
+    <Gender>Žensko</Gender>
+    <JMBG>lepi</JMBG>
+    <PhoneNumber>lepi</PhoneNumber>
+    <Email>lepi</Email>
+    <Uloga>DRIVER</Uloga>
+    <Id>3</Id>
+    <Voznje />
+    <Blokiran>false</Blokiran>
+    <Lokacija>
+      <Xcoordinate>19.890348376795792</Xcoordinate>
+      <Ycoordinate>45.239151957864465</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Nova 9 3</UlicaBroj>
+        <MestoPostanski>undefined 21000</MestoPostanski>
+      </Adresa>
+    </Lokacija>
+    <Automobil>
+      <GodisteAutomobila>lepi</GodisteAutomobila>
+      <Registracija>lepi</Registracija>
+      <TipAutomobila>putnicki</TipAutomobila>
+    </Automobil>
+    <Slobodan>false</Slobodan>
   </Driver>
 </ArrayOfDriver>
