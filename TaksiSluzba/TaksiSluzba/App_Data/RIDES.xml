@@ -1,2 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ArrayOfRide xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+<ArrayOfRide xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Ride>
+    <DatumIVremePorudzbine>2018-06-28T01:52:37.9473554+02:00</DatumIVremePorudzbine>
+    <LokacijaPolazna>
+      <Xcoordinate>19.851162393328167</Xcoordinate>
+      <Ycoordinate>45.24059906557855</Ycoordinate>
+      <Adresa>
+        <UlicaBroj>Suncani Kej 37</UlicaBroj>
+        <MestoPostanski>Novi Sad 21000</MestoPostanski>
+      </Adresa>
+    </LokacijaPolazna>
+    <Dispatcher>admin1</Dispatcher>
+    <Vozac>pera</Vozac>
+    <VozacId>6</VozacId>
+    <Iznos>0</Iznos>
+    <StatusVoznje>FORMIRANA</StatusVoznje>
+    <TipVozila>putnicki</TipVozila>
+    <Id>3</Id>
+    <DATUMM>28-06-18  1:52:37</DATUMM>
+  </Ride>
+</ArrayOfRide>
